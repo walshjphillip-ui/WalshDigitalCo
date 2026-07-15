@@ -27,6 +27,27 @@
     });
   }
 
+  /* ── hero: scroll-driven compress → expand ────────── */
+  var heroWrap = document.getElementById('heroWrap');
+  var heroMedia = document.getElementById('heroMedia');
+  if (heroWrap && heroMedia) {
+    var ticking = false;
+    var setP = function () {
+      var rect = heroWrap.getBoundingClientRect();
+      var total = rect.height - window.innerHeight;
+      var p = total > 0 ? Math.min(1, Math.max(0, -rect.top / total)) : 0;
+      // ease-out so it opens fast then settles
+      var eased = 1 - Math.pow(1 - p, 2);
+      heroMedia.style.setProperty('--p', eased.toFixed(4));
+      ticking = false;
+    };
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(setP); }
+    }, { passive: true });
+    window.addEventListener('resize', setP);
+    setP();
+  }
+
   /* ── scroll reveals ───────────────────────────────── */
   var rises = [].slice.call(document.querySelectorAll('.rise'));
   if (rises.length) {

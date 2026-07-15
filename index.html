@@ -9,7 +9,7 @@
 <meta property="og:description" content="Website, film, brand, search and social. One studio, one voice. Bay Area, CA.">
 <meta property="og:url" content="https://walshdigitalco.com">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#0a1119">
+<meta name="theme-color" content="#f6f2e9">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&display=swap" rel="stylesheet">
@@ -23,8 +23,8 @@
   <div class="wrap nav-in">
     <a href="index.html" class="mark" aria-label="Walsh Digital Co.">
       <svg width="30" height="30" viewBox="0 0 100 100" fill="none" aria-hidden="true">
-        <rect x="10" y="10" width="80" height="80" stroke="#8ea3c4" stroke-width="3"/>
-        <path d="M30 32 L43 70 L50 49 L57 70 L70 32" stroke="#c9d6ea" stroke-width="7" fill="none" stroke-linejoin="miter"/>
+        <rect x="10" y="10" width="80" height="80" stroke="currentColor" stroke-opacity=".5" stroke-width="3"/>
+        <path d="M30 32 L43 70 L50 49 L57 70 L70 32" stroke="currentColor" stroke-width="7" fill="none" stroke-linejoin="miter"/>
       </svg>
       <span>WALSH DIGITAL CO.</span>
     </a>
@@ -42,55 +42,69 @@
 </nav>
 
 <main id="main">
-  <div class="split">
 
-    <div class="split-body load">
-      <span class="tag">Marketing &amp; brand studio — Bay Area</span>
-      <h1 class="d1" style="margin-top:.32em">Presence <em class="ital">worthy</em><br>of your reputation.</h1>
-      <p class="lead" style="margin-top:1.6em">
-        You built something people trust in person. Online, it should say the same thing —
-        in one voice, on every surface, without you assembling a committee of freelancers to get there.
-      </p>
+  <!-- hero: cream left, dark plate right; media compresses → expands on scroll -->
+  <div class="hero-wrap" id="heroWrap">
+    <div class="hero-stick">
 
-      <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:2.4em">
-        <a href="pricing.html" class="btn">Build an engagement <span class="ar" aria-hidden="true">↗</span></a>
-        <a href="services.html" class="btn btn--line">The services</a>
+      <div class="hero-left load">
+        <span class="tag">Marketing &amp; brand studio — Bay Area</span>
+        <h1 class="d1" style="margin-top:.32em">Presence <em class="ital">worthy</em><br>of your reputation.</h1>
+        <p class="lead" style="margin-top:1.5em">
+          You built something people trust in person. Online it should say the same thing —
+          in one voice, on every surface, without assembling a committee of freelancers to get there.
+        </p>
+        <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:2.2em">
+          <a href="pricing.html" class="btn">Build an engagement <span class="ar" aria-hidden="true">↗</span></a>
+          <a href="services.html" class="btn btn--line">The services</a>
+        </div>
       </div>
 
-      <div style="margin-top:clamp(44px,6vw,80px)">
-        <span class="tag tag--rule" style="margin-bottom:22px">Practice</span>
-        <ul class="rlist" style="border-top:0">
+      <figure class="hero-plate" style="margin:0">
+        <div class="hero-media" id="heroMedia">
+          <img src="assets/hero.jpg" alt="Selected work by Walsh Digital Co." onerror="this.remove()">
+          <svg class="plate-mark" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+            <rect x="10" y="10" width="80" height="80" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M30 32 L43 70 L50 49 L57 70 L70 32" stroke="currentColor" stroke-width="3.5" fill="none" stroke-linejoin="miter"/>
+          </svg>
+          <figcaption class="plate-cap"><span>Selected work</span><span>Walnut Creek, CA</span></figcaption>
+        </div>
+      </figure>
+
+      <span class="scrollcue" aria-hidden="true"><i></i> Scroll</span>
+    </div>
+  </div>
+
+  <!-- the line that breaks the page -->
+  <div class="wrap"><div class="brk"><span>Practice</span></div></div>
+
+  <!-- one tiny section -->
+  <section class="tight">
+    <div class="wrap" style="display:grid;grid-template-columns:1fr 1.45fr;gap:clamp(26px,5vw,80px);align-items:start">
+      <h2 class="d3 rise" style="max-width:12ch">Five disciplines, <em class="ital">one hand.</em></h2>
+      <div class="rise" data-d="1">
+        <ul class="rlist">
           <li style="padding-top:0"><b>01</b><span><strong>Web</strong> — sites built to convert, structured for search from day one.</span></li>
           <li><b>02</b><span><strong>Film &amp; photo</strong> — original work, shot for how customers meet you.</span></li>
           <li><b>03</b><span><strong>Brand</strong> — the identity that ties every channel together.</span></li>
           <li><b>04</b><span><strong>Search</strong> — Google profile and local SEO, tracked monthly.</span></li>
           <li style="border-bottom:0"><b>05</b><span><strong>Social</strong> — managed, on-brand, without you thinking about it.</span></li>
         </ul>
-        <a href="services.html" class="ulink" style="margin-top:26px">Read the full practice <span aria-hidden="true">↗</span></a>
+        <a href="services.html" class="ulink" style="margin-top:24px">Read the full practice <span aria-hidden="true">↗</span></a>
       </div>
     </div>
+  </section>
 
-    <!-- one image, top to bottom of the page -->
-    <figure class="split-img">
-      <img src="assets/hero.jpg" alt="Selected work by Walsh Digital Co." onerror="this.remove()">
-      <svg class="plate-mark" viewBox="0 0 100 100" fill="none" aria-hidden="true">
-        <rect x="10" y="10" width="80" height="80" stroke="#c9d6ea" stroke-width="1.5"/>
-        <path d="M30 32 L43 70 L50 49 L57 70 L70 32" stroke="#c9d6ea" stroke-width="3.5" fill="none" stroke-linejoin="miter"/>
-      </svg>
-      <figcaption><span>Selected work</span><span>Walnut Creek, CA</span></figcaption>
-    </figure>
-
-  </div>
 </main>
 
-<footer class="foot">
+<footer class="foot dark">
   <div class="wrap">
     <div class="foot-grid">
       <div>
         <a href="index.html" class="mark" style="margin-bottom:16px">
           <svg width="24" height="24" viewBox="0 0 100 100" fill="none" aria-hidden="true">
-            <rect x="10" y="10" width="80" height="80" stroke="#8ea3c4" stroke-width="3"/>
-            <path d="M30 32 L43 70 L50 49 L57 70 L70 32" stroke="#c9d6ea" stroke-width="7" fill="none" stroke-linejoin="miter"/>
+            <rect x="10" y="10" width="80" height="80" stroke="currentColor" stroke-opacity=".5" stroke-width="3"/>
+            <path d="M30 32 L43 70 L50 49 L57 70 L70 32" stroke="currentColor" stroke-width="7" fill="none" stroke-linejoin="miter"/>
           </svg>
           <span>WALSH DIGITAL CO.</span>
         </a>
