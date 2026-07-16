@@ -1,19 +1,24 @@
 /* Walsh Digital Co. — architectural editorial system */
 
+/* ── Miami Design District ───────────────────────────
+   ocean night · turquoise · flamingo · butter · terrazzo plaza
+   ─────────────────────────────────────────────────── */
 :root{
-  /* light (default) */
-  --bg:#f6f2e9;
-  --bg-2:#ece5d6;
-  --fg:#0a1119;
-  --mute:rgba(10,17,25,.60);
-  --mute-2:rgba(10,17,25,.80);
-  --rule:rgba(10,17,25,.14);
-  --rule-2:rgba(10,17,25,.28);
-  --accent:#46608c;
-  --accent-lt:#6f8bb8;
-  --panel:#0a1119;
-  --panel-2:#0e1720;
-  --panel-3:#131f2c;
+  /* light (default) — the terrazzo plaza in full sun */
+  --bg:#f8f5ee;
+  --bg-2:#eee8da;
+  --fg:#0a2138;
+  --mute:rgba(10,33,56,.58);
+  --mute-2:rgba(10,33,56,.80);
+  --rule:rgba(10,33,56,.14);
+  --rule-2:rgba(10,33,56,.28);
+  --accent:#0c7f96;      /* turquoise, deepened to stay legible on bone */
+  --accent-lt:#3fc1d6;   /* full turquoise — fills, not text */
+  --accent-2:#cf4b86;    /* flamingo */
+  --accent-3:#dda32a;    /* butter / brass */
+  --panel:#0a2a47;       /* ocean night */
+  --panel-2:#0f3355;
+  --panel-3:#164066;
 
   --display:'Bodoni Moda', Didot, Georgia, serif;
   --body:'Archivo', system-ui, sans-serif;
@@ -23,19 +28,44 @@
   --nav-h:78px;
 }
 
-/* dark surfaces flip the same tokens */
+/* dark surfaces — ocean night, where the colour pops hardest */
 .dark{
-  --bg:#0a1119;
-  --bg-2:#0e1720;
-  --fg:#f2ede0;
-  --mute:rgba(242,237,224,.60);
-  --mute-2:rgba(242,237,224,.80);
-  --rule:rgba(242,237,224,.16);
-  --rule-2:rgba(242,237,224,.30);
-  --accent:#8ea3c4;
-  --accent-lt:#c9d6ea;
+  --bg:#0a2a47;
+  --bg-2:#0f3355;
+  --fg:#f8f5ee;
+  --mute:rgba(248,245,238,.60);
+  --mute-2:rgba(248,245,238,.82);
+  --rule:rgba(248,245,238,.16);
+  --rule-2:rgba(248,245,238,.30);
+  --accent:#4fd2e6;      /* turquoise, lifted */
+  --accent-lt:#93e6f2;
+  --accent-2:#f79ac4;    /* flamingo, lifted */
+  --accent-3:#f0c559;
   background:var(--bg);
   color:var(--fg);
+}
+
+/* plaza surface — drop into a dark page to break it open */
+.light{
+  --bg:#f8f5ee;
+  --bg-2:#eee8da;
+  --fg:#0a2138;
+  --mute:rgba(10,33,56,.58);
+  --mute-2:rgba(10,33,56,.80);
+  --rule:rgba(10,33,56,.14);
+  --rule-2:rgba(10,33,56,.28);
+  --accent:#0c7f96;
+  --accent-lt:#3fc1d6;
+  --accent-2:#cf4b86;
+  --accent-3:#dda32a;
+  background:var(--bg);
+  color:var(--fg);
+}
+
+/* terrazzo — turquoise, flamingo, butter and coral chips in plaster */
+.terrazzo{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cg fill-opacity='.55'%3E%3Cellipse cx='18' cy='24' rx='5.4' ry='3.4' fill='%233fc1d6' transform='rotate(24 18 24)'/%3E%3Cellipse cx='98' cy='14' rx='3.8' ry='2.6' fill='%23cf4b86' transform='rotate(-38 98 14)'/%3E%3Cellipse cx='140' cy='48' rx='4.8' ry='2.8' fill='%23dda32a' transform='rotate(12 140 48)'/%3E%3Cellipse cx='60' cy='54' rx='3.2' ry='4.6' fill='%230a2a47' transform='rotate(-15 60 54)'/%3E%3Cellipse cx='118' cy='96' rx='5.4' ry='3.2' fill='%233fc1d6' transform='rotate(52 118 96)'/%3E%3Cellipse cx='32' cy='110' rx='3.6' ry='5' fill='%23cf4b86' transform='rotate(8 32 110)'/%3E%3Cellipse cx='78' cy='136' rx='4.6' ry='2.8' fill='%23dda32a' transform='rotate(-28 78 136)'/%3E%3Cellipse cx='148' cy='128' rx='3.2' ry='4' fill='%233fc1d6' transform='rotate(40 148 128)'/%3E%3Cellipse cx='8' cy='76' rx='4' ry='2.6' fill='%23e8663f' transform='rotate(-52 8 76)'/%3E%3Cellipse cx='90' cy='76' rx='2.8' ry='3.8' fill='%230a2a47' transform='rotate(30 90 76)'/%3E%3Cellipse cx='50' cy='8' rx='3.4' ry='2.2' fill='%23cf4b86' transform='rotate(-10 50 8)'/%3E%3Cellipse cx='126' cy='70' rx='2.6' ry='3.4' fill='%23e8663f' transform='rotate(64 126 70)'/%3E%3Cellipse cx='40' cy='84' rx='2.4' ry='3' fill='%23dda32a' transform='rotate(18 40 84)'/%3E%3Cellipse cx='104' cy='44' rx='3' ry='2' fill='%233fc1d6' transform='rotate(-44 104 44)'/%3E%3Cellipse cx='66' cy='108' rx='2.6' ry='3.4' fill='%23e8663f' transform='rotate(70 66 108)'/%3E%3C/g%3E%3C/svg%3E");
+  background-size:160px 160px;
 }
 
 *{box-sizing:border-box}
@@ -49,7 +79,7 @@ body::after{
   content:"";position:fixed;inset:0;z-index:9998;pointer-events:none;opacity:.030;mix-blend-mode:multiply;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
-::selection{background:var(--accent);color:#f6f2e9}
+::selection{background:var(--accent);color:#f8f5ee}
 a{color:inherit;text-decoration:none}
 img{max-width:100%;display:block}
 h1,h2,h3,h4{margin:0;font-family:var(--display);font-weight:400;line-height:1.02;letter-spacing:-0.015em;text-wrap:balance}
@@ -106,7 +136,7 @@ hr{border:0;height:1px;background:var(--rule);margin:0}
   padding:1.15em 1.9em;border:1px solid var(--fg);background:var(--fg);color:var(--bg);
   transition:background .35s,color .35s,border-color .35s,transform .35s cubic-bezier(.2,.8,.2,1)
 }
-.btn:hover{background:var(--accent);border-color:var(--accent);color:#f6f2e9;transform:translateY(-2px)}
+.btn:hover{background:var(--accent);border-color:var(--accent);color:#f8f5ee;transform:translateY(-2px)}
 .btn .ar{transition:transform .35s cubic-bezier(.2,.8,.2,1)}
 .btn:hover .ar{transform:translate(4px,-4px)}
 .btn--line{background:transparent;color:var(--fg);border-color:var(--rule-2)}
@@ -134,20 +164,24 @@ hr{border:0;height:1px;background:var(--rule);margin:0}
   position:relative;overflow:hidden;
   width:calc(56% + 44% * var(--p));
   height:calc(48% + 52% * var(--p));
+  /* Palm Court arcade: opens as an arch, flattens to a plate as it expands */
+  border-radius:
+    calc(50% * (1 - var(--p))) calc(50% * (1 - var(--p))) 0 0 /
+    calc(34% * (1 - var(--p))) calc(34% * (1 - var(--p))) 0 0;
   background:
-    radial-gradient(120% 90% at 72% 14%, rgba(142,163,196,.18), transparent 58%),
-    repeating-linear-gradient(135deg, rgba(142,163,196,.055) 0 1px, transparent 1px 26px),
+    radial-gradient(120% 90% at 72% 14%, rgba(63,193,214,.22), transparent 58%),
+    repeating-linear-gradient(135deg, rgba(248,245,238,.05) 0 1px, transparent 1px 26px),
     linear-gradient(180deg, var(--panel-3), var(--panel));
-  outline:1px solid rgba(242,237,224,.16);
-  will-change:width,height;
+  box-shadow:0 0 0 1px rgba(248,245,238,.20);
+  will-change:width,height,border-radius;
 }
 .hero-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.plate-mark{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:min(44%,190px);opacity:.16;color:#c9d6ea}
+.plate-mark{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:min(44%,190px);opacity:.18;color:var(--accent-lt)}
 .plate-cap{
   position:absolute;left:0;right:0;bottom:0;z-index:2;padding:16px 18px;
-  border-top:1px solid rgba(242,237,224,.16);
-  background:linear-gradient(180deg,transparent,rgba(10,17,25,.72));
-  font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(242,237,224,.6);
+  border-top:1px solid rgba(248,245,238,.16);
+  background:linear-gradient(180deg,transparent,rgba(10,42,71,.75));
+  font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(248,245,238,.6);
   display:flex;justify-content:space-between;gap:12px;
   opacity:calc(var(--p) * 1.6);
 }
