@@ -72,8 +72,11 @@ hr{border:0;height:1px;background:var(--rule);margin:0}
 .folio{font-family:var(--display);font-size:clamp(4rem,9vw,9rem);line-height:.8;color:transparent;-webkit-text-stroke:1px var(--rule-2);user-select:none}
 
 /* ─── nav ────────────────────────────────────── */
-.nav{position:absolute;top:0;left:0;right:0;z-index:50;height:var(--nav-h);display:flex;align-items:center}
-.nav.is-fixed{position:fixed;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--rule)}
+/* always fixed — only the backing fades in, so it never scrolls out of frame */
+.nav{position:fixed;top:0;left:0;right:0;z-index:50;height:var(--nav-h);display:flex;align-items:center;
+  background:transparent;border-bottom:1px solid transparent;
+  transition:background .45s ease,border-color .45s ease,backdrop-filter .45s ease}
+.nav.is-fixed{background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(14px);border-bottom-color:var(--rule)}
 .nav-in{display:flex;align-items:center;justify-content:space-between;gap:24px;width:100%}
 .mark{display:inline-flex;align-items:center;gap:11px;color:var(--fg)}
 .mark span{font-size:.74rem;font-weight:600;letter-spacing:.2em;white-space:nowrap}
@@ -183,6 +186,8 @@ hr{border:0;height:1px;background:var(--rule);margin:0}
 
 .sec{padding-block:clamp(64px,9vw,130px)}
 .sec--rule{border-top:1px solid var(--rule)}
+/* tonal shift so consecutive sections don't read flat */
+.sec--alt{background:var(--bg-2)}
 
 /* ─── editorial index ────────────────────────── */
 .index-row{display:grid;grid-template-columns:auto 1.1fr 1.4fr auto;gap:clamp(18px,4vw,56px);align-items:baseline;
@@ -246,7 +251,7 @@ hr{border:0;height:1px;background:var(--rule);margin:0}
 @media(max-width:880px){.build{grid-template-columns:1fr}.est{position:static}}
 
 /* ─── footer ─────────────────────────────────── */
-.foot{padding-block:clamp(46px,6vw,74px)}
+.foot{padding-block:clamp(46px,6vw,74px);background:var(--bg-2);border-top:1px solid var(--rule)}
 .foot-grid{display:grid;grid-template-columns:1.6fr repeat(3,auto);gap:clamp(28px,4vw,64px)}
 .foot h4{font-family:var(--body);font-size:.62rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
 .foot ul{list-style:none;margin:0;padding:0;display:grid;gap:11px}

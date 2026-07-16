@@ -3,23 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Walsh Digital Co. — Marketing &amp; brand studio, Bay Area</title>
-<meta name="description" content="A one-studio marketing partner for local business. Website, film, brand, search and social — in one consistent voice. Walnut Creek &amp; the wider Bay Area.">
-<meta property="og:title" content="Walsh Digital Co. — Presence worthy of your reputation">
-<meta property="og:description" content="Website, film, brand, search and social. One studio, one voice. Bay Area, CA.">
-<meta property="og:url" content="https://walshdigitalco.com">
-<meta property="og:type" content="website">
-<meta name="theme-color" content="#f6f2e9">
+<title>Build an engagement — Walsh Digital Co.</title>
+<meta name="description" content="Select the services you need and see the estimate build itself — website, brand, film, social and local SEO. 10% off two or more projects taken together.">
+<meta name="theme-color" content="#0a1119">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&display=swap" rel="stylesheet">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230a1119'/%3E%3Crect x='16' y='16' width='68' height='68' stroke='%238ea3c4' stroke-width='4' fill='none'/%3E%3Cpath d='M31 33 L43 69 L50 50 L57 69 L69 33' stroke='%23c9d6ea' stroke-width='8' fill='none' stroke-linejoin='miter'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="assets/site.css">
 </head>
-<body>
+<body class="dark">
 <a class="skip" href="#main">Skip to content</a>
 
-<nav class="nav">
+<nav class="nav is-fixed" data-fixed="always">
   <div class="wrap nav-in">
     <a href="index.html" class="mark" aria-label="Walsh Digital Co.">
       <svg width="30" height="30" viewBox="0 0 100 100" fill="none" aria-hidden="true">
@@ -32,9 +28,9 @@
       <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M3 7h18M3 17h18" stroke="currentColor" stroke-width="1.6"/></svg>
     </button>
     <div class="menu">
-      <a href="index.html" aria-current="page">Home</a>
+      <a href="index.html">Home</a>
       <a href="services.html">Services</a>
-      <a href="build.html">Build</a>
+      <a href="build.html" aria-current="page">Build</a>
       <a href="pricing.html">Pricing</a>
       <a href="about.html">Studio</a>
       <a href="mailto:hello@walshdigitalco.com" class="nav-cta">Start a project</a>
@@ -44,54 +40,65 @@
 
 <main id="main">
 
-  <!-- hero: cream left, dark plate right; media compresses → expands on scroll -->
-  <div class="hero-wrap" id="heroWrap">
-    <div class="hero-stick">
-
-      <div class="hero-left load">
-        <span class="tag">Marketing &amp; brand studio — Bay Area</span>
-        <h1 class="d1" style="margin-top:.32em">Presence <em class="ital">worthy</em><br>of your reputation.</h1>
+  <header class="phead">
+    <div class="wrap phead-in load">
+      <div>
+        <span class="tag">Build an engagement</span>
+        <h1 class="d2" style="margin-top:.3em;max-width:16ch">Select what you need. <em class="ital">See the number.</em></h1>
         <p class="lead" style="margin-top:1.5em">
-          You built something people trust in person. Online it should say the same thing —
-          in one voice, on every surface, without assembling a committee of freelancers to get there.
+          No form, no gate, no "contact us for a quote". Choose the pieces and the estimate
+          builds itself — strategy, local SEO and reporting already inside every number.
         </p>
-        <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:2.2em">
-          <a href="build.html" class="btn">Build an engagement <span class="ar" aria-hidden="true">↗</span></a>
-          <a href="services.html" class="btn btn--line">The services</a>
-        </div>
       </div>
-
-      <figure class="hero-plate" style="margin:0">
-        <div class="hero-media" id="heroMedia">
-          <img src="assets/hero.jpg" alt="Selected work by Walsh Digital Co." onerror="this.remove()">
-          <svg class="plate-mark" viewBox="0 0 100 100" fill="none" aria-hidden="true">
-            <rect x="10" y="10" width="80" height="80" stroke="currentColor" stroke-width="1.5"/>
-            <path d="M30 32 L43 70 L50 49 L57 70 L70 32" stroke="currentColor" stroke-width="3.5" fill="none" stroke-linejoin="miter"/>
-          </svg>
-          <figcaption class="plate-cap"><span>Selected work</span><span>Walnut Creek, CA</span></figcaption>
-        </div>
-      </figure>
-
-      <span class="scrollcue" aria-hidden="true"><i></i> Scroll</span>
+      <div class="folio" aria-hidden="true">02</div>
     </div>
-  </div>
+  </header>
 
-  <!-- the line that breaks the page -->
-  <div class="wrap"><div class="brk"><span>Practice</span></div></div>
+  <section class="sec">
+    <div class="wrap">
+      <div class="build">
+        <div class="rise">
+          <div>
+            <span class="glbl">One-time projects</span>
+            <div class="deck" id="deckOnce"></div>
+          </div>
+          <div style="margin-top:32px">
+            <span class="glbl">Monthly</span>
+            <div class="deck" id="deckMonthly"></div>
+          </div>
 
-  <!-- one tiny section -->
-  <section class="tight">
-    <div class="wrap" style="display:grid;grid-template-columns:1fr 1.45fr;gap:clamp(26px,5vw,80px);align-items:start">
-      <h2 class="d3 rise" style="max-width:12ch">Five disciplines, <em class="ital">one hand.</em></h2>
-      <div class="rise" data-d="1">
-        <ul class="rlist">
-          <li style="padding-top:0"><b>01</b><span><strong>Web</strong> — sites built to convert, structured for search from day one.</span></li>
-          <li><b>02</b><span><strong>Film &amp; photo</strong> — original work, shot for how customers meet you.</span></li>
-          <li><b>03</b><span><strong>Brand</strong> — the identity that ties every channel together.</span></li>
-          <li><b>04</b><span><strong>Search</strong> — Google profile and local SEO, tracked monthly.</span></li>
-          <li style="border-bottom:0"><b>05</b><span><strong>Social</strong> — managed, on-brand, without you thinking about it.</span></li>
-        </ul>
-        <a href="services.html" class="ulink" style="margin-top:24px">Read the full practice <span aria-hidden="true">↗</span></a>
+          <div style="margin-top:38px;padding-top:26px;border-top:1px solid var(--rule)">
+            <span class="tag">Two or more</span>
+            <p class="small" style="margin-top:.8em;max-width:46ch">
+              Take more than one one-time project together and <strong style="color:var(--fg)">10% comes off the whole build</strong> —
+              the pieces are cheaper to make when they're made at once.
+            </p>
+          </div>
+
+          <p class="small" style="margin-top:26px;max-width:46ch">
+            Nothing here is a contract. It's a starting shape — the real proposal follows a fifteen-minute conversation.
+          </p>
+        </div>
+
+        <aside class="est rise" data-d="1">
+          <span class="tag">Your estimate</span>
+          <div id="estLines" style="margin-top:20px"></div>
+          <div class="est-empty" id="estEmpty">Select a service to begin.</div>
+          <a href="mailto:hello@walshdigitalco.com" id="estSend" class="btn" style="margin-top:26px;width:100%;justify-content:center">
+            Send my selection <span class="ar" aria-hidden="true">↗</span>
+          </a>
+          <p class="small" style="margin-top:16px;font-size:.78rem">Opens your mail app with the selection filled in.</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec--rule sec--alt">
+    <div class="wrap" style="text-align:center">
+      <h2 class="d3 rise" style="max-width:22ch;margin-inline:auto">Prefer to just talk it through?</h2>
+      <div class="rise" data-d="1" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:2em">
+        <a href="mailto:hello@walshdigitalco.com" class="btn">Email Phillip <span class="ar" aria-hidden="true">↗</span></a>
+        <a href="pricing.html" class="btn btn--line">See the full rates</a>
       </div>
     </div>
   </section>
