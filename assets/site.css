@@ -1,10 +1,10 @@
 /* Walsh Digital Co. — architectural editorial system */
 
 /* ── Miami Design District ───────────────────────────
-   ocean night · turquoise · flamingo · butter · terrazzo plaza
+   ocean night · turquoise · flamingo · butter · liquid glass
    ─────────────────────────────────────────────────── */
 :root{
-  /* light (default) — the terrazzo plaza in full sun */
+  /* light (default) — the plaza in full sun */
   --bg:#f8f5ee;
   --bg-2:#eee8da;
   --fg:#0a2138;
@@ -62,11 +62,86 @@
   color:var(--fg);
 }
 
-/* terrazzo — turquoise, flamingo, butter and coral chips in plaster */
-.terrazzo{
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cg fill-opacity='.55'%3E%3Cellipse cx='18' cy='24' rx='5.4' ry='3.4' fill='%233fc1d6' transform='rotate(24 18 24)'/%3E%3Cellipse cx='98' cy='14' rx='3.8' ry='2.6' fill='%23cf4b86' transform='rotate(-38 98 14)'/%3E%3Cellipse cx='140' cy='48' rx='4.8' ry='2.8' fill='%23dda32a' transform='rotate(12 140 48)'/%3E%3Cellipse cx='60' cy='54' rx='3.2' ry='4.6' fill='%230a2a47' transform='rotate(-15 60 54)'/%3E%3Cellipse cx='118' cy='96' rx='5.4' ry='3.2' fill='%233fc1d6' transform='rotate(52 118 96)'/%3E%3Cellipse cx='32' cy='110' rx='3.6' ry='5' fill='%23cf4b86' transform='rotate(8 32 110)'/%3E%3Cellipse cx='78' cy='136' rx='4.6' ry='2.8' fill='%23dda32a' transform='rotate(-28 78 136)'/%3E%3Cellipse cx='148' cy='128' rx='3.2' ry='4' fill='%233fc1d6' transform='rotate(40 148 128)'/%3E%3Cellipse cx='8' cy='76' rx='4' ry='2.6' fill='%23e8663f' transform='rotate(-52 8 76)'/%3E%3Cellipse cx='90' cy='76' rx='2.8' ry='3.8' fill='%230a2a47' transform='rotate(30 90 76)'/%3E%3Cellipse cx='50' cy='8' rx='3.4' ry='2.2' fill='%23cf4b86' transform='rotate(-10 50 8)'/%3E%3Cellipse cx='126' cy='70' rx='2.6' ry='3.4' fill='%23e8663f' transform='rotate(64 126 70)'/%3E%3Cellipse cx='40' cy='84' rx='2.4' ry='3' fill='%23dda32a' transform='rotate(18 40 84)'/%3E%3Cellipse cx='104' cy='44' rx='3' ry='2' fill='%233fc1d6' transform='rotate(-44 104 44)'/%3E%3Cellipse cx='66' cy='108' rx='2.6' ry='3.4' fill='%23e8663f' transform='rotate(70 66 108)'/%3E%3C/g%3E%3C/svg%3E");
-  background-size:160px 160px;
+/* ── aurora ──────────────────────────────────────────
+   vibrant colour as diffuse light, not pattern.
+   big soft fields of turquoise + flamingo behind content.
+   ─────────────────────────────────────────────────── */
+.aurora{position:relative;overflow:hidden;isolation:isolate}
+.aurora::before,.aurora::after{
+  content:"";position:absolute;z-index:0;pointer-events:none;
+  border-radius:50%;filter:blur(90px);
 }
+.aurora::before{
+  width:58vw;height:58vw;max-width:780px;max-height:780px;
+  right:-14vw;top:-20vw;
+  background:radial-gradient(circle,var(--aur-1,rgba(63,193,214,.55)),transparent 62%);
+}
+.aurora::after{
+  width:46vw;height:46vw;max-width:620px;max-height:620px;
+  left:-14vw;bottom:-20vw;
+  background:radial-gradient(circle,var(--aur-2,rgba(207,75,134,.40)),transparent 62%);
+}
+.aurora > *{position:relative;z-index:1}
+.dark .aurora::before,.dark.aurora::before{--aur-1:rgba(79,210,230,.42)}
+.dark .aurora::after, .dark.aurora::after {--aur-2:rgba(247,154,196,.30)}
+@media (prefers-reduced-motion:no-preference){
+  .aurora::before{animation:drift1 26s ease-in-out infinite alternate}
+  .aurora::after{animation:drift2 32s ease-in-out infinite alternate}
+}
+@keyframes drift1{to{transform:translate(-70px,50px) scale(1.14)}}
+@keyframes drift2{to{transform:translate(60px,-40px) scale(1.2)}}
+
+/* ── liquid glass ────────────────────────────────────
+   translucent, refractive, with a specular rim + sheen.
+   needs colour behind it — pair with .aurora or a field.
+   ─────────────────────────────────────────────────── */
+.glass{
+  position:relative;overflow:hidden;
+  background:linear-gradient(150deg,rgba(248,245,238,.16),rgba(248,245,238,.05));
+  -webkit-backdrop-filter:blur(26px) saturate(190%);
+  backdrop-filter:blur(26px) saturate(190%);
+  border:1px solid rgba(248,245,238,.22);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.34),
+    inset 0 -1px 0 rgba(255,255,255,.06),
+    0 30px 70px -30px rgba(2,12,24,.66);
+}
+/* specular sweep — the thing that reads as glass rather than fog */
+.glass::after{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:0;
+  background:linear-gradient(115deg,rgba(255,255,255,.20) 0%,transparent 38%,transparent 64%,rgba(255,255,255,.07) 100%);
+}
+.glass > *{position:relative;z-index:1}
+/* on plaza (light) surfaces the glass tints the other way */
+.light .glass,.light.glass{
+  background:linear-gradient(150deg,rgba(255,255,255,.62),rgba(255,255,255,.30));
+  border-color:rgba(255,255,255,.75);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.95),
+    0 26px 60px -30px rgba(10,33,56,.34);
+}
+.light .glass::after,.light.glass::after{
+  background:linear-gradient(115deg,rgba(255,255,255,.5) 0%,transparent 42%,transparent 66%,rgba(255,255,255,.22) 100%);
+}
+
+/* ── colour field ────────────────────────────────────
+   one bold saturated block. luxury is confident colour,
+   used once, at scale — the Tiffany facade move.
+   ─────────────────────────────────────────────────── */
+.field{
+  --bg:#3fc1d6;
+  --bg-2:#35b0c4;
+  --fg:#04222e;
+  --mute:rgba(4,34,46,.66);
+  --mute-2:rgba(4,34,46,.86);
+  --rule:rgba(4,34,46,.18);
+  --rule-2:rgba(4,34,46,.34);
+  --accent:#04222e;
+  --accent-lt:#0a2a47;
+  background:var(--bg);
+  color:var(--fg);
+}
+.field--flamingo{--bg:#f79ac4;--bg-2:#f186b7;--fg:#3d0a24;--mute:rgba(61,10,36,.66);--mute-2:rgba(61,10,36,.86);--rule:rgba(61,10,36,.18);--rule-2:rgba(61,10,36,.34);--accent:#3d0a24;--accent-lt:#5c1236}
 
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
@@ -106,7 +181,13 @@ hr{border:0;height:1px;background:var(--rule);margin:0}
 .nav{position:fixed;top:0;left:0;right:0;z-index:50;height:var(--nav-h);display:flex;align-items:center;
   background:transparent;border-bottom:1px solid transparent;
   transition:background .45s ease,border-color .45s ease,backdrop-filter .45s ease}
-.nav.is-fixed{background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(14px);border-bottom-color:var(--rule)}
+.nav.is-fixed{
+  background:color-mix(in srgb,var(--bg) 82%,transparent);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  backdrop-filter:blur(20px) saturate(180%);
+  border-bottom-color:var(--rule);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.16)
+}
 .nav-in{display:flex;align-items:center;justify-content:space-between;gap:24px;width:100%}
 .mark{display:inline-flex;align-items:center;gap:11px;color:var(--fg)}
 .mark span{font-size:.74rem;font-weight:600;letter-spacing:.2em;white-space:nowrap}
