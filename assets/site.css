@@ -20,7 +20,7 @@
   --panel-2:#0f3355;
   --panel-3:#164066;
 
-  --display:'Bodoni Moda', Didot, Georgia, serif;
+  --display:'Fraunces', 'Bodoni Moda', Georgia, serif;
   --body:'Archivo', system-ui, sans-serif;
 
   --gutter:clamp(20px,4vw,56px);
@@ -76,14 +76,18 @@
   right:-14vw;top:-20vw;
   background:radial-gradient(circle,var(--aur-1,rgba(63,193,214,.55)),transparent 62%);
 }
+/* warm blob: flamingo core → butter mid → clear. pink AND yellow. */
 .aurora::after{
-  width:46vw;height:46vw;max-width:620px;max-height:620px;
-  left:-14vw;bottom:-20vw;
-  background:radial-gradient(circle,var(--aur-2,rgba(207,75,134,.40)),transparent 62%);
+  width:52vw;height:52vw;max-width:680px;max-height:680px;
+  left:-14vw;bottom:-22vw;
+  background:radial-gradient(circle,
+    var(--aur-2,rgba(207,75,134,.44)) 0%,
+    var(--aur-3,rgba(221,163,42,.32)) 46%,
+    transparent 72%);
 }
 .aurora > *{position:relative;z-index:1}
-.dark .aurora::before,.dark.aurora::before{--aur-1:rgba(79,210,230,.42)}
-.dark .aurora::after, .dark.aurora::after {--aur-2:rgba(247,154,196,.30)}
+.dark .aurora::before,.dark.aurora::before{--aur-1:rgba(79,210,230,.44)}
+.dark .aurora::after, .dark.aurora::after {--aur-2:rgba(247,154,196,.36);--aur-3:rgba(240,197,89,.30)}
 @media (prefers-reduced-motion:no-preference){
   .aurora::before{animation:drift1 26s ease-in-out infinite alternate}
   .aurora::after{animation:drift2 32s ease-in-out infinite alternate}
@@ -157,7 +161,7 @@ body::after{
 ::selection{background:var(--accent);color:#f8f5ee}
 a{color:inherit;text-decoration:none}
 img{max-width:100%;display:block}
-h1,h2,h3,h4{margin:0;font-family:var(--display);font-weight:400;line-height:1.02;letter-spacing:-0.015em;text-wrap:balance}
+h1,h2,h3,h4{margin:0;font-family:var(--display);font-weight:400;font-optical-sizing:auto;line-height:1.04;letter-spacing:-0.014em;text-wrap:balance}
 p{margin:0}
 hr{border:0;height:1px;background:var(--rule);margin:0}
 
@@ -167,6 +171,16 @@ hr{border:0;height:1px;background:var(--rule);margin:0}
 .d2{font-size:clamp(2.4rem,5vw,4.6rem)}
 .d3{font-size:clamp(1.7rem,2.6vw,2.5rem)}
 .ital{font-style:italic;color:var(--accent)}
+/* gradient accent word — turquoise → flamingo → butter (Miami sunset) */
+.grad{
+  background-image:linear-gradient(100deg,var(--accent) 0%,var(--accent-2) 52%,var(--accent-3) 100%);
+  -webkit-background-clip:text;background-clip:text;
+  color:transparent;-webkit-text-fill-color:transparent;
+  padding-right:.04em;
+}
+@supports not ((-webkit-background-clip:text) or (background-clip:text)){
+  .grad{color:var(--accent);-webkit-text-fill-color:currentColor}
+}
 .lead{font-size:clamp(1.02rem,1.15vw,1.16rem);color:var(--mute-2);max-width:46ch;line-height:1.65}
 .small{font-size:.92rem;color:var(--mute)}
 
