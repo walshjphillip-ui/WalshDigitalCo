@@ -44,37 +44,48 @@
 
 <main id="main">
 
-  <!-- hero: cream left, dark plate right; media compresses → expands on scroll -->
-  <div class="hero-wrap" id="heroWrap">
-    <div class="hero-stick">
+  <!-- hero: headline left, scroll reel of work rising through centre on the right -->
+  <section class="reel-hero" id="reelHero" style="--n:4">
+    <div class="reel-stick">
+      <div class="glowbg" aria-hidden="true"></div>
+      <div class="wrap reel-grid">
 
-      <div class="hero-left load">
-        <span class="tag">Marketing &amp; brand studio</span>
-        <h1 class="d1" style="margin-top:.32em">Presence <em class="ital grad">worthy</em><br>of your reputation.</h1>
-        <p class="lead" style="margin-top:1.5em">
-          You built something people trust in person. Online it should say the same thing —
-          in one voice, on every surface, without assembling a committee of freelancers to get there.
-        </p>
-        <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:2.2em">
-          <a href="build.html" class="btn">Build an engagement <span class="ar" aria-hidden="true">↗</span></a>
-          <a href="services.html" class="btn btn--line">The services</a>
+        <div class="hero-left load">
+          <span class="tag">Marketing &amp; brand studio</span>
+          <h1 class="d1" style="margin-top:.32em">Presence <em class="ital grad">worthy</em><br>of your reputation.</h1>
+          <p class="lead" style="margin-top:1.5em">
+            You built something people trust in person. Online it should say the same thing —
+            in one voice, on every surface, without assembling a committee of freelancers to get there.
+          </p>
+          <div class="hero-cta" style="display:flex;gap:14px;flex-wrap:wrap;margin-top:2.2em">
+            <a href="build.html" class="btn">Build an engagement <span class="ar" aria-hidden="true">↗</span></a>
+            <a href="services.html" class="btn btn--line">The services</a>
+          </div>
         </div>
+
+        <div class="reel-stage" id="reelStage" role="list" aria-label="Selected work">
+          <figure class="reel-item" role="listitem">
+            <div class="reel-shot"><img src="assets/work-1.jpg" alt="Website project" onerror="this.remove()"><span class="reel-mark" aria-hidden="true">W</span></div>
+            <figcaption class="reel-cap"><span>Website</span><span>01 / 04</span></figcaption>
+          </figure>
+          <figure class="reel-item" role="listitem">
+            <div class="reel-shot"><img src="assets/work-2.jpg" alt="Brand identity project" onerror="this.remove()"><span class="reel-mark" aria-hidden="true">W</span></div>
+            <figcaption class="reel-cap"><span>Brand identity</span><span>02 / 04</span></figcaption>
+          </figure>
+          <figure class="reel-item" role="listitem">
+            <div class="reel-shot"><img src="assets/work-3.jpg" alt="Social campaign project" onerror="this.remove()"><span class="reel-mark" aria-hidden="true">W</span></div>
+            <figcaption class="reel-cap"><span>Social campaign</span><span>03 / 04</span></figcaption>
+          </figure>
+          <figure class="reel-item" role="listitem">
+            <div class="reel-shot"><img src="assets/work-4.jpg" alt="Google profile project" onerror="this.remove()"><span class="reel-mark" aria-hidden="true">W</span></div>
+            <figcaption class="reel-cap"><span>Google profile</span><span>04 / 04</span></figcaption>
+          </figure>
+        </div>
+
       </div>
-
-      <figure class="hero-plate aurora" style="margin:0">
-        <div class="hero-media" id="heroMedia">
-          <img src="assets/hero.jpg" alt="Selected work by Walsh Digital Co." onerror="this.remove()">
-          <svg class="plate-mark" viewBox="0 0 100 100" fill="none" aria-hidden="true">
-            <rect x="10" y="10" width="80" height="80" stroke="currentColor" stroke-width="1.5"/>
-            <path d="M30 32 L43 70 L50 49 L57 70 L70 32" stroke="currentColor" stroke-width="3.5" fill="none" stroke-linejoin="miter"/>
-          </svg>
-          <figcaption class="plate-cap"><span>Selected work</span><span>Studio archive</span></figcaption>
-        </div>
-      </figure>
-
       <span class="scrollcue" aria-hidden="true"><i></i> Scroll</span>
     </div>
-  </div>
+  </section>
 
   <!-- the line that breaks the page -->
   <div class="wrap"><div class="brk"><span>Services</span></div></div>

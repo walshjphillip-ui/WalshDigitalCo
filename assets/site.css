@@ -67,17 +67,19 @@
    big soft fields of turquoise + flamingo behind content.
    ─────────────────────────────────────────────────── */
 .aurora{position:relative;overflow:hidden;isolation:isolate}
-.aurora::before,.aurora::after{
+/* glowbg: same glow as an absolute overlay, for use inside pinned/sticky parents */
+.glowbg{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.aurora::before,.aurora::after,.glowbg::before,.glowbg::after{
   content:"";position:absolute;z-index:0;pointer-events:none;
   border-radius:50%;filter:blur(90px);
 }
-.aurora::before{
+.aurora::before,.glowbg::before{
   width:58vw;height:58vw;max-width:780px;max-height:780px;
   right:-14vw;top:-20vw;
   background:radial-gradient(circle,var(--aur-1,rgba(63,193,214,.55)),transparent 62%);
 }
 /* warm blob: flamingo core → butter mid → clear. pink AND yellow. */
-.aurora::after{
+.aurora::after,.glowbg::after{
   width:52vw;height:52vw;max-width:680px;max-height:680px;
   left:-14vw;bottom:-22vw;
   background:radial-gradient(circle,
@@ -86,8 +88,12 @@
     transparent 72%);
 }
 .aurora > *{position:relative;z-index:1}
-.dark .aurora::before,.dark.aurora::before{--aur-1:rgba(79,210,230,.44)}
-.dark .aurora::after, .dark.aurora::after {--aur-2:rgba(247,154,196,.36);--aur-3:rgba(240,197,89,.30)}
+.dark .aurora::before,.dark.aurora::before,.dark .glowbg::before{--aur-1:rgba(79,210,230,.44)}
+.dark .aurora::after,.dark.aurora::after,.dark .glowbg::after{--aur-2:rgba(247,154,196,.36);--aur-3:rgba(240,197,89,.30)}
+@media (prefers-reduced-motion:no-preference){
+  .glowbg::before{animation:drift1 26s ease-in-out infinite alternate}
+  .glowbg::after{animation:drift2 32s ease-in-out infinite alternate}
+}
 @media (prefers-reduced-motion:no-preference){
   .aurora::before{animation:drift1 26s ease-in-out infinite alternate}
   .aurora::after{animation:drift2 32s ease-in-out infinite alternate}
@@ -146,6 +152,31 @@
   color:var(--fg);
 }
 .field--flamingo{--bg:#f79ac4;--bg-2:#f186b7;--fg:#3d0a24;--mute:rgba(61,10,36,.66);--mute-2:rgba(61,10,36,.86);--rule:rgba(61,10,36,.18);--rule-2:rgba(61,10,36,.34);--accent:#3d0a24;--accent-lt:#5c1236}
+
+/* ── scroll reel ─────────────────────────────────────
+   work rises from below, peaks front-and-centre, then
+   climbs on, shrinking, as the next piece follows.
+   JS-driven (site.js) via each item's distance from centre.
+   ─────────────────────────────────────────────────── */
+.reel-hero{position:relative;height:calc((var(--n,4) * 0.82 + 1) * 100vh)}
+.reel-stick{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:flex;align-items:center}
+.reel-grid{position:relative;z-index:1;display:grid;grid-template-columns:1fr minmax(340px,.92fr);align-items:center;gap:clamp(30px,4vw,72px);padding-top:var(--nav-h)}
+.reel-stage{position:relative;height:min(76vh,640px);align-self:center}
+.reel-item{position:absolute;top:50%;left:50%;width:min(94%,480px);transform:translate(-50%,-50%);will-change:transform,opacity}
+.reel-shot{position:relative;aspect-ratio:4/3;border-radius:14px;overflow:hidden;
+  background:radial-gradient(120% 90% at 72% 12%,rgba(63,193,214,.22),transparent 58%),linear-gradient(160deg,var(--panel-3),var(--panel));
+  box-shadow:0 46px 92px -42px rgba(2,12,24,.72),inset 0 0 0 1px rgba(248,245,238,.16)}
+.reel-shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.reel-mark{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--display);font-size:3.4rem;color:rgba(201,214,234,.16)}
+.reel-cap{display:flex;justify-content:space-between;gap:12px;margin-top:13px;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mute)}
+.reel-cap span:last-child{color:var(--accent)}
+@media(max-width:920px){
+  .reel-hero{height:auto}
+  .reel-stick{position:static;height:auto;display:block;padding:calc(var(--nav-h) + 56px) 0 40px}
+  .reel-grid{grid-template-columns:1fr;padding-top:0}
+  .reel-stage{height:auto;display:grid;gap:22px;margin-top:40px}
+  .reel-item{position:static;width:100%;transform:none!important;opacity:1!important;z-index:auto!important}
+}
 
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}

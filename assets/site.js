@@ -27,25 +27,39 @@
     });
   }
 
-  /* ── hero: scroll-driven compress → expand ────────── */
-  var heroWrap = document.getElementById('heroWrap');
-  var heroMedia = document.getElementById('heroMedia');
-  if (heroWrap && heroMedia) {
-    var ticking = false;
-    var setP = function () {
-      var rect = heroWrap.getBoundingClientRect();
+  /* ── hero reel: work rises, peaks front-and-centre, recedes ── */
+  var reelHero = document.getElementById('reelHero');
+  var reelStage = document.getElementById('reelStage');
+  if (reelHero && reelStage) {
+    var items = Array.prototype.slice.call(reelStage.querySelectorAll('.reel-item'));
+    var n = items.length || 1;
+    var rTick = false;
+    var reelFrame = function () {
+      var rect = reelHero.getBoundingClientRect();
       var total = rect.height - window.innerHeight;
-      var p = total > 0 ? Math.min(1, Math.max(0, -rect.top / total)) : 0;
-      // ease-out so it opens fast then settles
-      var eased = 1 - Math.pow(1 - p, 2);
-      heroMedia.style.setProperty('--p', eased.toFixed(4));
-      ticking = false;
+      var prog = total > 0 ? Math.min(1, Math.max(0, -rect.top / total)) : 0;
+      reelHero.style.setProperty('--p', prog.toFixed(4));
+      var mobile = window.innerWidth <= 920;
+      var p = prog * (n - 1);          // continuous position, 0 .. n-1
+      var sh = reelStage.clientHeight || 1;
+      items.forEach(function (el, i) {
+        if (mobile) { el.style.cssText = ''; return; }
+        var d = i - p;                 // signed distance from centre
+        var ad = Math.abs(d);
+        var ty = d * sh * 0.42;        // below when ahead, above once passed
+        var sc = Math.max(0.5, 1 - ad * 0.24);
+        var op = Math.max(0, Math.min(1, 1.28 - ad * 0.6));
+        el.style.transform = 'translate(-50%,-50%) translateY(' + ty.toFixed(1) + 'px) scale(' + sc.toFixed(3) + ')';
+        el.style.opacity = op.toFixed(3);
+        el.style.zIndex = String(200 - Math.round(ad * 20));
+      });
+      rTick = false;
     };
     window.addEventListener('scroll', function () {
-      if (!ticking) { ticking = true; requestAnimationFrame(setP); }
+      if (!rTick) { rTick = true; requestAnimationFrame(reelFrame); }
     }, { passive: true });
-    window.addEventListener('resize', setP);
-    setP();
+    window.addEventListener('resize', reelFrame);
+    reelFrame();
   }
 
   /* ── scroll reveals ───────────────────────────────── */
