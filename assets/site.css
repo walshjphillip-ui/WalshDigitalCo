@@ -170,6 +170,25 @@
 .reel-mark{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--display);font-size:3.4rem;color:rgba(201,214,234,.16)}
 .reel-cap{display:flex;justify-content:space-between;gap:12px;margin-top:13px;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mute)}
 .reel-cap span:last-child{color:var(--accent)}
+
+/* small-screen headline relief (was overflowing on phones) */
+@media(max-width:560px){ .d1{font-size:clamp(2.2rem,10.5vw,3rem)} }
+
+/* ── service cards (services page) ─────────────────── */
+.svc-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(clamp(250px,40%,330px),1fr));gap:18px}
+.svc-card{position:relative;overflow:hidden;border:1px solid var(--rule);border-radius:16px;
+  padding:clamp(24px,2.4vw,34px);display:flex;flex-direction:column;min-height:250px;
+  background:linear-gradient(160deg,color-mix(in srgb,var(--bg-2) 55%,transparent),transparent);
+  transition:transform .45s cubic-bezier(.2,.8,.2,1),border-color .45s,box-shadow .45s}
+.svc-card::before{content:"";position:absolute;right:-25%;top:-45%;width:66%;height:85%;border-radius:50%;
+  background:radial-gradient(circle,var(--accent-lt),transparent 60%);opacity:0;filter:blur(46px);transition:opacity .55s}
+.svc-card:hover{transform:translateY(-7px);border-color:var(--rule-2);box-shadow:0 34px 66px -40px rgba(2,12,24,.55)}
+.svc-card:hover::before{opacity:.42}
+.svc-card .num{position:relative;font-family:var(--display);font-style:italic;font-size:1.5rem;color:var(--accent)}
+.svc-card h3{position:relative;font-size:clamp(1.45rem,2.1vw,1.9rem);margin-top:.3em}
+.svc-card p{position:relative;color:var(--mute);font-size:.96rem;margin-top:.7em;line-height:1.55}
+.svc-card .price{position:relative;margin-top:auto;padding-top:18px;border-top:1px solid var(--rule);
+  font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}
 @media(max-width:920px){
   .reel-hero{height:auto}
   .reel-stick{position:static;height:auto;display:block;padding:calc(var(--nav-h) + 56px) 0 40px}
