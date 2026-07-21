@@ -189,6 +189,18 @@
 .svc-card p{position:relative;color:var(--mute);font-size:.96rem;margin-top:.7em;line-height:1.55}
 .svc-card .price{position:relative;margin-top:auto;padding-top:18px;border-top:1px solid var(--rule);
   font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}
+
+/* keep the hero's LEFT (headline) clean — glow stays on the reel side */
+.reel-hero .glowbg::before{right:-8vw;top:-14vw}
+.reel-hero .glowbg::after{left:auto;right:-4vw;bottom:-22vw;width:44vw;height:44vw}
+
+/* landing "Five services" band — blue, with a restrained glow */
+.tight.aurora::before{opacity:.5;width:40vw;height:40vw;right:-6vw;top:-30vw}
+.tight.aurora::after{opacity:.45;left:auto;right:8vw;bottom:-32vw;width:36vw;height:36vw}
+
+/* logo: exact PNG when present, the vector mark is the fallback */
+.mark img{display:block;height:30px;width:auto}
+.foot .mark img{height:24px}
 @media(max-width:920px){
   .reel-hero{height:auto}
   .reel-stick{position:static;height:auto;display:block;padding:calc(var(--nav-h) + 56px) 0 40px}
