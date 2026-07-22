@@ -16,6 +16,7 @@
   --accent-lt:#3fc1d6;   /* full turquoise — fills, not text */
   --accent-2:#cf4b86;    /* flamingo */
   --accent-3:#dda32a;    /* butter / brass */
+  --num:#0a2a47;         /* index numbers, on light */
   --panel:#0a2a47;       /* ocean night */
   --panel-2:#0f3355;
   --panel-3:#164066;
@@ -41,6 +42,7 @@
   --accent-lt:#93e6f2;
   --accent-2:#f79ac4;    /* flamingo, lifted */
   --accent-3:#f0c559;
+  --num:#4fd2e6;
   background:var(--bg);
   color:var(--fg);
 }
@@ -58,6 +60,7 @@
   --accent-lt:#3fc1d6;
   --accent-2:#cf4b86;
   --accent-3:#dda32a;
+  --num:#0a2a47;
   background:var(--bg);
   color:var(--fg);
 }
@@ -184,7 +187,7 @@
   background:radial-gradient(circle,var(--accent-lt),transparent 60%);opacity:0;filter:blur(46px);transition:opacity .55s}
 .svc-card:hover{transform:translateY(-7px);border-color:var(--rule-2);box-shadow:0 34px 66px -40px rgba(2,12,24,.55)}
 .svc-card:hover::before{opacity:.42}
-.svc-card .num{position:relative;font-family:var(--display);font-style:italic;font-size:1.5rem;color:var(--accent)}
+.svc-card .num{position:relative;font-family:var(--display);font-style:italic;font-size:1.5rem;color:var(--num)}
 .svc-card h3{position:relative;font-size:clamp(1.45rem,2.1vw,1.9rem);margin-top:.3em}
 .svc-card p{position:relative;color:var(--mute);font-size:.96rem;margin-top:.7em;line-height:1.55}
 .svc-card .price{position:relative;margin-top:auto;padding-top:18px;border-top:1px solid var(--rule);
@@ -201,6 +204,11 @@
 /* logo: exact PNG when present, the vector mark is the fallback */
 .mark img{display:block;height:30px;width:auto}
 .foot .mark img{height:24px}
+
+/* liquid-glass panel floating on the blue services band */
+.band-glass{display:grid;grid-template-columns:1fr 1.45fr;gap:clamp(26px,5vw,72px);align-items:center;
+  padding:clamp(30px,4.5vw,56px);border-radius:22px}
+@media(max-width:760px){.band-glass{grid-template-columns:1fr;gap:24px}}
 @media(max-width:920px){
   .reel-hero{min-height:0}
   .reel-stick{position:static;height:auto;min-height:0;display:block;padding:calc(var(--nav-h) + 56px) 0 40px}
@@ -385,7 +393,7 @@ hr{border:0;height:1px;background:var(--rule);margin:0}
   padding-block:clamp(28px,3.6vw,46px);border-bottom:1px solid var(--rule);
   transition:padding-left .5s cubic-bezier(.2,.8,.2,1),background .5s}
 .index-row:hover{padding-left:clamp(0px,1.6vw,26px);background:linear-gradient(90deg,rgba(70,96,140,.06),transparent 60%)}
-.index-no{font-family:var(--display);font-size:1rem;color:var(--accent);letter-spacing:.1em}
+.index-no{font-family:var(--display);font-size:1rem;color:var(--num);letter-spacing:.1em}
 .index-row h3{font-size:clamp(1.5rem,2.5vw,2.3rem)}
 .index-row:hover h3{color:var(--accent)}
 .index-row p{color:var(--mute);font-size:.96rem;max-width:52ch}
@@ -396,7 +404,7 @@ hr{border:0;height:1px;background:var(--rule);margin:0}
 .rlist{list-style:none;margin:0;padding:0}
 .rlist li{padding-block:clamp(12px,1.4vw,17px);border-bottom:1px solid var(--rule);display:flex;gap:1.2em;align-items:baseline;color:var(--mute-2);font-size:.96rem}
 .rlist li:first-child{padding-top:0}
-.rlist b{font-family:var(--display);font-size:1.3rem;color:var(--accent);line-height:1;min-width:2.6ch}
+.rlist b{font-family:var(--display);font-size:1.3rem;color:var(--num);line-height:1;min-width:2.6ch}
 .rlist strong{color:var(--fg);font-weight:600}
 
 /* ─── pricing table ──────────────────────────── */
