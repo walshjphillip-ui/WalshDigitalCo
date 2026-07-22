@@ -27,49 +27,38 @@
     });
   }
 
-  /* ── hero reel: work drifts up through centre, endlessly ── */
+  /* ── hero reel: YOUR scroll drives the work up through centre ── */
   var reelHero = document.getElementById('reelHero');
   var reelStage = document.getElementById('reelStage');
   if (reelHero && reelStage) {
     var items = Array.prototype.slice.call(reelStage.querySelectorAll('.reel-item'));
     var n = items.length || 1;
-    var pos = 0, last = 0, raf = 0, playing = true;
-    var SPEED = 0.22;                                  // slots per second (full loop ~ n/SPEED)
-
-    function layout(pp) {
+    var rTick = false;
+    function reelFrame() {
       var mobile = window.innerWidth <= 920;
+      var rect = reelHero.getBoundingClientRect();
+      var total = rect.height - window.innerHeight;
+      var prog = total > 0 ? Math.min(1, Math.max(0, -rect.top / total)) : 0;
+      var p = prog * (n - 1);                    // 0 .. n-1, entirely scroll-controlled
       var sh = reelStage.clientHeight || 1;
       items.forEach(function (el, i) {
         if (mobile) { el.style.cssText = ''; return; }
-        var r = (i - pp) % n; if (r < 0) r += n; if (r > n / 2) r -= n;   // wrapped: [-n/2, n/2]
-        var ad = Math.abs(r);
-        var ty = r * sh * 0.42;                        // below when ahead, above once passed
-        var sc = Math.max(0.5, 1 - ad * 0.26);
-        var op = Math.max(0, Math.min(1, 1.3 - ad * 0.62));   // ~0 at the extremes -> wrap is invisible
+        var d = i - p;
+        var ad = Math.abs(d);
+        var ty = d * sh * 0.42;
+        var sc = Math.max(0.5, 1 - ad * 0.24);
+        var op = Math.max(0, Math.min(1, 1.28 - ad * 0.6));
         el.style.transform = 'translate(-50%,-50%) translateY(' + ty.toFixed(1) + 'px) scale(' + sc.toFixed(3) + ')';
         el.style.opacity = op.toFixed(3);
         el.style.zIndex = String(200 - Math.round(ad * 20));
       });
+      rTick = false;
     }
-
-    function frame(t) {
-      if (!playing) { raf = 0; return; }
-      if (!last) last = t;
-      var dt = Math.min(0.05, (t - last) / 1000); last = t;
-      pos += dt * SPEED; if (pos >= n) pos -= n;
-      layout(pos);
-      raf = requestAnimationFrame(frame);
-    }
-
-    layout(0);
-    var start = function () { if (playing && !raf) { last = 0; raf = requestAnimationFrame(frame); } };
-    if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function (es) {
-        playing = es[0].isIntersecting;
-        if (playing) start();
-      }, { threshold: 0.04 }).observe(reelHero);
-    } else { start(); }
-    window.addEventListener('resize', function () { layout(pos); });
+    window.addEventListener('scroll', function () {
+      if (!rTick) { rTick = true; requestAnimationFrame(reelFrame); }
+    }, { passive: true });
+    window.addEventListener('resize', reelFrame);
+    reelFrame();
   }
 
   /* ── scroll reveals ───────────────────────────────── */

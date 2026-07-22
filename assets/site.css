@@ -42,7 +42,7 @@
   --accent-lt:#93e6f2;
   --accent-2:#f79ac4;    /* flamingo, lifted */
   --accent-3:#f0c559;
-  --num:#4fd2e6;
+  --num:#f8f5ee;
   background:var(--bg);
   color:var(--fg);
 }
@@ -161,10 +161,10 @@
    climbs on, shrinking, as the next piece follows.
    JS-driven (site.js) via each item's distance from centre.
    ─────────────────────────────────────────────────── */
-.reel-hero{position:relative;min-height:84vh}
-.reel-stick{position:relative;min-height:84vh;overflow:hidden;display:flex;align-items:center}
+.reel-hero{position:relative;height:calc((var(--n,4) * 0.3 + 1) * 100vh)}
+.reel-stick{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:flex;align-items:center}
 .reel-grid{position:relative;z-index:1;width:100%;display:grid;grid-template-columns:1fr minmax(340px,.92fr);align-items:center;gap:clamp(30px,4vw,72px);padding-top:var(--nav-h)}
-.reel-stage{position:relative;height:min(58vh,500px);align-self:center}
+.reel-stage{position:relative;height:min(72vh,600px);align-self:center}
 .reel-item{position:absolute;top:50%;left:50%;width:min(94%,480px);transform:translate(-50%,-50%);will-change:transform,opacity}
 .reel-shot{position:relative;aspect-ratio:4/3;border-radius:14px;overflow:hidden;
   background:radial-gradient(120% 90% at 72% 12%,rgba(63,193,214,.22),transparent 58%),linear-gradient(160deg,var(--panel-3),var(--panel));
@@ -202,15 +202,15 @@
 .tight.aurora::after{opacity:.45;left:auto;right:8vw;bottom:-32vw;width:36vw;height:36vw}
 
 /* logo: exact PNG when present, the vector mark is the fallback */
-.mark img{display:block;height:30px;width:auto}
-.foot .mark img{height:24px}
+.mark img{display:block;height:40px;width:auto}
+.foot .mark img{height:32px}
 
 /* liquid-glass panel floating on the blue services band */
 .band-glass{display:grid;grid-template-columns:1fr 1.45fr;gap:clamp(26px,5vw,72px);align-items:center;
   padding:clamp(30px,4.5vw,56px);border-radius:22px}
 @media(max-width:760px){.band-glass{grid-template-columns:1fr;gap:24px}}
 @media(max-width:920px){
-  .reel-hero{min-height:0}
+  .reel-hero{height:auto}
   .reel-stick{position:static;height:auto;min-height:0;display:block;padding:calc(var(--nav-h) + 56px) 0 40px}
   .reel-grid{grid-template-columns:1fr;padding-top:0}
   .reel-stage{height:auto;display:grid;gap:22px;margin-top:40px}
