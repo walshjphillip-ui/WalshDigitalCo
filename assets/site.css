@@ -163,7 +163,7 @@
    ─────────────────────────────────────────────────── */
 .reel-hero{position:relative;height:calc((var(--n,4) * 0.3 + 1) * 100vh)}
 .reel-stick{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:flex;align-items:center}
-.reel-grid{position:relative;z-index:1;width:100%;display:grid;grid-template-columns:1fr minmax(340px,.92fr);align-items:center;gap:clamp(30px,4vw,72px);padding-top:var(--nav-h)}
+.reel-grid{position:relative;z-index:1;width:100%;display:grid;grid-template-columns:1fr minmax(340px,.92fr);align-items:center;gap:clamp(30px,4vw,72px)}
 .reel-stage{position:relative;height:min(72vh,600px);align-self:center}
 .reel-item{position:absolute;top:50%;left:50%;width:min(94%,480px);transform:translate(-50%,-50%);will-change:transform,opacity}
 .reel-shot{position:relative;aspect-ratio:4/3;border-radius:14px;overflow:hidden;
@@ -258,7 +258,8 @@ hr{border:0;height:1px;background:var(--rule);margin:0}
 .tag--rule{display:flex;align-items:center;gap:1em}
 .tag--rule::after{content:"";height:1px;flex:1;background:var(--rule)}
 
-.folio{font-family:var(--display);font-size:clamp(4rem,9vw,9rem);line-height:.8;color:transparent;-webkit-text-stroke:1px var(--rule-2);user-select:none}
+/* small editorial detail — was a giant ghost numeral eating the layout */
+.folio{font-family:var(--display);font-size:clamp(2rem,3.2vw,3.2rem);line-height:.8;color:transparent;-webkit-text-stroke:1px var(--rule-2);user-select:none}
 
 /* ─── nav ────────────────────────────────────── */
 /* always fixed — only the backing fades in, so it never scrolls out of frame */
@@ -350,11 +351,12 @@ hr{border:0;height:1px;background:var(--rule);margin:0}
   display:flex;justify-content:space-between;gap:12px;
   opacity:calc(var(--p) * 1.6);
 }
+/* bottom-RIGHT so it never collides with the hero CTA buttons */
 .scrollcue{
-  position:absolute;left:clamp(20px,calc((100vw - var(--wrap))/2 + 4vw),100px);bottom:30px;z-index:3;
-  display:inline-flex;align-items:center;gap:.9em;font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:var(--mute);
-  opacity:calc(1 - var(--p) * 2)
+  position:absolute;right:var(--gutter);bottom:26px;z-index:3;pointer-events:none;
+  display:inline-flex;align-items:center;gap:.9em;font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:var(--mute)
 }
+@media(max-width:920px){.scrollcue{display:none}}
 .scrollcue i{display:block;width:46px;height:1px;background:var(--rule-2);position:relative;overflow:hidden}
 .scrollcue i::after{content:"";position:absolute;inset:0;width:40%;background:var(--accent);animation:cue 2.4s cubic-bezier(.6,0,.2,1) infinite}
 @keyframes cue{0%{transform:translateX(-110%)}60%,100%{transform:translateX(280%)}}
@@ -381,7 +383,7 @@ hr{border:0;height:1px;background:var(--rule);margin:0}
 /* ─── page header ────────────────────────────── */
 .phead{padding:calc(var(--nav-h) + clamp(60px,9vw,130px)) 0 clamp(40px,5vw,70px);border-bottom:1px solid var(--rule)}
 .phead-in{display:grid;grid-template-columns:1fr auto;gap:30px;align-items:end}
-@media(max-width:760px){.phead-in{grid-template-columns:1fr}.folio{display:none}}
+@media(max-width:1000px){.phead-in{grid-template-columns:1fr}.folio{display:none}}
 
 .sec{padding-block:clamp(64px,9vw,130px)}
 .sec--rule{border-top:1px solid var(--rule)}
