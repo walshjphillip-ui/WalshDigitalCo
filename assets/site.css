@@ -259,7 +259,8 @@ hr{border:0;height:1px;background:var(--rule);margin:0}
 .tag--rule::after{content:"";height:1px;flex:1;background:var(--rule)}
 
 /* small editorial detail — was a giant ghost numeral eating the layout */
-.folio{font-family:var(--display);font-size:clamp(2rem,3.2vw,3.2rem);line-height:.8;color:transparent;-webkit-text-stroke:1px var(--rule-2);user-select:none}
+/* solid fill, not hollow: navy on light surfaces, white on navy */
+.folio{font-family:var(--display);font-size:clamp(2rem,3.2vw,3.2rem);line-height:.8;color:var(--num);-webkit-text-stroke:0;user-select:none}
 
 /* ─── nav ────────────────────────────────────── */
 /* always fixed — only the backing fades in, so it never scrolls out of frame */
