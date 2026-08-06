@@ -1,88 +1,52 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 750" width="1000" height="750" font-family="Georgia, 'Times New Roman', serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 750" width="1000" height="750">
   <defs>
-    <linearGradient id="glow" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#3fc1d6" stop-opacity=".28"/>
-      <stop offset="1" stop-color="#3fc1d6" stop-opacity="0"/>
-    </linearGradient>
-    <radialGradient id="sun" cx="0.5" cy="0.5" r="0.5">
-      <stop offset="0" stop-color="#dda32a"/>
+    <linearGradient id="lens" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3fc1d6"/>
+      <stop offset=".55" stop-color="#dda32a"/>
       <stop offset="1" stop-color="#cf4b86"/>
-    </radialGradient>
-    <linearGradient id="cardg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#123a5c"/>
-      <stop offset="1" stop-color="#0a2a47"/>
     </linearGradient>
+    <radialGradient id="glowA" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#3fc1d6" stop-opacity=".32"/>
+      <stop offset="1" stop-color="#3fc1d6" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowB" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#cf4b86" stop-opacity=".28"/>
+      <stop offset="1" stop-color="#cf4b86" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="leftLens"><circle cx="168" cy="322" r="80"/></clipPath>
   </defs>
 
   <!-- ground -->
-  <rect width="1000" height="750" fill="#f4efe4"/>
-  <circle cx="880" cy="70" r="360" fill="url(#glow)"/>
-  <rect x="18" y="18" width="964" height="714" rx="10" fill="none" stroke="#0a2a47" stroke-opacity=".14"/>
+  <rect width="1000" height="750" fill="#0a2a47"/>
+  <circle cx="880" cy="80" r="380" fill="url(#glowA)"/>
+  <circle cx="110" cy="710" r="330" fill="url(#glowB)"/>
 
   <!-- header -->
-  <text x="60" y="74" font-family="Archivo, system-ui, sans-serif" font-size="14" font-weight="600" letter-spacing="4" fill="#0a2a47">BRAND SYSTEM</text>
-  <text x="940" y="74" text-anchor="end" font-family="Archivo, system-ui, sans-serif" font-size="12.5" letter-spacing="3.5" fill="#5d6d7e">SKIN &amp; WELLNESS · MIAMI</text>
-  <line x1="60" y1="96" x2="940" y2="96" stroke="#0a2a47" stroke-opacity=".12"/>
+  <text x="70" y="96" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif" font-size="25" font-weight="600" letter-spacing="7" fill="#f4efe4">BRAND IDENTITY</text>
+  <text x="930" y="96" text-anchor="end" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif" font-size="23" letter-spacing="4.5" fill="#8ea3b8">MIAMI BEACH</text>
+  <line x1="70" y1="130" x2="930" y2="130" stroke="#f4efe4" stroke-opacity=".18"/>
 
-  <!-- lockup: sunburst mark + wordmark -->
-  <g transform="translate(150,238)">
-    <circle r="64" fill="none" stroke="#0a2a47" stroke-width="2.4"/>
-    <g stroke="url(#sun)" stroke-width="6.5" stroke-linecap="round">
-      <line x1="0" y1="-40" x2="0" y2="-14"/>
-      <line x1="0" y1="40" x2="0" y2="14"/>
-      <line x1="-40" y1="0" x2="-14" y2="0"/>
-      <line x1="40" y1="0" x2="14" y2="0"/>
-      <line x1="-28.3" y1="-28.3" x2="-9.9" y2="-9.9"/>
-      <line x1="28.3" y1="28.3" x2="9.9" y2="9.9"/>
-      <line x1="28.3" y1="-28.3" x2="9.9" y2="-9.9"/>
-      <line x1="-28.3" y1="28.3" x2="-9.9" y2="9.9"/>
-    </g>
-    <circle r="7" fill="#0a2a47"/>
-  </g>
-  <text x="250" y="262" font-size="84" fill="#0a2a47">Lumé</text>
-  <text x="254" y="298" font-family="Archivo, system-ui, sans-serif" font-size="14" letter-spacing="5.5" fill="#5d6d7e">SKIN &amp; WELLNESS STUDIO</text>
+  <!-- mark: interlocking lens -->
+  <circle cx="168" cy="322" r="80" fill="none" stroke="#f4efe4" stroke-opacity=".85" stroke-width="3"/>
+  <circle cx="248" cy="322" r="80" fill="none" stroke="#f4efe4" stroke-opacity=".85" stroke-width="3"/>
+  <g clip-path="url(#leftLens)"><circle cx="248" cy="322" r="80" fill="url(#lens)"/></g>
 
-  <line x1="60" y1="392" x2="940" y2="392" stroke="#0a2a47" stroke-opacity=".12"/>
-  <line x1="386" y1="430" x2="386" y2="660" stroke="#0a2a47" stroke-opacity=".1"/>
-  <line x1="648" y1="430" x2="648" y2="660" stroke="#0a2a47" stroke-opacity=".1"/>
+  <!-- wordmark -->
+  <text x="378" y="368" font-family="Georgia,'Times New Roman',serif" font-size="152" fill="#f8f5ee">Lumé</text>
+  <text x="384" y="420" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif" font-size="25" letter-spacing="9" fill="#9db0c2">SKIN STUDIO</text>
 
-  <!-- col 1: palette -->
-  <text x="60" y="440" font-family="Archivo, system-ui, sans-serif" font-size="12" font-weight="600" letter-spacing="3.5" fill="#5d6d7e">PALETTE</text>
-  <g>
-    <rect x="60"  y="466" width="52" height="74" rx="9" fill="#0a2a47"/>
-    <rect x="122" y="466" width="52" height="74" rx="9" fill="#3fc1d6"/>
-    <rect x="184" y="466" width="52" height="74" rx="9" fill="#cf4b86"/>
-    <rect x="246" y="466" width="52" height="74" rx="9" fill="#dda32a"/>
-    <rect x="308" y="466" width="52" height="74" rx="9" fill="#f8f5ee" stroke="#d6cdb7"/>
-  </g>
-  <g font-family="Archivo, system-ui, sans-serif" font-size="9.5" fill="#8493a1" text-anchor="middle">
-    <text x="86"  y="560">#0A2A47</text>
-    <text x="148" y="560">#3FC1D6</text>
-    <text x="210" y="560">#CF4B86</text>
-    <text x="272" y="560">#DDA32A</text>
-    <text x="334" y="560">#F8F5EE</text>
-  </g>
+  <line x1="70" y1="512" x2="930" y2="512" stroke="#f4efe4" stroke-opacity=".14"/>
 
-  <!-- col 2: type -->
-  <text x="410" y="440" font-family="Archivo, system-ui, sans-serif" font-size="12" font-weight="600" letter-spacing="3.5" fill="#5d6d7e">TYPE</text>
-  <text x="408" y="556" font-size="96" fill="#0a2a47">Aa</text>
-  <text x="410" y="598" font-size="21" fill="#0a2a47">Fraunces</text>
-  <text x="410" y="626" font-family="Archivo, system-ui, sans-serif" font-size="14" letter-spacing="1" fill="#5d6d7e">Archivo</text>
+  <!-- palette -->
+  <text x="70" y="564" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif" font-size="21" font-weight="600" letter-spacing="5" fill="#8ea3b8">PALETTE</text>
+  <rect x="70"  y="588" width="104" height="104" rx="16" fill="#f8f5ee"/>
+  <rect x="192" y="588" width="104" height="104" rx="16" fill="#3fc1d6"/>
+  <rect x="314" y="588" width="104" height="104" rx="16" fill="#cf4b86"/>
+  <rect x="436" y="588" width="104" height="104" rx="16" fill="#dda32a"/>
+  <rect x="558" y="588" width="104" height="104" rx="16" fill="#0a2a47" stroke="#f4efe4" stroke-opacity=".38" stroke-width="2"/>
 
-  <!-- col 3: business card -->
-  <g transform="translate(680,452)">
-    <rect x="6" y="10" width="252" height="150" rx="14" fill="#0a2a47" opacity=".14"/>
-    <rect width="252" height="150" rx="14" fill="url(#cardg)"/>
-    <g transform="translate(32,46)">
-      <circle r="17" fill="none" stroke="#3fc1d6" stroke-width="1.6"/>
-      <g stroke="#3fc1d6" stroke-width="2.4" stroke-linecap="round">
-        <line x1="0" y1="-11" x2="0" y2="-4.5"/><line x1="0" y1="11" x2="0" y2="4.5"/>
-        <line x1="-11" y1="0" x2="-4.5" y2="0"/><line x1="11" y1="0" x2="4.5" y2="0"/>
-      </g>
-      <circle r="2.4" fill="#3fc1d6"/>
-    </g>
-    <text x="62" y="54" font-size="30" fill="#f8f5ee">Lumé</text>
-    <line x1="32" y1="94" x2="122" y2="94" stroke="#3fc1d6" stroke-width="1.4"/>
-    <text x="32" y="122" font-family="Archivo, system-ui, sans-serif" font-size="11" letter-spacing="1.5" fill="#aebfce">hello@lumestudio.co</text>
-  </g>
+  <!-- type specimen -->
+  <line x1="716" y1="548" x2="716" y2="700" stroke="#f4efe4" stroke-opacity=".14"/>
+  <text x="756" y="564" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif" font-size="21" font-weight="600" letter-spacing="5" fill="#8ea3b8">TYPE</text>
+  <text x="754" y="668" font-family="Georgia,'Times New Roman',serif" font-size="98" fill="#f8f5ee">Aa</text>
 </svg>

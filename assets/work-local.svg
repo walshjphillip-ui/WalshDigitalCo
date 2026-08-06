@@ -1,90 +1,97 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 750" width="1000" height="750" font-family="Archivo, system-ui, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 750" width="1000" height="750" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">
   <defs>
-    <linearGradient id="mapg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#dfeee6"/>
-      <stop offset="1" stop-color="#cfe4ee"/>
-    </linearGradient>
-    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="10" stdDeviation="16" flood-color="#0a2a47" flood-opacity="0.12"/>
+    <filter id="shSoft" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="8" stdDeviation="13" flood-color="#0a2a47" flood-opacity=".20"/>
     </filter>
-    <clipPath id="mapclip"><rect x="694" y="222" width="246" height="452" rx="20"/></clipPath>
+    <filter id="shCard" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="12" stdDeviation="20" flood-color="#0a2a47" flood-opacity=".24"/>
+    </filter>
+    <clipPath id="frame"><rect width="1000" height="750" rx="2"/></clipPath>
   </defs>
 
-  <!-- ground -->
-  <rect width="1000" height="750" fill="#f4efe4"/>
-  <rect x="18" y="18" width="964" height="714" rx="10" fill="none" stroke="#0a2a47" stroke-opacity=".14"/>
-  <text x="60" y="74" font-size="14" font-weight="600" letter-spacing="4" fill="#0a2a47">LOCAL SEARCH</text>
-  <text x="940" y="74" text-anchor="end" font-size="12.5" letter-spacing="3.5" fill="#5d6d7e">GOOGLE BUSINESS PROFILE</text>
-  <line x1="60" y1="96" x2="940" y2="96" stroke="#0a2a47" stroke-opacity=".12"/>
-
-  <!-- search bar -->
-  <g filter="url(#soft)">
-    <rect x="60" y="130" width="600" height="60" rx="30" fill="#ffffff"/>
-  </g>
-  <circle cx="100" cy="160" r="11" fill="none" stroke="#5d6d7e" stroke-width="2.4"/>
-  <line x1="108" y1="168" x2="118" y2="178" stroke="#5d6d7e" stroke-width="2.4" stroke-linecap="round"/>
-  <text x="136" y="167" font-size="20" fill="#33455a">med spa near me</text>
-  <circle cx="608" cy="160" r="4" fill="#dda32a"/><circle cx="620" cy="160" r="4" fill="#cf4b86"/><circle cx="632" cy="160" r="4" fill="#3fc1d6"/>
-
-  <!-- result card -->
-  <g filter="url(#soft)">
-    <rect x="60" y="222" width="600" height="452" rx="22" fill="#ffffff"/>
-  </g>
-  <!-- top-result pill -->
-  <rect x="92" y="252" width="132" height="30" rx="15" fill="#e4f6f9"/>
-  <text x="110" y="272" font-size="12" font-weight="600" letter-spacing="1.4" fill="#178196">TOP RESULT</text>
-
-  <!-- name + category -->
-  <text x="92" y="332" font-family="Georgia, serif" font-size="37" fill="#0a2a47">Lumé Skin &amp; Wellness</text>
-  <text x="94" y="366" font-size="17" fill="#5d6d7e">Med spa · $$ · Miami Beach</text>
-
-  <!-- rating -->
-  <text x="92" y="412" font-size="22" font-weight="700" fill="#0a2a47">4.9</text>
-  <text x="140" y="413" font-size="24" letter-spacing="2" fill="#dda32a">★★★★★</text>
-  <text x="300" y="412" font-size="17" fill="#5d6d7e">(214)</text>
-  <circle cx="352" cy="406" r="3" fill="#8493a1"/>
-  <text x="370" y="412" font-size="17" font-weight="600" fill="#1f7a5a">Open now</text>
-
-  <!-- address -->
-  <path d="M88 434 c-9 0 -15 7 -15 15 c0 11 15 25 15 25 s15 -14 15 -25 c0 -8 -6 -15 -15 -15 z" fill="none" stroke="#5d6d7e" stroke-width="2.4"/>
-  <circle cx="88" cy="449" r="4.2" fill="#5d6d7e"/>
-  <text x="118" y="458" font-size="16" fill="#5d6d7e">1200 Collins Ave, Miami Beach, FL</text>
-
-  <!-- buttons -->
-  <g font-size="14.5" font-weight="600" fill="#178196" text-anchor="middle">
-    <rect x="92"  y="500" width="150" height="46" rx="23" fill="none" stroke="#3fc1d6" stroke-width="1.6"/>
-    <text x="167" y="529">Directions</text>
-    <rect x="258" y="500" width="120" height="46" rx="23" fill="none" stroke="#3fc1d6" stroke-width="1.6"/>
-    <text x="318" y="529">Call</text>
-    <rect x="394" y="500" width="150" height="46" rx="23" fill="#3fc1d6"/>
-    <text x="469" y="529" fill="#06303a">Website</text>
-  </g>
-
-  <!-- photo strip -->
-  <rect x="92"  y="586" width="132" height="60" rx="10" fill="#0a2a47"/>
-  <rect x="234" y="586" width="132" height="60" rx="10" fill="#cf4b86"/>
-  <rect x="376" y="586" width="132" height="60" rx="10" fill="#dda32a"/>
-  <rect x="518" y="586" width="110" height="60" rx="10" fill="#3fc1d6"/>
-
-  <!-- map thumbnail -->
-  <g filter="url(#soft)">
-    <rect x="694" y="222" width="246" height="452" rx="20" fill="url(#mapg)"/>
-  </g>
-  <g clip-path="url(#mapclip)">
-    <g stroke="#ffffff" stroke-width="7" stroke-linecap="round" opacity=".9">
-      <line x1="694" y1="330" x2="940" y2="300"/>
-      <line x1="740" y1="674" x2="820" y2="222"/>
-      <line x1="694" y1="520" x2="940" y2="560"/>
+  <g clip-path="url(#frame)">
+    <!-- land -->
+    <rect width="1000" height="750" fill="#e9ece3"/>
+    <!-- bay -->
+    <path d="M786 0 C816 130 762 250 802 380 C840 506 792 620 828 750 L1000 750 L1000 0 Z" fill="#bfdfe8"/>
+    <!-- park -->
+    <rect x="78" y="176" width="182" height="152" rx="18" fill="#cfe0c2"/>
+    <!-- city blocks -->
+    <g fill="#d9dece">
+      <rect x="78"  y="58"  width="182" height="94"  rx="10"/>
+      <rect x="330" y="118" width="132" height="92"  rx="10"/>
+      <rect x="502" y="118" width="122" height="92"  rx="10"/>
+      <rect x="672" y="118" width="96"  height="92"  rx="10"/>
+      <rect x="330" y="252" width="132" height="110" rx="10"/>
+      <rect x="502" y="252" width="122" height="110" rx="10"/>
+      <rect x="672" y="252" width="92"  height="110" rx="10"/>
+      <rect x="120" y="404" width="152" height="102" rx="10"/>
+      <rect x="330" y="404" width="132" height="102" rx="10"/>
+      <rect x="502" y="404" width="122" height="102" rx="10"/>
     </g>
-    <g stroke="#b9d3c6" stroke-width="3" opacity=".7">
-      <line x1="694" y1="430" x2="940" y2="410"/>
-      <line x1="860" y1="222" x2="900" y2="674"/>
+    <!-- roads -->
+    <g stroke="#ffffff" stroke-linecap="round">
+      <line x1="300" y1="0" x2="300" y2="750" stroke-width="21"/>
+      <line x1="482" y1="0" x2="482" y2="750" stroke-width="14"/>
+      <line x1="652" y1="0" x2="652" y2="750" stroke-width="14"/>
+      <line x1="0" y1="232" x2="780" y2="232" stroke-width="19"/>
+      <line x1="0" y1="382" x2="792" y2="382" stroke-width="12"/>
+      <line x1="0" y1="536" x2="784" y2="536" stroke-width="12"/>
+      <!-- causeway over the bay -->
+      <line x1="652" y1="304" x2="1000" y2="262" stroke-width="13"/>
     </g>
-  </g>
-  <!-- pin -->
-  <g transform="translate(817,436)">
-    <ellipse cx="0" cy="40" rx="18" ry="6" fill="#0a2a47" opacity=".18"/>
-    <path d="M0 34 C-22 4 -26 -6 -26 -20 A26 26 0 1 1 26 -20 C26 -6 22 4 0 34 Z" fill="#cf4b86"/>
-    <circle cx="0" cy="-20" r="9.5" fill="#ffffff"/>
+
+    <!-- competitor pins -->
+    <g fill="#93a6b6" opacity=".62">
+      <g transform="translate(352,300) scale(.5)">
+        <path d="M0 0 C-18 -28 -34 -46 -34 -66 A34 34 0 1 1 34 -66 C34 -46 18 -28 0 0 Z"/>
+      </g>
+      <g transform="translate(726,196) scale(.5)">
+        <path d="M0 0 C-18 -28 -34 -46 -34 -66 A34 34 0 1 1 34 -66 C34 -46 18 -28 0 0 Z"/>
+      </g>
+    </g>
+
+    <!-- the client's pin -->
+    <g transform="translate(516,392)">
+      <ellipse cx="0" cy="8" rx="20" ry="7" fill="#0a2a47" opacity=".20"/>
+      <path d="M0 0 C-18 -28 -34 -46 -34 -66 A34 34 0 1 1 34 -66 C34 -46 18 -28 0 0 Z" fill="#cf4b86"/>
+      <circle cx="0" cy="-66" r="13" fill="#ffffff"/>
+    </g>
+
+    <!-- search bar -->
+    <g filter="url(#shSoft)"><rect x="60" y="52" width="562" height="76" rx="38" fill="#ffffff"/></g>
+    <circle cx="110" cy="88" r="14" fill="none" stroke="#5d6d7e" stroke-width="4"/>
+    <line x1="120" y1="98" x2="132" y2="111" stroke="#5d6d7e" stroke-width="4" stroke-linecap="round"/>
+    <text x="156" y="101" font-size="30" fill="#33455a">auto detailing near me</text>
+
+    <!-- result card -->
+    <g filter="url(#shCard)"><rect x="56" y="440" width="888" height="260" rx="26" fill="#ffffff"/></g>
+
+    <text x="96" y="498" font-size="46" font-weight="600" fill="#0a2a47">Coastal Detail Co.</text>
+    <text x="98" y="538" font-size="27" fill="#5d6d7e">Auto detailing · Miami Beach</text>
+
+    <!-- rating row -->
+    <text x="96" y="590" font-size="34" font-weight="700" fill="#0a2a47">4.9</text>
+    <text x="152" y="588" font-size="32" letter-spacing="2" fill="#dda32a">★★★★★</text>
+    <text x="342" y="588" font-size="27" fill="#5d6d7e">(214)</text>
+    <circle cx="440" cy="579" r="4" fill="#93a6b6"/>
+    <text x="462" y="588" font-size="27" font-weight="600" fill="#1f7a5a">Open now</text>
+
+    <!-- actions -->
+    <g font-size="26" font-weight="600" text-anchor="middle">
+      <rect x="96"  y="616" width="200" height="56" rx="28" fill="none" stroke="#3fc1d6" stroke-width="2"/>
+      <text x="196" y="653" fill="#178196">Directions</text>
+      <rect x="312" y="616" width="150" height="56" rx="28" fill="none" stroke="#3fc1d6" stroke-width="2"/>
+      <text x="387" y="653" fill="#178196">Call</text>
+      <rect x="478" y="616" width="200" height="56" rx="28" fill="#3fc1d6"/>
+      <text x="578" y="653" fill="#06303a">Website</text>
+    </g>
+
+    <!-- rank badge + photo strip -->
+    <rect x="686" y="470" width="230" height="48" rx="24" fill="#e4f6f9"/>
+    <text x="801" y="501" text-anchor="middle" font-size="21" font-weight="600" letter-spacing="1.4" fill="#178196">TOP LOCAL RESULT</text>
+    <rect x="686" y="548" width="72" height="72" rx="12" fill="#0a2a47"/>
+    <rect x="765" y="548" width="72" height="72" rx="12" fill="#3fc1d6"/>
+    <rect x="844" y="548" width="72" height="72" rx="12" fill="#dda32a"/>
   </g>
 </svg>
