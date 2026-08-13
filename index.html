@@ -66,52 +66,132 @@
 
 <main id="main">
 
-  <!-- hero: headline left, scroll reel of work rising through centre on the right -->
-  <section class="reel-hero" id="reelHero" style="--n:4">
-    <div class="reel-stick">
-      <div class="glowbg" aria-hidden="true"></div>
-      <div class="wrap reel-grid">
+  <!-- hero: compact, unpinned — the services band sits just under the fold -->
+  <section class="hero-c">
+    <div class="glowbg" aria-hidden="true"></div>
+    <div class="wrap hero-c-grid">
 
-        <div class="hero-left load">
-          <span class="tag">Marketing &amp; brand studio</span>
-          <h1 class="d1" style="margin-top:.32em">Your business,<br><em class="ital grad">unmistakable</em> online.</h1>
-          <p class="lead" style="margin-top:1.5em">
-            You built something people trust in person. Online it should say the same thing —
-            in one voice, on every surface, without assembling a committee of freelancers to get there.
-          </p>
-          <div class="hero-cta" style="display:flex;gap:14px;flex-wrap:wrap;margin-top:2.2em">
-            <a href="build.html" class="btn">Build an engagement <span class="ar" aria-hidden="true">↗</span></a>
-            <a href="services.html" class="btn btn--line">The services</a>
+      <div class="load">
+        <span class="tag">Marketing &amp; brand studio</span>
+        <h1 class="d1" style="margin-top:.32em">Your business,<br><em class="ital grad">unmistakable</em> online.</h1>
+        <p class="lead" style="margin-top:1.5em">
+          You built something people trust in person. Online it should say the same thing —
+          in one voice, on every surface, without assembling a committee of freelancers to get there.
+        </p>
+        <div class="hero-cta" style="display:flex;gap:14px;flex-wrap:wrap;margin-top:2.2em">
+          <a href="build.html" class="btn">Build an engagement <span class="ar" aria-hidden="true">↗</span></a>
+          <a href="services.html" class="btn btn--line">The services</a>
+        </div>
+      </div>
+
+      <figure class="hero-c-shot rise">
+        <div class="reel-shot reel-shot--web">
+          <div class="reel-bar" aria-hidden="true"><i></i><i></i><i></i><span class="reel-url">pursut</span></div>
+          <div class="reel-media"><img src="assets/work-pursut.jpg" alt="Pursut — marketing website built by Walsh Digital Co." onerror="this.remove()"></div>
+        </div>
+        <figcaption class="reel-cap"><span>Pursut · Website</span><span>Recent work</span></figcaption>
+      </figure>
+
+    </div>
+  </section>
+
+  <!-- before / after: one business, two versions, wiped apart by scroll -->
+  <section class="ba" id="baSec" aria-labelledby="baTitle">
+    <div class="ba-stick">
+
+      <div class="ba-frame">
+        <div class="ba-layer ba-before" data-lab="Before" aria-hidden="true">
+          <div class="mk mk--old">
+            <div class="mk-nav">
+              <span class="mk-brand">LUMÉ SKIN STUDIO</span>
+              <span class="mk-links"><span>Home</span><span>About Us</span><span>Services</span><span>Specials</span><span>Testimonials</span><span>Contact Us</span></span>
+            </div>
+            <div class="mk-hero">
+              <div class="mk-copy">
+                <div class="mk-eyebrow">Welcome to our website!</div>
+                <div class="mk-h">Lumé Skin Studio</div>
+                <p class="mk-p">We are a full service skin care studio proudly serving the Miami area
+                  since 2009. We offer facials, chemical peels, microdermabrasion, waxing and more.
+                  Please call today to schedule your appointment. Walk-ins welcome. Se habla español.</p>
+                <span class="mk-btn">Click Here</span>
+              </div>
+              <div class="mk-vis">photo1.jpg</div>
+            </div>
+            <div class="mk-cards">
+              <div><div class="mk-cardh">Facials</div><p class="mk-cardp">Deep cleansing treatments for all skin types. Call for pricing.</p></div>
+              <div><div class="mk-cardh">Chemical Peels</div><p class="mk-cardp">Ask about our specials on peels and microdermabrasion.</p></div>
+              <div><div class="mk-cardh">Waxing</div><p class="mk-cardp">Full body waxing services available by appointment only.</p></div>
+            </div>
+            <div class="mk-foot">
+              <span>© 2014 Lumé Skin Studio &nbsp;·&nbsp; Site by WebHost Templates</span>
+              <span>Tel. 305-555-0147</span>
+            </div>
           </div>
         </div>
 
-        <div class="reel-stage" id="reelStage" role="list" aria-label="Selected work">
-          <figure class="reel-item" role="listitem">
-            <div class="reel-shot reel-shot--web">
-              <div class="reel-bar" aria-hidden="true"><i></i><i></i><i></i><span class="reel-url">pursut</span></div>
-              <div class="reel-media"><img src="assets/work-pursut.jpg" alt="Pursut — marketing website built by Walsh Digital Co." onerror="this.remove()"></div>
+        <div class="ba-layer ba-after" data-lab="After" aria-hidden="true">
+          <div class="mk mk--new">
+            <div class="mk-nav">
+              <span class="mk-brand">Lumé</span>
+              <span class="mk-links"><span>Treatments</span><span>About</span><span>Book</span></span>
             </div>
-            <figcaption class="reel-cap"><span>Pursut · Website</span><span>01 / 04</span></figcaption>
-          </figure>
-          <figure class="reel-item" role="listitem">
-            <div class="reel-shot"><img src="assets/work-brand.svg" alt="Brand identity system — a Walsh Digital Co. design sample" onerror="this.remove()"></div>
-            <figcaption class="reel-cap"><span>Lumé · Brand identity</span><span>02 / 04</span></figcaption>
-          </figure>
-          <figure class="reel-item" role="listitem">
-            <div class="reel-shot reel-shot--web">
-              <div class="reel-bar" aria-hidden="true"><i></i><i></i><i></i><span class="reel-url">tiktok.com/@peakpurenatural</span></div>
-              <div class="reel-media"><img src="assets/work-peak.jpg" alt="Peak Pure &amp; Natural — social content grown by Walsh Digital Co." onerror="this.remove()"></div>
+            <div class="mk-hero">
+              <div class="mk-copy">
+                <div class="mk-eyebrow">Skin &amp; wellness · Miami Beach</div>
+                <div class="mk-h">Skin that looks<br><em>like you.</em></div>
+                <p class="mk-p">Considered treatments, honest advice, and a studio that actually
+                  feels like somewhere you want to spend an hour.</p>
+                <span class="mk-btn">Book a visit</span>
+              </div>
+              <div class="mk-vis"></div>
             </div>
-            <figcaption class="reel-cap"><span>Peak Pure &amp; Natural · Social</span><span>03 / 04</span></figcaption>
-          </figure>
-          <figure class="reel-item" role="listitem">
-            <div class="reel-shot"><img src="assets/work-local.svg" alt="Coastal Detail Co. — Google Business Profile and local search sample" onerror="this.remove()"></div>
-            <figcaption class="reel-cap"><span>Coastal Detail · Local SEO</span><span>04 / 04</span></figcaption>
-          </figure>
+            <div class="mk-cards">
+              <div><div class="mk-cardh">Facials</div><p class="mk-cardp">Built around your skin, not a menu. From $120.</p></div>
+              <div><div class="mk-cardh">Peels</div><p class="mk-cardp">Resurfacing with a plan for what comes after. From $180.</p></div>
+              <div><div class="mk-cardh">Dermaplaning</div><p class="mk-cardp">Smoother texture, immediate glow. From $95.</p></div>
+            </div>
+            <div class="mk-foot">
+              <span>LUMÉ SKIN STUDIO · 1200 COLLINS AVE, MIAMI BEACH</span>
+              <span>BOOK ONLINE</span>
+            </div>
+          </div>
         </div>
 
+        <span class="ba-seam" aria-hidden="true"></span>
       </div>
-      <span class="scrollcue" aria-hidden="true"><i></i> Scroll</span>
+
+      <div class="ba-hud">
+        <span class="ba-pill ba-pill--b">Before</span>
+        <h2 class="ba-title" id="baTitle">The same business. <em>Fifteen days</em> apart.</h2>
+        <span class="ba-pill ba-pill--a">After</span>
+        <div class="ba-track" aria-hidden="true"><i></i></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- the line that breaks the page -->
+  <div class="wrap"><div class="brk"><span>Selected work</span></div></div>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="work-strip">
+        <figure class="rise">
+          <div class="reel-shot"><img src="assets/work-brand.svg" alt="Brand identity system — a Walsh Digital Co. design sample" onerror="this.remove()"></div>
+          <figcaption class="reel-cap"><span>Lumé · Brand identity</span><span>Sample</span></figcaption>
+        </figure>
+        <figure class="rise" data-d="1">
+          <div class="reel-shot reel-shot--web">
+            <div class="reel-bar" aria-hidden="true"><i></i><i></i><i></i><span class="reel-url">tiktok.com/@peakpurenatural</span></div>
+            <div class="reel-media"><img src="assets/work-peak.jpg" alt="Peak Pure &amp; Natural — social content grown by Walsh Digital Co." onerror="this.remove()"></div>
+          </div>
+          <figcaption class="reel-cap"><span>Peak Pure &amp; Natural · Social</span><span>Client</span></figcaption>
+        </figure>
+        <figure class="rise" data-d="2">
+          <div class="reel-shot"><img src="assets/work-local.svg" alt="Coastal Detail Co. — Google Business Profile and local search sample" onerror="this.remove()"></div>
+          <figcaption class="reel-cap"><span>Coastal Detail · Local SEO</span><span>Sample</span></figcaption>
+        </figure>
+      </div>
     </div>
   </section>
 

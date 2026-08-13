@@ -27,38 +27,34 @@
     });
   }
 
-  /* ── hero reel: YOUR scroll drives the work up through centre ── */
-  var reelHero = document.getElementById('reelHero');
-  var reelStage = document.getElementById('reelStage');
-  if (reelHero && reelStage) {
-    var items = Array.prototype.slice.call(reelStage.querySelectorAll('.reel-item'));
-    var n = items.length || 1;
-    var rTick = false;
-    function reelFrame() {
-      var mobile = window.innerWidth <= 920;
-      var rect = reelHero.getBoundingClientRect();
+  /* ── before / after: YOUR scroll wipes the redesign across ──
+     --p (0–100%) lands on the section so the after layer's
+     clip-path, the seam and the progress track all read it. */
+  var baSec = document.getElementById('baSec');
+  if (baSec) {
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+    var bTick = false;
+    function baFrame() {
+      if (window.innerWidth <= 920 || reduce) {   // stacked, no wipe
+        baSec.style.removeProperty('--p');
+        baSec.classList.remove('is-after');
+        bTick = false;
+        return;
+      }
+      var rect = baSec.getBoundingClientRect();
       var total = rect.height - window.innerHeight;
       var prog = total > 0 ? Math.min(1, Math.max(0, -rect.top / total)) : 0;
-      var p = prog * (n - 1);                    // 0 .. n-1, entirely scroll-controlled
-      var sh = reelStage.clientHeight || 1;
-      items.forEach(function (el, i) {
-        if (mobile) { el.style.cssText = ''; return; }
-        var d = i - p;
-        var ad = Math.abs(d);
-        var ty = d * sh * 0.42;
-        var sc = Math.max(0.5, 1 - ad * 0.24);
-        var op = Math.max(0, Math.min(1, 1.28 - ad * 0.6));
-        el.style.transform = 'translate(-50%,-50%) translateY(' + ty.toFixed(1) + 'px) scale(' + sc.toFixed(3) + ')';
-        el.style.opacity = op.toFixed(3);
-        el.style.zIndex = String(200 - Math.round(ad * 20));
-      });
-      rTick = false;
+      var t = Math.min(1, Math.max(0, (prog - 0.15) / 0.70));   // hold fully-before, then fully-after
+      var e = t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+      baSec.style.setProperty('--p', (e * 100).toFixed(2) + '%');
+      baSec.classList.toggle('is-after', e > 0.5);
+      bTick = false;
     }
     window.addEventListener('scroll', function () {
-      if (!rTick) { rTick = true; requestAnimationFrame(reelFrame); }
+      if (!bTick) { bTick = true; requestAnimationFrame(baFrame); }
     }, { passive: true });
-    window.addEventListener('resize', reelFrame);
-    reelFrame();
+    window.addEventListener('resize', baFrame);
+    baFrame();
   }
 
   /* ── scroll reveals ───────────────────────────────── */

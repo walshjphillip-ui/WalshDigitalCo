@@ -156,16 +156,19 @@
 }
 .field--flamingo{--bg:#f79ac4;--bg-2:#f186b7;--fg:#3d0a24;--mute:rgba(61,10,36,.66);--mute-2:rgba(61,10,36,.86);--rule:rgba(61,10,36,.18);--rule-2:rgba(61,10,36,.34);--accent:#3d0a24;--accent-lt:#5c1236}
 
-/* ── scroll reel ─────────────────────────────────────
-   work rises from below, peaks front-and-centre, then
-   climbs on, shrinking, as the next piece follows.
-   JS-driven (site.js) via each item's distance from centre.
+/* ── compact hero ────────────────────────────────────
+   no pin, no scroll hijack — the services band sits
+   just under the fold. The one scroll-driven moment on
+   this page is the before/after further down.
    ─────────────────────────────────────────────────── */
-.reel-hero{position:relative;height:calc((var(--n,4) * 0.3 + 1) * 100vh)}
-.reel-stick{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:flex;align-items:center}
-.reel-grid{position:relative;z-index:1;width:100%;display:grid;grid-template-columns:1fr minmax(340px,.92fr);align-items:center;gap:clamp(30px,4vw,72px)}
-.reel-stage{position:relative;height:min(72vh,600px);align-self:center}
-.reel-item{position:absolute;top:50%;left:50%;width:min(94%,480px);transform:translate(-50%,-50%);will-change:transform,opacity}
+.hero-c{position:relative;padding:calc(var(--nav-h) + clamp(38px,6vh,84px)) 0 clamp(44px,7vh,84px)}
+.hero-c .glowbg::before{right:-8vw;top:-16vw}
+.hero-c .glowbg::after{left:auto;right:-4vw;bottom:-24vw;width:44vw;height:44vw}
+.hero-c-grid{position:relative;z-index:1;display:grid;grid-template-columns:1fr minmax(330px,.9fr);
+  align-items:center;gap:clamp(30px,4vw,72px)}
+.hero-c-shot{margin:0;min-width:0}
+
+/* work shot card — shared by the hero and the work strip */
 .reel-shot{position:relative;aspect-ratio:4/3;border-radius:20px;overflow:hidden;
   background:radial-gradient(120% 90% at 72% 12%,rgba(63,193,214,.22),transparent 58%),linear-gradient(160deg,var(--panel-3),var(--panel));
   box-shadow:0 44px 84px -36px rgba(2,12,24,.78),0 6px 16px -8px rgba(2,12,24,.55),
@@ -227,9 +230,132 @@
 .ind-incl li{font-size:.86rem;color:var(--mute-2);display:flex;gap:.6em;align-items:flex-start}
 .ind-incl li::before{content:"✓";color:var(--accent);font-weight:600;font-size:.85em;margin-top:.05em}
 
-/* keep the hero's LEFT (headline) clean — glow stays on the reel side */
-.reel-hero .glowbg::before{right:-8vw;top:-14vw}
-.reel-hero .glowbg::after{left:auto;right:-4vw;bottom:-22vw;width:44vw;height:44vw}
+/* selected-work strip (homepage, under the before/after) */
+.work-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(clamp(240px,28%,320px),1fr));
+  gap:clamp(18px,2.4vw,32px)}
+.work-strip figure{margin:0;min-width:0}
+
+/* ── before / after ──────────────────────────────────
+   one business, two versions of its website, wiped
+   apart by scroll. --p (0–100%) is set on the section
+   by site.js so every child can read it.
+   ─────────────────────────────────────────────────── */
+.ba{position:relative;height:220vh}
+.ba-stick{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:var(--panel)}
+.ba-frame{position:absolute;top:var(--nav-h);left:0;right:0;bottom:0;overflow:hidden}
+.ba-layer{position:absolute;inset:0}
+.ba-after{clip-path:inset(0 calc(100% - var(--p,0%)) 0 0)}
+.ba-seam{position:absolute;top:0;bottom:0;left:var(--p,0%);width:2px;z-index:6;margin-left:-1px;
+  background:linear-gradient(180deg,rgba(248,245,238,0),rgba(248,245,238,.9) 12%,
+    rgba(248,245,238,.9) 88%,rgba(248,245,238,0));
+  box-shadow:0 0 22px rgba(79,210,230,.5)}
+
+.ba-hud{position:absolute;left:0;right:0;bottom:0;z-index:8;display:flex;align-items:center;
+  gap:clamp(12px,2vw,26px);padding:clamp(26px,5vh,54px) var(--gutter) clamp(16px,2.4vh,24px);
+  background:linear-gradient(180deg,transparent,rgba(5,18,31,.86) 52%)}
+.ba-title{font-family:var(--display);font-weight:400;color:#f8f5ee;text-align:center;
+  font-size:clamp(1rem,1.8vw,1.55rem);margin:0 auto;line-height:1.2}
+.ba-title em{font-style:italic;color:#4fd2e6}
+.ba-pill{flex:none;font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600;
+  padding:8px 15px;border-radius:99px;background:rgba(248,245,238,.14);color:#dbe4ec;
+  transition:background .35s ease,color .35s ease}
+.ba:not(.is-after) .ba-pill--b{background:#f8f5ee;color:#0a2a47}
+.ba.is-after .ba-pill--a{background:#4fd2e6;color:#06303a}
+.ba-track{position:absolute;left:0;right:0;bottom:0;height:2px;background:rgba(248,245,238,.16)}
+.ba-track i{display:block;height:100%;width:var(--p,0%);background:#4fd2e6}
+
+/* ── the two mock sites ──────────────────────────────
+   IDENTICAL geometry in both versions — only type and
+   colour fork — so the wipe transforms the page
+   element-for-element instead of revealing a mismatch.
+   ─────────────────────────────────────────────────── */
+.mk{height:100%;display:flex;flex-direction:column;overflow:hidden}
+.mk-nav{flex:none;height:clamp(52px,6.4vh,74px);display:flex;align-items:center;
+  justify-content:space-between;gap:20px;padding:0 clamp(22px,4.4vw,72px)}
+.mk-links{display:flex;gap:clamp(10px,1.5vw,26px);white-space:nowrap}
+.mk-hero{flex:1;min-height:0;display:grid;grid-template-columns:1.06fr .94fr;
+  gap:clamp(24px,4vw,64px);align-items:center;
+  padding:clamp(14px,2.6vh,38px) clamp(22px,4.4vw,72px)}
+.mk-copy{min-width:0}
+.mk-vis{height:min(100%,clamp(190px,40vh,400px))}
+.mk-cards{flex:none;height:clamp(108px,16.5vh,176px);display:grid;grid-template-columns:repeat(3,1fr);
+  gap:clamp(12px,1.4vw,22px);padding:0 clamp(22px,4.4vw,72px)}
+.mk-foot{flex:none;height:clamp(42px,5.6vh,62px);display:flex;align-items:center;
+  justify-content:space-between;gap:16px;padding:0 clamp(22px,4.4vw,72px)}
+
+/* before — a real 2014 template site, not a parody */
+.mk--old{background:#fff;color:#222;font-family:'Times New Roman',Times,serif}
+.mk--old .mk-nav{background:linear-gradient(#4272a6,#2f5d8f);color:#fff;
+  font-family:Arial,Helvetica,sans-serif;font-size:clamp(11px,1vw,13.5px)}
+.mk--old .mk-brand{font-weight:700;letter-spacing:.07em}
+.mk--old .mk-eyebrow{font-style:italic;color:#8d8d8d;font-size:clamp(13px,1.15vw,16px)}
+.mk--old .mk-h{font-weight:700;color:#1d1d1d;line-height:1.14;margin:.2em 0 0;
+  font-size:clamp(1.8rem,3.3vw,2.8rem)}
+.mk--old .mk-p{color:#4c4c4c;line-height:1.45;margin-top:.85em;max-width:54ch;
+  font-size:clamp(12.5px,1.02vw,15px)}
+.mk--old .mk-btn{display:inline-block;margin-top:1.25em;font-family:Arial,Helvetica,sans-serif;
+  font-size:clamp(11.5px,.95vw,13.5px);padding:9px 20px;color:#333;border-radius:3px;
+  background:linear-gradient(#fdfdfd,#dedede);border:1px solid #a7a7a7}
+.mk--old .mk-vis{background:#e3e6ea;border:1px solid #c2c8d0;display:grid;place-items:center;
+  color:#9aa3ad;font-size:clamp(11.5px,.95vw,13.5px)}
+.mk--old .mk-cards>div{background:#eef0f3;border:1px solid #ccd2d9;padding:clamp(12px,1.4vw,18px)}
+.mk--old .mk-cardh{font-weight:700;color:#7a2a2a;font-size:clamp(13.5px,1.18vw,16.5px)}
+.mk--old .mk-cardp{color:#5c5c5c;line-height:1.4;margin-top:.35em;font-size:clamp(11px,.88vw,13px)}
+.mk--old .mk-foot{background:#f1f1f1;border-top:1px solid #d8d8d8;color:#8b8b8b;
+  font-size:clamp(10px,.82vw,12px)}
+
+/* after — the redesign, in the studio's own system */
+.mk--new{color:#f8f5ee;font-family:var(--body);
+  background:radial-gradient(120% 90% at 82% 6%,rgba(63,193,214,.20),transparent 58%),
+    linear-gradient(158deg,#12395b,#08243d)}
+.mk--new .mk-nav{border-bottom:1px solid rgba(248,245,238,.14);color:#c3d2e0;
+  font-size:clamp(9.5px,.8vw,11.5px);letter-spacing:.2em;text-transform:uppercase}
+.mk--new .mk-brand{font-family:var(--display);letter-spacing:.02em;color:#f8f5ee;
+  font-size:clamp(15px,1.5vw,21px);text-transform:none}
+.mk--new .mk-eyebrow{color:#4fd2e6;font-weight:600;text-transform:uppercase;letter-spacing:.24em;
+  font-size:clamp(9.5px,.8vw,11.5px)}
+.mk--new .mk-h{font-family:var(--display);font-weight:400;line-height:1.04;margin:.3em 0 0;
+  letter-spacing:-.015em;font-size:clamp(2rem,4.2vw,3.5rem)}
+.mk--new .mk-h em{font-style:italic;color:#4fd2e6}
+.mk--new .mk-p{color:#c3d2e0;line-height:1.6;margin-top:1.05em;max-width:44ch;
+  font-size:clamp(12.5px,1.02vw,15.5px)}
+.mk--new .mk-btn{display:inline-block;margin-top:1.5em;background:#f8f5ee;color:#0a2a47;
+  font-weight:600;letter-spacing:.18em;text-transform:uppercase;padding:14px 26px;
+  font-size:clamp(9.5px,.82vw,11.5px)}
+.mk--new .mk-vis{border-radius:16px;
+  background:radial-gradient(120% 100% at 22% 12%,rgba(63,193,214,.50),transparent 62%),
+    linear-gradient(150deg,rgba(207,75,134,.42),rgba(221,163,42,.30));
+  box-shadow:inset 0 0 0 1px rgba(248,245,238,.18),0 40px 80px -40px rgba(0,0,0,.7)}
+.mk--new .mk-cards>div{border-radius:14px;background:rgba(248,245,238,.06);
+  box-shadow:inset 0 0 0 1px rgba(248,245,238,.14);padding:clamp(13px,1.5vw,20px)}
+.mk--new .mk-cardh{font-family:var(--display);color:#f8f5ee;font-size:clamp(14.5px,1.35vw,19px)}
+.mk--new .mk-cardp{color:#9db0c2;line-height:1.5;margin-top:.4em;font-size:clamp(11px,.88vw,13px)}
+.mk--new .mk-foot{border-top:1px solid rgba(248,245,238,.14);color:#8ea3b8;letter-spacing:.08em;
+  font-size:clamp(10px,.82vw,12px)}
+
+/* phones + reduced motion: no pin, no wipe — just stack them */
+@media(max-width:920px),(prefers-reduced-motion:reduce){
+  .ba{height:auto}
+  .ba-stick{position:static;height:auto;overflow:visible;background:transparent;
+    display:flex;flex-direction:column;gap:18px;padding:clamp(40px,7vh,72px) 0}
+  .ba-frame{position:static;display:grid;gap:18px;padding:0 var(--gutter)}
+  .ba-layer{position:relative;clip-path:none}
+  .ba-layer::before{content:attr(data-lab);position:absolute;top:12px;left:12px;z-index:4;
+    font-size:.54rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600;
+    padding:6px 12px;border-radius:99px;background:rgba(10,42,71,.82);color:#f8f5ee}
+  .ba-after::before{background:#4fd2e6;color:#06303a}
+  .ba-seam,.ba-pill,.ba-track{display:none}
+  .ba-hud{position:static;order:-1;background:none;padding:0 var(--gutter)}
+  .ba-title{text-align:left;margin:0;font-size:clamp(1.5rem,5.4vw,2.1rem)}
+  .mk{height:auto;border-radius:14px}
+  .mk-nav{height:auto;padding:14px 18px}
+  .mk-links{display:none}
+  .mk-hero{grid-template-columns:1fr;gap:20px;padding:22px 18px}
+  .mk-vis{height:clamp(120px,26vw,180px)}
+  .mk-cards{height:auto;grid-template-columns:1fr;gap:9px;padding:0 18px 18px}
+  .mk-cards>div{padding:12px 14px}
+  .mk-foot{height:auto;padding:14px 18px}
+}
 
 /* landing "Five services" band — blue, with a restrained glow */
 .tight.aurora::before{opacity:.5;width:40vw;height:40vw;right:-6vw;top:-30vw}
@@ -244,11 +370,8 @@
   padding:clamp(30px,4.5vw,56px);border-radius:22px}
 @media(max-width:760px){.band-glass{grid-template-columns:1fr;gap:24px}}
 @media(max-width:920px){
-  .reel-hero{height:auto}
-  .reel-stick{position:static;height:auto;min-height:0;display:block;padding:calc(var(--nav-h) + 56px) 0 40px}
-  .reel-grid{grid-template-columns:1fr;padding-top:0}
-  .reel-stage{height:auto;display:grid;gap:22px;margin-top:40px}
-  .reel-item{position:static;width:100%;transform:none!important;opacity:1!important;z-index:auto!important}
+  .hero-c{padding-top:calc(var(--nav-h) + 44px)}
+  .hero-c-grid{grid-template-columns:1fr;gap:34px}
 }
 
 *{box-sizing:border-box}
