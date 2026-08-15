@@ -164,9 +164,7 @@
 .hero-c{position:relative;padding:calc(var(--nav-h) + clamp(38px,6vh,84px)) 0 clamp(44px,7vh,84px)}
 .hero-c .glowbg::before{right:-8vw;top:-16vw}
 .hero-c .glowbg::after{left:auto;right:-4vw;bottom:-24vw;width:44vw;height:44vw}
-.hero-c-grid{position:relative;z-index:1;display:grid;grid-template-columns:1fr minmax(330px,.9fr);
-  align-items:center;gap:clamp(30px,4vw,72px)}
-.hero-c-shot{margin:0;min-width:0}
+.hero-c-grid{position:relative;z-index:1;max-width:min(100%,66ch)}
 
 /* work shot card — shared by the hero and the work strip */
 .reel-shot{position:relative;aspect-ratio:4/3;border-radius:20px;overflow:hidden;
@@ -240,27 +238,42 @@
    apart by scroll. --p (0–100%) is set on the section
    by site.js so every child can read it.
    ─────────────────────────────────────────────────── */
-.ba{position:relative;height:220vh}
+.ba{position:relative;height:220vh;--ba-tabs-h:clamp(40px,5.2vh,54px)}
 .ba-stick{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:var(--panel)}
-.ba-frame{position:absolute;top:var(--nav-h);left:0;right:0;bottom:0;overflow:hidden}
-.ba-layer{position:absolute;inset:0}
-.ba-after{clip-path:inset(0 calc(100% - var(--p,0%)) 0 0)}
-.ba-seam{position:absolute;top:0;bottom:0;left:var(--p,0%);width:2px;z-index:6;margin-left:-1px;
-  background:linear-gradient(180deg,rgba(248,245,238,0),rgba(248,245,238,.9) 12%,
-    rgba(248,245,238,.9) 88%,rgba(248,245,238,0));
-  box-shadow:0 0 22px rgba(79,210,230,.5)}
 
-.ba-hud{position:absolute;left:0;right:0;bottom:0;z-index:8;display:flex;align-items:center;
-  gap:clamp(12px,2vw,26px);padding:clamp(26px,5vh,54px) var(--gutter) clamp(16px,2.4vh,24px);
+/* label bar — its two halves track the wipe, so the split is unmissable */
+.ba-tabs{position:absolute;top:var(--nav-h);left:0;right:0;height:var(--ba-tabs-h);z-index:7;display:flex}
+.ba-tab{flex:none;display:flex;align-items:stretch;overflow:hidden;
+  transition:background .3s ease,color .3s ease}
+/* padding lives on the inner row — a zero-width tab must collapse to nothing */
+.ba-tab-in{flex:none;display:flex;align-items:center;gap:.9em;white-space:nowrap;
+  padding:0 clamp(14px,2.6vw,34px);font-size:clamp(.55rem,.76vw,.68rem);letter-spacing:.22em;
+  text-transform:uppercase;font-weight:600}
+.ba-tab em{font-style:normal;letter-spacing:.14em}
+.ba-tab--b{width:calc(100% - var(--p,0%));background:#e7eaef;color:#39424d;justify-content:flex-start}
+.ba-tab--b em{color:#7a838f}
+.ba-tab--a{width:var(--p,0%);background:#0a2a47;color:#4fd2e6;justify-content:flex-end}
+.ba-tab--a em{color:#9db0c2}
+
+.ba-frame{position:absolute;top:calc(var(--nav-h) + var(--ba-tabs-h));left:0;right:0;bottom:0;overflow:hidden}
+.ba-layer{position:absolute;inset:0}
+.ba-after{clip-path:inset(0 0 0 calc(100% - var(--p,0%)))}
+.ba-seam{position:absolute;top:0;bottom:0;left:calc(100% - var(--p,0%));width:2px;z-index:6;margin-left:-1px;
+  background:linear-gradient(180deg,rgba(248,245,238,0),rgba(248,245,238,.92) 10%,
+    rgba(248,245,238,.92) 90%,rgba(248,245,238,0));
+  box-shadow:0 0 24px rgba(79,210,230,.55)}
+.ba-seam::before{content:"";position:absolute;top:50%;left:50%;width:46px;height:46px;
+  transform:translate(-50%,-50%);border-radius:50%;background:#f8f5ee;
+  box-shadow:0 12px 30px rgba(2,12,24,.5)}
+.ba-seam::after{content:"";position:absolute;top:50%;left:50%;width:2px;height:15px;
+  transform:translate(-50%,-50%);background:#0a2a47;opacity:.5}
+
+.ba-hud{position:absolute;left:0;right:0;bottom:0;z-index:8;
+  padding:clamp(26px,5vh,54px) var(--gutter) clamp(16px,2.4vh,24px);
   background:linear-gradient(180deg,transparent,rgba(5,18,31,.86) 52%)}
 .ba-title{font-family:var(--display);font-weight:400;color:#f8f5ee;text-align:center;
-  font-size:clamp(1rem,1.8vw,1.55rem);margin:0 auto;line-height:1.2}
+  font-size:clamp(1rem,1.8vw,1.55rem);margin:0;line-height:1.2}
 .ba-title em{font-style:italic;color:#4fd2e6}
-.ba-pill{flex:none;font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600;
-  padding:8px 15px;border-radius:99px;background:rgba(248,245,238,.14);color:#dbe4ec;
-  transition:background .35s ease,color .35s ease}
-.ba:not(.is-after) .ba-pill--b{background:#f8f5ee;color:#0a2a47}
-.ba.is-after .ba-pill--a{background:#4fd2e6;color:#06303a}
 .ba-track{position:absolute;left:0;right:0;bottom:0;height:2px;background:rgba(248,245,238,.16)}
 .ba-track i{display:block;height:100%;width:var(--p,0%);background:#4fd2e6}
 
@@ -344,7 +357,7 @@
     font-size:.54rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600;
     padding:6px 12px;border-radius:99px;background:rgba(10,42,71,.82);color:#f8f5ee}
   .ba-after::before{background:#4fd2e6;color:#06303a}
-  .ba-seam,.ba-pill,.ba-track{display:none}
+  .ba-seam,.ba-tabs,.ba-track{display:none}
   .ba-hud{position:static;order:-1;background:none;padding:0 var(--gutter)}
   .ba-title{text-align:left;margin:0;font-size:clamp(1.5rem,5.4vw,2.1rem)}
   .mk{height:auto;border-radius:14px}
@@ -371,7 +384,6 @@
 @media(max-width:760px){.band-glass{grid-template-columns:1fr;gap:24px}}
 @media(max-width:920px){
   .hero-c{padding-top:calc(var(--nav-h) + 44px)}
-  .hero-c-grid{grid-template-columns:1fr;gap:34px}
 }
 
 *{box-sizing:border-box}
