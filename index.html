@@ -94,6 +94,11 @@
         </div>
       </div>
 
+      <button class="film-play" id="filmPlay" type="button">
+        <span class="film-play-btn" aria-hidden="true"><i></i></span>
+        <span class="film-play-lbl">Watch the<br><b>transformation</b></span>
+      </button>
+
       <span class="scrollcue film-cue" aria-hidden="true"><i></i> Scroll</span>
 
       <div class="film-ba" id="filmBa">
@@ -139,15 +144,9 @@
               <span class="mk-brand">Lumé</span>
               <span class="mk-links"><span>Treatments</span><span>About</span><span>Book</span></span>
             </div>
-            <div class="mk-hero">
-              <div class="mk-copy">
-                <div class="mk-eyebrow">Skin &amp; wellness · Miami Beach</div>
-                <div class="mk-h">Skin that looks<br><em>like you.</em></div>
-                <p class="mk-p">Considered treatments, honest advice, and a studio that actually
-                  feels like somewhere you want to spend an hour.</p>
-                <span class="mk-btn">Book a visit</span>
-              </div>
-              <div class="mk-vis"></div>
+            <div class="mk-hero mk-hero--shot">
+              <img class="mk-shot" src="assets/lume-hero.jpg" alt="" onerror="this.remove()">
+              <span class="mk-btn mk-btn--float">Book a visit</span>
             </div>
             <div class="mk-cards">
               <div><div class="mk-cardh">Facials</div><p class="mk-cardp">Built around your skin, not a menu. From $120.</p></div>
@@ -171,9 +170,20 @@
 
       </div><!-- /.film-ba -->
 
-      <button class="film-reveal" id="filmReveal" type="button">
-        <span class="film-reveal-dot" aria-hidden="true"></span>
-        See the redesign
+      <!-- covers the panel: click anywhere on the old site to reveal the redesign -->
+      <button class="film-reveal" id="filmReveal" type="button" aria-label="Reveal the redesign">
+        <span class="film-reveal-in">
+          <span class="film-reveal-ring" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M5 12h13M12.5 6.5 19 12l-6.5 5.5" stroke="currentColor" stroke-width="1.8"
+                    stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span class="film-reveal-txt">
+            <b>Click to reveal the redesign</b>
+            <em>This is what they have today</em>
+          </span>
+        </span>
       </button>
 
     </div>

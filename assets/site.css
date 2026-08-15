@@ -179,22 +179,54 @@
   pointer-events:none;visibility:hidden}
 .film.ba-live .film-ba{visibility:visible}
 
-/* the reveal — a real button so it is keyboard reachable */
-.film-reveal{position:absolute;left:50%;bottom:clamp(84px,13vh,132px);transform:translateX(-50%) translateY(10px);
-  z-index:9;display:inline-flex;align-items:center;gap:.85em;cursor:pointer;
-  font-family:var(--body);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600;
-  color:#0a2a47;background:#f8f5ee;border:0;border-radius:99px;padding:15px 26px;
-  box-shadow:0 20px 44px -18px rgba(2,12,24,.7);
-  opacity:0;visibility:hidden;transition:opacity .45s ease,transform .45s ease,background .3s}
-.film.can-reveal .film-reveal{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
-.film-reveal:hover{background:#4fd2e6}
-.film-reveal:focus-visible{outline:2px solid #4fd2e6;outline-offset:4px}
-.film-reveal-dot{width:8px;height:8px;border-radius:50%;background:#cf4b86;flex:none;
-  box-shadow:0 0 0 0 rgba(207,75,134,.6);animation:revealPulse 2s ease-out infinite}
+/* auto-play control — sits right of the headline, scrolls the film for you */
+.film-play{position:absolute;z-index:6;right:clamp(28px,6vw,96px);top:50%;
+  transform:translateY(-50%);display:flex;align-items:center;gap:16px;
+  background:none;border:0;cursor:pointer;color:#f8f5ee;font-family:var(--body);
+  opacity:var(--copyIn,1);transition:opacity .3s}
+.film-play-btn{position:relative;width:clamp(62px,6vw,82px);aspect-ratio:1;border-radius:50%;flex:none;
+  display:grid;place-items:center;background:rgba(248,245,238,.10);
+  box-shadow:inset 0 0 0 1px rgba(248,245,238,.55);backdrop-filter:blur(8px);
+  transition:background .35s,box-shadow .35s,transform .35s}
+.film-play-btn::before{content:"";position:absolute;inset:-1px;border-radius:50%;
+  box-shadow:0 0 0 0 rgba(248,245,238,.5);animation:playPulse 2.6s ease-out infinite}
+.film-play-btn i{width:0;height:0;margin-left:4px;
+  border-left:15px solid #f8f5ee;border-top:10px solid transparent;border-bottom:10px solid transparent}
+.film-play-lbl{text-align:left;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;
+  line-height:1.7;color:rgba(248,245,238,.72)}
+.film-play-lbl b{color:#f8f5ee;font-weight:600}
+.film-play:hover .film-play-btn{background:rgba(248,245,238,.2);transform:scale(1.06)}
+.film-play:focus-visible .film-play-btn{outline:2px solid #4fd2e6;outline-offset:5px}
+.film.copy-gone .film-play,.film.copy-gone .film-copy{pointer-events:none}
+@keyframes playPulse{
+  0%{box-shadow:0 0 0 0 rgba(248,245,238,.45)}
+  70%{box-shadow:0 0 0 20px rgba(248,245,238,0)}
+  100%{box-shadow:0 0 0 0 rgba(248,245,238,0)}
+}
+@media(max-width:1100px){.film-play-lbl{display:none}}
+
+/* the reveal — the whole panel is the button, so a click anywhere works */
+.film-reveal{position:absolute;inset:0;width:100%;z-index:9;cursor:pointer;border:0;padding:0;
+  display:grid;place-items:center;background:radial-gradient(52% 46% at 50% 52%,
+    rgba(4,15,26,.52),rgba(4,15,26,.14) 62%,transparent);
+  opacity:0;visibility:hidden;transition:opacity .5s ease}
+.film.can-reveal .film-reveal{opacity:1;visibility:visible}
+.film-reveal-in{display:flex;align-items:center;gap:18px;background:#f8f5ee;color:#0a2a47;
+  border-radius:99px;padding:14px 30px 14px 14px;
+  box-shadow:0 26px 60px -20px rgba(2,12,24,.8);transition:transform .35s,background .35s}
+.film-reveal:hover .film-reveal-in{transform:translateY(-3px)}
+.film-reveal:focus-visible .film-reveal-in{outline:2px solid #4fd2e6;outline-offset:4px}
+.film-reveal-ring{width:46px;height:46px;border-radius:50%;flex:none;display:grid;place-items:center;
+  background:#0a2a47;color:#f8f5ee;
+  box-shadow:0 0 0 0 rgba(10,42,71,.5);animation:revealPulse 2.2s ease-out infinite}
+.film-reveal-ring svg{width:22px;height:22px}
+.film-reveal-txt{display:flex;flex-direction:column;gap:3px;text-align:left}
+.film-reveal-txt b{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600}
+.film-reveal-txt em{font-style:normal;font-size:.72rem;color:#6b7885;letter-spacing:.02em}
 @keyframes revealPulse{
-  0%{box-shadow:0 0 0 0 rgba(207,75,134,.55)}
-  70%{box-shadow:0 0 0 12px rgba(207,75,134,0)}
-  100%{box-shadow:0 0 0 0 rgba(207,75,134,0)}
+  0%{box-shadow:0 0 0 0 rgba(10,42,71,.45)}
+  70%{box-shadow:0 0 0 16px rgba(10,42,71,0)}
+  100%{box-shadow:0 0 0 0 rgba(10,42,71,0)}
 }
 
 /* work shot card — shared by the hero and the work strip */
@@ -366,10 +398,15 @@
 .mk--new .mk-btn{display:inline-block;margin-top:1.5em;background:#f8f5ee;color:#0a2a47;
   font-weight:600;letter-spacing:.18em;text-transform:uppercase;padding:14px 26px;
   font-size:clamp(9.5px,.82vw,11.5px)}
-.mk--new .mk-vis{border-radius:16px;
-  background:radial-gradient(120% 100% at 22% 12%,rgba(63,193,214,.50),transparent 62%),
-    linear-gradient(150deg,rgba(207,75,134,.42),rgba(221,163,42,.30));
-  box-shadow:inset 0 0 0 1px rgba(248,245,238,.18),0 40px 80px -40px rgba(0,0,0,.7)}
+/* the redesign leads with a real campaign image, full-bleed across the hero row.
+   The row keeps its height so nav / cards / footer still line up with the old site. */
+.mk-hero--shot{display:block;position:relative;padding:0;overflow:hidden}
+.mk-shot{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 8%;
+  display:block}
+.mk-hero--shot::after{content:"";position:absolute;inset:auto 0 0 0;height:46%;
+  background:linear-gradient(180deg,transparent,rgba(8,26,44,.55))}
+.mk-btn--float{position:absolute;z-index:2;left:clamp(22px,4.4vw,72px);bottom:clamp(16px,2.6vh,30px);
+  margin-top:0}
 .mk--new .mk-cards>div{border-radius:14px;background:rgba(248,245,238,.06);
   box-shadow:inset 0 0 0 1px rgba(248,245,238,.14);padding:clamp(13px,1.5vw,20px)}
 .mk--new .mk-cardh{font-family:var(--display);color:#f8f5ee;font-size:clamp(14.5px,1.35vw,19px)}
@@ -385,7 +422,7 @@
   .film-vid-wrap{position:relative;height:min(52vh,380px);opacity:1;flex:none}
   .film-copy{position:static;transform:none;opacity:1;
     padding:clamp(30px,6vh,52px) 0 clamp(10px,2vh,20px)}
-  .film-cue,.film-reveal{display:none}
+  .film-cue,.film-reveal,.film-play{display:none}
   .film-ba{position:static;opacity:1;visibility:visible;pointer-events:auto;
     display:flex;flex-direction:column;gap:18px;padding:clamp(40px,7vh,72px) 0}
   .ba-frame{position:static;display:grid;gap:18px;padding:0 var(--gutter)}
@@ -402,6 +439,9 @@
   .mk-links{display:none}
   .mk-hero{grid-template-columns:1fr;gap:20px;padding:22px 18px}
   .mk-vis{height:clamp(120px,26vw,180px)}
+  /* flex:none, or flex-basis:0 collapses this image-only row to nothing */
+  .mk--new .mk-hero--shot{flex:none;height:clamp(200px,50vw,300px);padding:0;display:block}
+  .mk-btn--float{left:18px;bottom:14px}
   .mk-cards{height:auto;grid-template-columns:1fr;gap:9px;padding:0 18px 18px}
   .mk-cards>div{padding:12px 14px}
   .mk-foot{height:auto;padding:14px 18px}

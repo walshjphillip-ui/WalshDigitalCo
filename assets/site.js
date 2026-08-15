@@ -56,7 +56,9 @@
       var total = rect.height - window.innerHeight;
       var prog = total > 0 ? Math.min(1, Math.max(0, -rect.top / total)) : 0;
 
-      film.style.setProperty('--copyIn', (1 - sub(prog, 0.06, 0.17)).toFixed(3));
+      var copyIn = 1 - sub(prog, 0.06, 0.17);
+      film.style.setProperty('--copyIn', copyIn.toFixed(3));
+      film.classList.toggle('copy-gone', copyIn < 0.05);
 
       if (vidReady && vid.duration) {                    // scrub, never play
         var vt = sub(prog, 0.06, 0.66) * (vid.duration - 0.05);
@@ -80,6 +82,38 @@
       vid.addEventListener('loadedmetadata', function () { vidReady = true; filmFrame(); });
       if (vid.readyState >= 1) { vidReady = true; }
     }
+    /* "Watch the transformation" — drive the scroll to the reveal beat.
+       Any real input from the visitor cancels it, so they never feel trapped. */
+    var playBtn = document.getElementById('filmPlay');
+    if (playBtn) {
+      var auto = null;
+      function stopAuto() { auto = null; }
+      ['wheel', 'touchstart', 'keydown', 'mousedown'].forEach(function (ev) {
+        window.addEventListener(ev, function (e) {
+          if (auto && !(e.target && e.target.closest && e.target.closest('.film-play'))) stopAuto();
+        }, { passive: true });
+      });
+      playBtn.addEventListener('click', function () {
+        var top = film.getBoundingClientRect().top + window.pageYOffset;
+        var span = film.offsetHeight - window.innerHeight;
+        var from = window.pageYOffset;
+        var to = top + span * 0.76;            // lands where the reveal is offered
+        if (to <= from) return;
+        var dur = Math.min(6200, Math.max(2600, (to - from) * 1.7));
+        var t0 = null;
+        auto = {};
+        var mine = auto;
+        requestAnimationFrame(function step(ts) {
+          if (auto !== mine) return;           // cancelled by the visitor
+          if (t0 === null) t0 = ts;
+          var k = Math.min(1, (ts - t0) / dur);
+          var e = k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
+          window.scrollTo(0, from + (to - from) * e);
+          if (k < 1) requestAnimationFrame(step); else stopAuto();
+        });
+      });
+    }
+
     if (revealBtn) {
       revealBtn.addEventListener('click', function () {
         revealed = true;
