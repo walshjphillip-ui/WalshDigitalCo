@@ -66,29 +66,37 @@
 
 <main id="main">
 
-  <!-- hero: compact, unpinned — the services band sits just under the fold -->
-  <section class="hero-c">
-    <div class="glowbg" aria-hidden="true"></div>
-    <div class="wrap">
-      <div class="hero-c-grid load">
-        <span class="tag">Marketing &amp; brand studio</span>
-        <h1 class="d1" style="margin-top:.32em">Your business,<br><em class="ital grad">unmistakable</em> online.</h1>
-        <p class="lead" style="margin-top:1.5em">
-          You built something people trust in person. Online it should say the same thing —
-          in one voice, on every surface, without assembling a committee of freelancers to get there.
-        </p>
-        <div class="hero-cta" style="display:flex;gap:14px;flex-wrap:wrap;margin-top:2.2em">
-          <a href="build.html" class="btn">Build an engagement <span class="ar" aria-hidden="true">↗</span></a>
-          <a href="services.html" class="btn btn--line">The services</a>
+  <!-- the film: scroll flies down the street, lands on the storefront,
+       dissolves into their dated site — then a click reveals the redesign -->
+  <section class="film dark" id="film" aria-labelledby="filmTitle">
+    <div class="film-stick">
+
+      <div class="film-vid-wrap" aria-hidden="true">
+        <video id="filmVid" class="film-vid" poster="assets/film-poster.jpg"
+               muted playsinline preload="auto" disablepictureinpicture>
+          <source src="assets/film.mp4" type="video/mp4">
+        </video>
+        <div class="film-scrim"></div>
+      </div>
+
+      <div class="film-copy">
+        <div class="wrap load">
+          <span class="tag">Marketing &amp; brand studio</span>
+          <h1 class="d1" id="filmTitle" style="margin-top:.32em;max-width:15ch">A digital presence as good as <em class="ital grad">your storefront.</em></h1>
+          <p class="lead" style="margin-top:1.5em;max-width:46ch">
+            You built something people trust the moment they walk in. Online it should say
+            exactly the same thing — in one voice, on every surface.
+          </p>
+          <div class="hero-cta" style="display:flex;gap:14px;flex-wrap:wrap;margin-top:2.2em">
+            <a href="build.html" class="btn">Build an engagement <span class="ar" aria-hidden="true">↗</span></a>
+            <a href="services.html" class="btn btn--line">The services</a>
+          </div>
         </div>
       </div>
-    </div>
-    <span class="scrollcue" aria-hidden="true"><i></i> Scroll</span>
-  </section>
 
-  <!-- before / after: one business, two versions, wiped apart by scroll -->
-  <section class="ba" id="baSec" aria-labelledby="baTitle">
-    <div class="ba-stick">
+      <span class="scrollcue film-cue" aria-hidden="true"><i></i> Scroll</span>
+
+      <div class="film-ba" id="filmBa">
 
       <div class="ba-tabs" aria-hidden="true">
         <div class="ba-tab ba-tab--b"><span class="ba-tab-in"><span>Before</span><em>A typical local business site</em></span></div>
@@ -111,7 +119,7 @@
                   Please call today to schedule your appointment. Walk-ins welcome. Se habla español.</p>
                 <span class="mk-btn">Click Here</span>
               </div>
-              <div class="mk-vis">photo1.jpg</div>
+              <div class="mk-vis"><img src="assets/salon.jpg" alt="" onerror="this.remove()"></div>
             </div>
             <div class="mk-cards">
               <div><div class="mk-cardh">Facials</div><p class="mk-cardp">Deep cleansing treatments for all skin types. Call for pricing.</p></div>
@@ -157,9 +165,16 @@
       </div>
 
       <div class="ba-hud">
-        <h2 class="ba-title" id="baTitle">The same business, <em>fifteen days</em> apart.</h2>
+        <h2 class="ba-title">The same business, <em>fifteen days</em> apart.</h2>
         <div class="ba-track" aria-hidden="true"><i></i></div>
       </div>
+
+      </div><!-- /.film-ba -->
+
+      <button class="film-reveal" id="filmReveal" type="button">
+        <span class="film-reveal-dot" aria-hidden="true"></span>
+        See the redesign
+      </button>
 
     </div>
   </section>

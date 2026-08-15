@@ -156,15 +156,46 @@
 }
 .field--flamingo{--bg:#f79ac4;--bg-2:#f186b7;--fg:#3d0a24;--mute:rgba(61,10,36,.66);--mute-2:rgba(61,10,36,.86);--rule:rgba(61,10,36,.18);--rule-2:rgba(61,10,36,.34);--accent:#3d0a24;--accent-lt:#5c1236}
 
-/* ── compact hero ────────────────────────────────────
-   no pin, no scroll hijack — the services band sits
-   just under the fold. The one scroll-driven moment on
-   this page is the before/after further down.
+/* ── the film ────────────────────────────────────────
+   one pinned section, four acts driven by a single
+   scroll progress (site.js): headline over the street
+   fly-through → the film scrubs → it dissolves into the
+   dated site → a click reveals the redesign.
    ─────────────────────────────────────────────────── */
-.hero-c{position:relative;padding:calc(var(--nav-h) + clamp(38px,6vh,84px)) 0 clamp(44px,7vh,84px)}
-.hero-c .glowbg::before{right:-8vw;top:-16vw}
-.hero-c .glowbg::after{left:auto;right:-4vw;bottom:-24vw;width:44vw;height:44vw}
-.hero-c-grid{position:relative;z-index:1;max-width:min(100%,66ch)}
+/* registering --p lets the click-reveal animate it; scroll still sets it per frame */
+@property --p{syntax:'<percentage>';inherits:true;initial-value:0%}
+.film{position:relative;height:340vh;background:#061726}
+.film.revealed{transition:--p 1.05s cubic-bezier(.65,0,.35,1)}
+.film-stick{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:#061726}
+.film-vid-wrap{position:absolute;inset:0;z-index:1;opacity:calc(1 - var(--baIn,0))}
+.film-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.film-scrim{position:absolute;inset:0;
+  background:linear-gradient(94deg,rgba(4,15,26,.90) 0%,rgba(4,15,26,.66) 42%,rgba(4,15,26,.22) 74%,rgba(4,15,26,.34) 100%)}
+.film-copy{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);z-index:4;
+  opacity:var(--copyIn,1)}
+.film-copy .lead{color:#c3d2e0}
+.film-cue{z-index:4;opacity:var(--copyIn,1)}
+.film-ba{position:absolute;inset:0;z-index:5;opacity:var(--baIn,0);
+  pointer-events:none;visibility:hidden}
+.film.ba-live .film-ba{visibility:visible}
+
+/* the reveal — a real button so it is keyboard reachable */
+.film-reveal{position:absolute;left:50%;bottom:clamp(84px,13vh,132px);transform:translateX(-50%) translateY(10px);
+  z-index:9;display:inline-flex;align-items:center;gap:.85em;cursor:pointer;
+  font-family:var(--body);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600;
+  color:#0a2a47;background:#f8f5ee;border:0;border-radius:99px;padding:15px 26px;
+  box-shadow:0 20px 44px -18px rgba(2,12,24,.7);
+  opacity:0;visibility:hidden;transition:opacity .45s ease,transform .45s ease,background .3s}
+.film.can-reveal .film-reveal{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+.film-reveal:hover{background:#4fd2e6}
+.film-reveal:focus-visible{outline:2px solid #4fd2e6;outline-offset:4px}
+.film-reveal-dot{width:8px;height:8px;border-radius:50%;background:#cf4b86;flex:none;
+  box-shadow:0 0 0 0 rgba(207,75,134,.6);animation:revealPulse 2s ease-out infinite}
+@keyframes revealPulse{
+  0%{box-shadow:0 0 0 0 rgba(207,75,134,.55)}
+  70%{box-shadow:0 0 0 12px rgba(207,75,134,0)}
+  100%{box-shadow:0 0 0 0 rgba(207,75,134,0)}
+}
 
 /* work shot card — shared by the hero and the work strip */
 .reel-shot{position:relative;aspect-ratio:4/3;border-radius:20px;overflow:hidden;
@@ -234,12 +265,11 @@
 .work-strip figure{margin:0;min-width:0}
 
 /* ── before / after ──────────────────────────────────
-   one business, two versions of its website, wiped
-   apart by scroll. --p (0–100%) is set on the section
-   by site.js so every child can read it.
+   one business, two versions of its website. Lives
+   inside the film's final act. --p (0–100%) is set on
+   #film by site.js so every child can read it.
    ─────────────────────────────────────────────────── */
-.ba{position:relative;height:220vh;--ba-tabs-h:clamp(40px,5.2vh,54px)}
-.ba-stick{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:var(--panel)}
+.film{--ba-tabs-h:clamp(40px,5.2vh,54px)}
 
 /* label bar — its two halves track the wipe, so the split is unmissable */
 .ba-tabs{position:absolute;top:var(--nav-h);left:0;right:0;height:var(--ba-tabs-h);z-index:7;display:flex}
@@ -290,7 +320,8 @@
   gap:clamp(24px,4vw,64px);align-items:center;
   padding:clamp(14px,2.6vh,38px) clamp(22px,4.4vw,72px)}
 .mk-copy{min-width:0}
-.mk-vis{height:min(100%,clamp(190px,40vh,400px))}
+.mk-vis{height:min(100%,clamp(190px,40vh,400px));overflow:hidden}
+.mk-vis img{width:100%;height:100%;object-fit:cover;display:block}
 .mk-cards{flex:none;height:clamp(108px,16.5vh,176px);display:grid;grid-template-columns:repeat(3,1fr);
   gap:clamp(12px,1.4vw,22px);padding:0 clamp(22px,4.4vw,72px)}
 .mk-foot{flex:none;height:clamp(42px,5.6vh,62px);display:flex;align-items:center;
@@ -346,10 +377,16 @@
 .mk--new .mk-foot{border-top:1px solid rgba(248,245,238,.14);color:#8ea3b8;letter-spacing:.08em;
   font-size:clamp(10px,.82vw,12px)}
 
-/* phones + reduced motion: no pin, no wipe — just stack them */
+/* phones + reduced motion: no pin, no scrub, no wipe —
+   poster + headline, then the two versions stacked */
 @media(max-width:920px),(prefers-reduced-motion:reduce){
-  .ba{height:auto}
-  .ba-stick{position:static;height:auto;overflow:visible;background:transparent;
+  .film{height:auto}
+  .film-stick{position:static;height:auto;overflow:visible;display:flex;flex-direction:column}
+  .film-vid-wrap{position:relative;height:min(52vh,380px);opacity:1;flex:none}
+  .film-copy{position:static;transform:none;opacity:1;
+    padding:clamp(30px,6vh,52px) 0 clamp(10px,2vh,20px)}
+  .film-cue,.film-reveal{display:none}
+  .film-ba{position:static;opacity:1;visibility:visible;pointer-events:auto;
     display:flex;flex-direction:column;gap:18px;padding:clamp(40px,7vh,72px) 0}
   .ba-frame{position:static;display:grid;gap:18px;padding:0 var(--gutter)}
   .ba-layer{position:relative;clip-path:none}
@@ -382,9 +419,6 @@
 .band-glass{display:grid;grid-template-columns:1fr 1.45fr;gap:clamp(26px,5vw,72px);align-items:center;
   padding:clamp(30px,4.5vw,56px);border-radius:22px}
 @media(max-width:760px){.band-glass{grid-template-columns:1fr;gap:24px}}
-@media(max-width:920px){
-  .hero-c{padding-top:calc(var(--nav-h) + 44px)}
-}
 
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}

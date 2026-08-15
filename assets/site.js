@@ -27,34 +27,73 @@
     });
   }
 
-  /* ── before / after: YOUR scroll wipes the redesign across ──
-     --p (0–100%) lands on the section so the after layer's
-     clip-path, the seam and the progress track all read it. */
-  var baSec = document.getElementById('baSec');
-  if (baSec) {
+  /* ── the film: one scroll progress, four acts ──────────
+     0.00–0.06  hold on frame one, headline in
+     0.06–0.66  the film scrubs to its end
+     0.60–0.70  cross-fade into the dated site (crisp HTML)
+     0.70–      the reveal offer appears
+     0.80–1.00  the wipe — or a click jumps straight to it   */
+  var film = document.getElementById('film');
+  if (film) {
+    var vid = document.getElementById('filmVid');
+    var revealBtn = document.getElementById('filmReveal');
     var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
-    var bTick = false;
-    function baFrame() {
-      if (window.innerWidth <= 920 || reduce) {   // stacked, no wipe
-        baSec.style.removeProperty('--p');
-        baSec.classList.remove('is-after');
-        bTick = false;
+    var revealed = false, fTick = false, vidReady = false;
+
+    function sub(p, a, b) { return Math.min(1, Math.max(0, (p - a) / (b - a))); }
+    function ease(t) { return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; }
+
+    function filmFrame() {
+      fTick = false;
+      if (window.innerWidth <= 920 || reduce) {          // stacked, nothing driven
+        film.style.removeProperty('--copyIn');
+        film.style.removeProperty('--baIn');
+        film.style.removeProperty('--p');
+        film.classList.remove('can-reveal', 'ba-live', 'is-after');
         return;
       }
-      var rect = baSec.getBoundingClientRect();
+      var rect = film.getBoundingClientRect();
       var total = rect.height - window.innerHeight;
       var prog = total > 0 ? Math.min(1, Math.max(0, -rect.top / total)) : 0;
-      var t = Math.min(1, Math.max(0, (prog - 0.15) / 0.70));   // hold fully-before, then fully-after
-      var e = t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
-      baSec.style.setProperty('--p', (e * 100).toFixed(2) + '%');
-      baSec.classList.toggle('is-after', e > 0.5);
-      bTick = false;
+
+      film.style.setProperty('--copyIn', (1 - sub(prog, 0.06, 0.17)).toFixed(3));
+
+      if (vidReady && vid.duration) {                    // scrub, never play
+        var vt = sub(prog, 0.06, 0.66) * (vid.duration - 0.05);
+        if (Math.abs(vid.currentTime - vt) > 0.02) {
+          try { vid.currentTime = vt; } catch (e) {}
+        }
+      }
+
+      var baIn = sub(prog, 0.60, 0.70);
+      film.style.setProperty('--baIn', baIn.toFixed(3));
+      film.classList.toggle('ba-live', baIn > 0);
+
+      var p = revealed ? 1 : ease(sub(prog, 0.80, 1.0));
+      // offer the click only while there is still something to reveal
+      film.classList.toggle('can-reveal', prog > 0.70 && !revealed && p < 0.04);
+      film.style.setProperty('--p', (p * 100).toFixed(2) + '%');
+      film.classList.toggle('is-after', p > 0.5);
+    }
+
+    if (vid) {
+      vid.addEventListener('loadedmetadata', function () { vidReady = true; filmFrame(); });
+      if (vid.readyState >= 1) { vidReady = true; }
+    }
+    if (revealBtn) {
+      revealBtn.addEventListener('click', function () {
+        revealed = true;
+        film.classList.remove('can-reveal');
+        film.classList.add('revealed');
+        film.style.setProperty('--p', '100%');
+        setTimeout(function () { film.classList.add('is-after'); }, 480);
+      });
     }
     window.addEventListener('scroll', function () {
-      if (!bTick) { bTick = true; requestAnimationFrame(baFrame); }
+      if (!fTick) { fTick = true; requestAnimationFrame(filmFrame); }
     }, { passive: true });
-    window.addEventListener('resize', baFrame);
-    baFrame();
+    window.addEventListener('resize', filmFrame);
+    filmFrame();
   }
 
   /* ── scroll reveals ───────────────────────────────── */
