@@ -157,7 +157,7 @@
     { key: 'film',    name: 'Video & photography', price: 1600 }
   ];
   var MONTHLY = [
-    { key: 'social', name: 'Social management',        price: 600 },
+    { key: 'social', name: 'Social & content',         price: 600 },
     { key: 'seo',    name: 'Google profile & local SEO', price: 350 }
   ];
   var picks = { website: true, brand: false, film: false, social: true, seo: false };

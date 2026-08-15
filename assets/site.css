@@ -272,6 +272,18 @@
 .svc-card .price{position:relative;margin-top:auto;padding-top:18px;border-top:1px solid var(--rule);
   font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}
 
+/* ── services, split by how the work is actually bought ──
+   establish = built once and owned; maintain = ongoing.  */
+.svc-group + .svc-group{margin-top:clamp(54px,8vw,104px);padding-top:clamp(54px,8vw,104px);
+  border-top:1px solid var(--rule)}
+.svc-group-head{margin-bottom:clamp(28px,3.4vw,46px)}
+.svc-kind{display:inline-flex;align-items:center;gap:.75em;font-size:.6rem;letter-spacing:.24em;
+  text-transform:uppercase;font-weight:600;color:var(--accent)}
+.svc-kind::before{content:"";width:28px;height:1px;background:currentColor;opacity:.7}
+.svc-group-name{font-size:clamp(1.9rem,4vw,3rem);margin-top:.3em}
+.svc-group-name em{font-style:italic;color:var(--accent)}
+.svc-group-head p{color:var(--mute);margin-top:.75em;max-width:54ch}
+
 /* ── industries: typical-investment cards ──────────── */
 .ind-block + .ind-block{margin-top:clamp(48px,7vw,92px);padding-top:clamp(48px,7vw,92px);border-top:1px solid var(--rule)}
 .ind-name{color:var(--accent);font-size:clamp(1.9rem,4vw,3.2rem)}
