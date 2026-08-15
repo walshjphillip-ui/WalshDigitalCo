@@ -1,5 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900"
      font-family="'Segoe UI',system-ui,-apple-system,Helvetica,Arial,sans-serif">
+  <defs>
+    <filter id="grbw" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="4" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+  </defs>
   <rect width="1200" height="900" fill="#f8fafc"/>
 
   <!-- top rule + wordmark: tiny, so the headline owns the page -->
@@ -32,4 +38,5 @@
   </g>
   <rect x="1050" y="352" width="86" height="2" fill="#e2e8f0"/>
   <rect x="1050" y="398" width="86" height="2" fill="#e2e8f0"/>
+  <rect width="100%" height="100%" filter="url(#grbw)" opacity="0.04"/>
 </svg>

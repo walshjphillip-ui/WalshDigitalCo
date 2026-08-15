@@ -1,79 +1,137 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900"
      font-family="'Segoe UI',system-ui,-apple-system,Helvetica,Arial,sans-serif">
   <defs>
-    <linearGradient id="sgDark" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#243244"/><stop offset="1" stop-color="#0b0f14"/></linearGradient>
-    <linearGradient id="sgRed" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#dc2626"/><stop offset="1" stop-color="#7f1414"/></linearGradient>
-    <linearGradient id="sgSteel" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#475569"/><stop offset="1" stop-color="#1e293b"/></linearGradient>
-    <linearGradient id="sgGloss" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#ffffff" stop-opacity="0"/><stop offset=".5" stop-color="#ffffff" stop-opacity=".3"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    <linearGradient id="tDark" x1="0" y1="0" x2=".8" y2="1">
+      <stop offset="0" stop-color="#31465c"/><stop offset=".55" stop-color="#151f2b"/><stop offset="1" stop-color="#080c11"/>
     </linearGradient>
+    <linearGradient id="tRed" x1="0" y1="0" x2=".8" y2="1">
+      <stop offset="0" stop-color="#f0463f"/><stop offset=".5" stop-color="#c11f1f"/><stop offset="1" stop-color="#5e0f0f"/>
+    </linearGradient>
+    <linearGradient id="tSteel" x1="0" y1="0" x2=".7" y2="1">
+      <stop offset="0" stop-color="#6b7f93"/><stop offset=".55" stop-color="#33445a"/><stop offset="1" stop-color="#141d28"/>
+    </linearGradient>
+    <linearGradient id="tGloss" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset=".47" stop-color="#ffffff" stop-opacity=".26"/>
+      <stop offset=".53" stop-color="#ffffff" stop-opacity=".26"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="tKey" cx=".34" cy=".26" r=".72">
+      <stop offset="0" stop-color="#ffffff" stop-opacity=".2"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="tVig" cx=".5" cy=".46" r=".68">
+      <stop offset=".5" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000000" stop-opacity=".62"/>
+    </radialGradient>
+    <linearGradient id="tFoot" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#000000" stop-opacity="0"/><stop offset="1" stop-color="#000000" stop-opacity=".78"/>
+    </linearGradient>
+    <filter id="sgGrain" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="4" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+    <filter id="sgLift" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#000" flood-opacity=".55"/>
+    </filter>
   </defs>
 
-  <rect width="1200" height="900" fill="#0b0f14"/>
+  <rect width="1200" height="900" fill="#080c11"/>
+  <ellipse cx="600" cy="380" rx="760" ry="520" fill="#16283a" opacity=".42"/>
 
-  <!-- handle bar, flat and mechanical -->
-  <rect x="56" y="52" width="72" height="72" fill="#dc2626"/>
-  <text x="92" y="103" text-anchor="middle" font-family="'Arial Black',Impact,sans-serif"
-        font-size="38" fill="#ffffff">C</text>
-  <text x="150" y="88" font-family="'Arial Black','Segoe UI Black',Impact,sans-serif"
-        font-size="34" letter-spacing="-.6" fill="#f8fafc">@coastaldetail</text>
-  <text x="152" y="120" font-size="23" font-weight="600" letter-spacing="2.4" fill="#7d8b9b">CERAMIC &#8212; PPF &#8212; TINT</text>
+  <!-- handle bar -->
+  <rect x="56" y="52" width="70" height="70" fill="#dc2626"/>
+  <rect x="56" y="52" width="70" height="2" fill="#ff7a7a" opacity=".6"/>
+  <text x="91" y="102" text-anchor="middle" font-family="'Arial Black',Impact,sans-serif"
+        font-size="36" fill="#ffffff">C</text>
+  <text x="148" y="86" font-family="'Arial Black','Segoe UI Black',Impact,sans-serif"
+        font-size="32" letter-spacing="-.6" fill="#eef3f8">@coastaldetail</text>
+  <text x="150" y="117" font-size="21" font-weight="600" letter-spacing="2.8" fill="#6f8091">CERAMIC &#8212; PPF &#8212; TINT</text>
+  <text x="1144" y="80" text-anchor="end" font-family="'Arial Black','Segoe UI Black',Impact,sans-serif"
+        font-size="32" fill="#eef3f8">12.4K</text>
+  <text x="1144" y="110" text-anchor="end" font-size="18" font-weight="700" letter-spacing="3.2" fill="#6f8091">FOLLOWERS</text>
+  <rect x="56" y="152" width="1088" height="1" fill="#ffffff" fill-opacity=".14"/>
+  <rect x="56" y="152" width="230" height="3" fill="#dc2626"/>
 
-  <g font-family="'Arial Black','Segoe UI Black',Impact,sans-serif" font-size="34" fill="#f8fafc" text-anchor="end">
-    <text x="1144" y="80">12.4K</text>
+  <!-- grid: each tile lit, vignetted and footed so it reads as a frame, not a swatch -->
+  <g filter="url(#sgLift)">
+    <!-- r1 -->
+    <g><rect x="56" y="190" width="262" height="202" fill="url(#tDark)"/>
+       <rect x="56" y="190" width="262" height="202" fill="url(#tKey)"/>
+       <polygon points="56,352 196,190 268,190 56,394" fill="url(#tGloss)"/>
+       <rect x="56" y="190" width="262" height="202" fill="url(#tVig)"/>
+       <rect x="56" y="322" width="262" height="70" fill="url(#tFoot)"/>
+       <rect x="56" y="190" width="106" height="32" fill="#dc2626"/>
+       <text x="109" y="213" text-anchor="middle" font-size="17" font-weight="800" letter-spacing="2" fill="#fff">BEFORE</text></g>
+
+    <g><rect x="332" y="190" width="262" height="202" fill="url(#tRed)"/>
+       <rect x="332" y="190" width="262" height="202" fill="url(#tKey)"/>
+       <rect x="332" y="190" width="262" height="202" fill="url(#tVig)"/>
+       <rect x="332" y="322" width="262" height="70" fill="url(#tFoot)"/>
+       <circle cx="463" cy="286" r="33" fill="none" stroke="#fff" stroke-width="3" opacity=".92"/>
+       <polygon points="453,270 484,286 453,302" fill="#fff" opacity=".92"/>
+       <text x="348" y="374" font-size="19" font-weight="800" letter-spacing="1.4" fill="#ffe3e3">82.4K VIEWS</text></g>
+
+    <g><rect x="608" y="190" width="262" height="202" fill="url(#tSteel)"/>
+       <rect x="608" y="190" width="262" height="202" fill="url(#tKey)"/>
+       <polygon points="608,352 748,190 820,190 608,394" fill="url(#tGloss)" opacity=".7"/>
+       <rect x="608" y="190" width="262" height="202" fill="url(#tVig)"/>
+       <rect x="608" y="322" width="262" height="70" fill="url(#tFoot)"/>
+       <text x="624" y="374" font-size="19" font-weight="800" letter-spacing="1.4" fill="#cfdae5">TINT &#8212; 20%</text></g>
+
+    <g><rect x="884" y="190" width="260" height="202" fill="url(#tDark)"/>
+       <rect x="884" y="190" width="260" height="202" fill="url(#tKey)"/>
+       <rect x="884" y="190" width="260" height="202" fill="url(#tVig)"/>
+       <rect x="884" y="322" width="260" height="70" fill="url(#tFoot)"/>
+       <circle cx="1014" cy="286" r="33" fill="none" stroke="#fff" stroke-width="3" opacity=".92"/>
+       <polygon points="1004,270 1035,286 1004,302" fill="#fff" opacity=".92"/>
+       <text x="900" y="374" font-size="19" font-weight="800" letter-spacing="1.4" fill="#9fb0c0">41.9K VIEWS</text></g>
+
+    <!-- r2 -->
+    <g><rect x="56" y="406" width="262" height="202" fill="url(#tSteel)"/>
+       <rect x="56" y="406" width="262" height="202" fill="url(#tKey)"/>
+       <rect x="56" y="406" width="262" height="202" fill="url(#tVig)"/>
+       <rect x="56" y="538" width="262" height="70" fill="url(#tFoot)"/>
+       <text x="72" y="590" font-size="19" font-weight="800" letter-spacing="1.4" fill="#cfdae5">INTERIOR</text></g>
+
+    <g><rect x="332" y="406" width="262" height="202" fill="url(#tDark)"/>
+       <rect x="332" y="406" width="262" height="202" fill="url(#tKey)"/>
+       <polygon points="332,568 472,406 544,406 332,610" fill="url(#tGloss)"/>
+       <rect x="332" y="406" width="262" height="202" fill="url(#tVig)"/>
+       <rect x="332" y="406" width="92" height="32" fill="#dc2626"/>
+       <text x="378" y="429" text-anchor="middle" font-size="17" font-weight="800" letter-spacing="2" fill="#fff">AFTER</text></g>
+
+    <g><rect x="608" y="406" width="262" height="202" fill="url(#tRed)"/>
+       <rect x="608" y="406" width="262" height="202" fill="url(#tKey)"/>
+       <rect x="608" y="406" width="262" height="202" fill="url(#tVig)"/>
+       <rect x="608" y="538" width="262" height="70" fill="url(#tFoot)"/>
+       <text x="624" y="590" font-size="19" font-weight="800" letter-spacing="1.4" fill="#ffe3e3">9H COAT</text></g>
+
+    <g><rect x="884" y="406" width="260" height="202" fill="url(#tSteel)"/>
+       <rect x="884" y="406" width="260" height="202" fill="url(#tKey)"/>
+       <polygon points="884,568 1024,406 1096,406 884,610" fill="url(#tGloss)" opacity=".6"/>
+       <rect x="884" y="406" width="260" height="202" fill="url(#tVig)"/></g>
+
+    <!-- r3 -->
+    <g><rect x="56" y="622" width="262" height="166" fill="url(#tDark)"/>
+       <rect x="56" y="622" width="262" height="166" fill="url(#tKey)"/>
+       <rect x="56" y="622" width="262" height="166" fill="url(#tVig)"/></g>
+    <g><rect x="332" y="622" width="262" height="166" fill="url(#tSteel)"/>
+       <rect x="332" y="622" width="262" height="166" fill="url(#tKey)"/>
+       <rect x="332" y="622" width="262" height="166" fill="url(#tVig)"/></g>
+    <g><rect x="608" y="622" width="262" height="166" fill="url(#tDark)"/>
+       <rect x="608" y="622" width="262" height="166" fill="url(#tKey)"/>
+       <polygon points="608,782 748,622 820,622 608,788" fill="url(#tGloss)" opacity=".8"/>
+       <rect x="608" y="622" width="262" height="166" fill="url(#tVig)"/></g>
+    <g><rect x="884" y="622" width="260" height="166" fill="url(#tRed)"/>
+       <rect x="884" y="622" width="260" height="166" fill="url(#tKey)"/>
+       <rect x="884" y="622" width="260" height="166" fill="url(#tVig)"/></g>
   </g>
-  <text x="1144" y="112" text-anchor="end" font-size="20" font-weight="700" letter-spacing="3" fill="#7d8b9b">FOLLOWERS</text>
 
-  <rect x="56" y="156" width="1088" height="3" fill="#dc2626"/>
+  <rect x="56" y="824" width="1088" height="1" fill="#ffffff" fill-opacity=".14"/>
+  <text x="56" y="876" font-family="'Arial Black','Segoe UI Black',Impact,sans-serif"
+        font-size="28" fill="#eef3f8">18 POSTS<tspan fill="#dc2626"> / </tspan>MONTH</text>
+  <text x="1144" y="876" text-anchor="end" font-size="19" font-weight="700" letter-spacing="3" fill="#6f8091">SHOT, CUT AND POSTED BY WDC</text>
 
-  <!-- content grid: 4 across, tight gutters, hard corners -->
-  <g>
-    <!-- row 1 -->
-    <rect x="56" y="192" width="262" height="200" fill="url(#sgDark)"/>
-    <polygon points="56,352 190,192 262,192 56,392" fill="url(#sgGloss)" opacity=".5"/>
-    <rect x="56" y="192" width="112" height="34" fill="#dc2626"/>
-    <text x="112" y="216" text-anchor="middle" font-size="18" font-weight="800" letter-spacing="2" fill="#ffffff">BEFORE</text>
-
-    <rect x="332" y="192" width="262" height="200" fill="url(#sgRed)"/>
-    <circle cx="463" cy="292" r="36" fill="none" stroke="#ffffff" stroke-width="4"/>
-    <polygon points="452,274 486,292 452,310" fill="#ffffff"/>
-    <text x="348" y="378" font-size="20" font-weight="800" letter-spacing="1.6" fill="#ffe1e1">82.4K VIEWS</text>
-
-    <rect x="608" y="192" width="262" height="200" fill="url(#sgSteel)"/>
-    <polygon points="608,352 742,192 814,192 608,392" fill="url(#sgGloss)" opacity=".35"/>
-    <text x="624" y="378" font-size="20" font-weight="800" letter-spacing="1.6" fill="#cbd5e1">TINT &#8212; 20%</text>
-
-    <rect x="884" y="192" width="260" height="200" fill="url(#sgDark)"/>
-    <circle cx="1014" cy="292" r="36" fill="none" stroke="#ffffff" stroke-width="4"/>
-    <polygon points="1003,274 1037,292 1003,310" fill="#ffffff"/>
-    <text x="900" y="378" font-size="20" font-weight="800" letter-spacing="1.6" fill="#9fb0c0">41.9K VIEWS</text>
-
-    <!-- row 2 -->
-    <rect x="56" y="406" width="262" height="200" fill="url(#sgSteel)"/>
-    <text x="72" y="592" font-size="20" font-weight="800" letter-spacing="1.6" fill="#cbd5e1">INTERIOR</text>
-
-    <rect x="332" y="406" width="262" height="200" fill="url(#sgDark)"/>
-    <polygon points="332,566 466,406 538,406 332,606" fill="url(#sgGloss)" opacity=".5"/>
-    <rect x="332" y="406" width="96" height="34" fill="#dc2626"/>
-    <text x="380" y="430" text-anchor="middle" font-size="18" font-weight="800" letter-spacing="2" fill="#ffffff">AFTER</text>
-
-    <rect x="608" y="406" width="262" height="200" fill="url(#sgRed)"/>
-    <text x="624" y="592" font-size="20" font-weight="800" letter-spacing="1.6" fill="#ffe1e1">9H COAT</text>
-
-    <rect x="884" y="406" width="260" height="200" fill="url(#sgSteel)"/>
-    <polygon points="884,566 1018,406 1090,406 884,606" fill="url(#sgGloss)" opacity=".3"/>
-
-    <!-- row 3 -->
-    <rect x="56"  y="620" width="262" height="168" fill="url(#sgDark)"/>
-    <rect x="332" y="620" width="262" height="168" fill="url(#sgSteel)"/>
-    <rect x="608" y="620" width="262" height="168" fill="url(#sgDark)"/>
-    <polygon points="608,780 742,620 814,620 608,788" fill="url(#sgGloss)" opacity=".4"/>
-    <rect x="884" y="620" width="260" height="168" fill="url(#sgRed)"/>
-  </g>
-
-  <!-- footer stat, mechanical -->
-  <rect x="56" y="822" width="1088" height="3" fill="#ffffff" fill-opacity=".12"/>
-  <text x="56" y="878" font-family="'Arial Black','Segoe UI Black',Impact,sans-serif"
-        font-size="30" fill="#f8fafc">18 POSTS<tspan fill="#dc2626"> / </tspan>MONTH</text>
-  <text x="1144" y="878" text-anchor="end" font-size="21" font-weight="700" letter-spacing="3" fill="#7d8b9b">SHOT, CUT AND POSTED BY WDC</text>
+  <rect width="1200" height="900" filter="url(#sgGrain)" opacity=".05"/>
 </svg>

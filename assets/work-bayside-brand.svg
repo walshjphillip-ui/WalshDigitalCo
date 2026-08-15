@@ -1,5 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900"
      font-family="'Segoe UI',system-ui,-apple-system,Helvetica,Arial,sans-serif">
+  <defs>
+    <filter id="grbb" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="4" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+  </defs>
   <rect width="1200" height="900" fill="#334155"/>
 
   <!-- header -->
@@ -41,4 +47,5 @@
   <text x="366" y="830" font-size="42" font-weight="600" fill="#cbd5e1">Semibold</text>
   <text x="574" y="830" font-size="42" font-weight="400" fill="#94a3b8">Regular</text>
   <text x="1136" y="830" text-anchor="end" font-size="21" font-weight="600" letter-spacing="2.6" fill="#64748b">LEXEND &#183; SOURCE SANS</text>
+  <rect width="100%" height="100%" filter="url(#grbb)" opacity="0.052"/>
 </svg>
