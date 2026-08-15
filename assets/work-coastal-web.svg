@@ -1,82 +1,94 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900"
+     font-family="'Arial Black','Segoe UI Black',Impact,Haettenschweiler,sans-serif">
   <defs>
-    <linearGradient id="cwBg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#101c28"/><stop offset="1" stop-color="#05090e"/>
+    <linearGradient id="cdPaint" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#243244"/><stop offset=".5" stop-color="#0c1218"/><stop offset="1" stop-color="#1b2735"/>
     </linearGradient>
-    <radialGradient id="cwGlow" cx=".5" cy=".5" r=".5">
-      <stop offset="0" stop-color="#3fc1d6" stop-opacity=".34"/><stop offset="1" stop-color="#3fc1d6" stop-opacity="0"/>
+    <linearGradient id="cdSweep" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset=".48" stop-color="#dceef7" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="cdBead" cx=".33" cy=".28" r=".75">
+      <stop offset="0" stop-color="#ffffff" stop-opacity=".92"/>
+      <stop offset=".5" stop-color="#a8c6d6" stop-opacity=".38"/>
+      <stop offset="1" stop-color="#0c1218" stop-opacity=".2"/>
     </radialGradient>
-    <linearGradient id="paint" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#1a2b3d"/><stop offset=".45" stop-color="#0b141d"/><stop offset="1" stop-color="#16283a"/>
-    </linearGradient>
-    <linearGradient id="spec" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#bfe9f2" stop-opacity="0"/>
-      <stop offset=".5" stop-color="#bfe9f2" stop-opacity=".5"/>
-      <stop offset="1" stop-color="#bfe9f2" stop-opacity="0"/>
-    </linearGradient>
-    <radialGradient id="bead" cx=".34" cy=".3" r=".72">
-      <stop offset="0" stop-color="#eafaff" stop-opacity=".95"/>
-      <stop offset=".45" stop-color="#8fd6e6" stop-opacity=".45"/>
-      <stop offset="1" stop-color="#0b141d" stop-opacity=".16"/>
-    </radialGradient>
-    <clipPath id="panelClip"><rect x="880" y="196" width="632" height="446" rx="22"/></clipPath>
+    <pattern id="cdHatch" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)">
+      <rect width="14" height="14" fill="none"/>
+      <rect width="3" height="14" fill="#ffffff" fill-opacity=".025"/>
+    </pattern>
+    <clipPath id="cdPanel"><polygon points="1010,120 1600,120 1600,676 950,676"/></clipPath>
   </defs>
 
-  <rect width="1600" height="900" fill="url(#cwBg)"/>
-  <circle cx="1320" cy="180" r="520" fill="url(#cwGlow)"/>
+  <rect width="1600" height="900" fill="#0b0f14"/>
+  <rect width="1600" height="900" fill="url(#cdHatch)"/>
+
+  <!-- red slash -->
+  <polygon points="0,742 1600,606 1600,652 0,788" fill="#dc2626"/>
+  <polygon points="0,788 1600,652 1600,664 0,800" fill="#7f1414"/>
 
   <!-- nav -->
-  <text x="90" y="56" font-size="25" font-weight="700" letter-spacing="4.5" fill="#f2f7fa">COASTAL DETAIL CO.</text>
-  <g font-size="21" letter-spacing="2.6" fill="#9fb6c4" text-anchor="end">
-    <text x="1510" y="56">CERAMIC &#183; PPF &#183; TINT &#183; BOOK</text>
+  <text x="86" y="62" font-size="30" letter-spacing="1" fill="#f8fafc">COASTAL<tspan fill="#dc2626">/</tspan>DETAIL</text>
+  <g font-family="'Segoe UI',system-ui,Arial,sans-serif" font-size="21" font-weight="700"
+     letter-spacing="3.4" fill="#7d8b9b" text-anchor="end">
+    <text x="1514" y="60">CERAMIC &#8212; PPF &#8212; TINT &#8212; BOOK</text>
   </g>
-  <line x1="0" y1="88" x2="1600" y2="88" stroke="#f2f7fa" stroke-opacity=".13"/>
+  <rect x="86" y="82" width="1428" height="2" fill="#ffffff" fill-opacity=".1"/>
 
-  <!-- hero copy -->
-  <text x="90" y="268" font-size="23" font-weight="600" letter-spacing="6.5" fill="#4fd2e6">MIAMI BEACH &#183; MOBILE &amp; IN-SHOP</text>
-  <text x="90" y="382" font-family="Georgia,serif" font-size="86" fill="#f4f9fc">Protection that</text>
-  <text x="90" y="472" font-family="Georgia,serif" font-size="86" fill="#f4f9fc">outlasts <tspan font-style="italic" fill="#4fd2e6">the car.</tspan></text>
-  <text x="93" y="536" font-size="26" fill="#9fb6c4">Ceramic coating, paint protection film and tint —</text>
-  <text x="93" y="574" font-size="26" fill="#9fb6c4">booked online, done in a day.</text>
+  <!-- headline -->
+  <text x="82" y="240" font-family="'Segoe UI',system-ui,Arial,sans-serif" font-size="23"
+        font-weight="700" letter-spacing="7" fill="#dc2626">MIAMI BEACH &#8212; EST. 2016</text>
+  <text x="78" y="372" font-size="118" letter-spacing="-3" fill="#f8fafc">ARMOR FOR</text>
+  <text x="78" y="486" font-size="118" letter-spacing="-3" fill="#f8fafc">YOUR PAINT<tspan fill="#dc2626">.</tspan></text>
+  <text x="84" y="548" font-family="'Segoe UI',system-ui,Arial,sans-serif" font-size="26"
+        font-weight="400" fill="#8fa0b1">Nine-layer ceramic. Five-year warranty.</text>
+  <text x="84" y="586" font-family="'Segoe UI',system-ui,Arial,sans-serif" font-size="26"
+        font-weight="400" fill="#8fa0b1">In and out the same day.</text>
 
-  <rect x="90" y="618" width="252" height="70" rx="35" fill="#4fd2e6"/>
-  <text x="216" y="662" text-anchor="middle" font-size="24" font-weight="700" letter-spacing="2.6" fill="#052029">GET A QUOTE</text>
-  <text x="376" y="662" font-size="24" font-weight="600" letter-spacing="2.4" fill="#f2f7fa">SEE THE WORK</text>
+  <rect x="82" y="626" width="286" height="72" fill="#dc2626"/>
+  <text x="225" y="674" text-anchor="middle" font-family="'Segoe UI',system-ui,Arial,sans-serif"
+        font-size="23" font-weight="800" letter-spacing="3" fill="#ffffff">BOOK A SLOT</text>
+  <text x="404" y="674" font-family="'Segoe UI',system-ui,Arial,sans-serif" font-size="23"
+        font-weight="800" letter-spacing="3" fill="#f8fafc">SEE THE WORK &#8594;</text>
 
-  <!-- glossy coated panel with water beading -->
-  <g clip-path="url(#panelClip)">
-    <rect x="880" y="196" width="632" height="446" fill="url(#paint)"/>
-    <polygon points="880,560 1250,196 1420,196 880,700" fill="url(#spec)" opacity=".55"/>
-    <polygon points="1180,642 1512,300 1512,420 1330,642" fill="url(#spec)" opacity=".3"/>
+  <!-- skewed coated panel -->
+  <g clip-path="url(#cdPanel)">
+    <rect x="930" y="100" width="700" height="600" fill="url(#cdPaint)"/>
+    <polygon points="930,560 1300,120 1450,120 930,720" fill="url(#cdSweep)" opacity=".7"/>
+    <polygon points="1290,676 1600,320 1600,440 1430,676" fill="url(#cdSweep)" opacity=".34"/>
     <g>
-      <circle cx="1000" cy="300" r="26" fill="url(#bead)"/>
-      <circle cx="1078" cy="372" r="17" fill="url(#bead)"/>
-      <circle cx="962"  cy="404" r="13" fill="url(#bead)"/>
-      <circle cx="1148" cy="286" r="11" fill="url(#bead)"/>
-      <circle cx="1230" cy="392" r="22" fill="url(#bead)"/>
-      <circle cx="1330" cy="300" r="14" fill="url(#bead)"/>
-      <circle cx="1298" cy="470" r="19" fill="url(#bead)"/>
-      <circle cx="1414" cy="392" r="12" fill="url(#bead)"/>
-      <circle cx="1040" cy="500" r="16" fill="url(#bead)"/>
-      <circle cx="1160" cy="536" r="12" fill="url(#bead)"/>
-      <circle cx="1392" cy="546" r="21" fill="url(#bead)"/>
-      <circle cx="1466" cy="470" r="10" fill="url(#bead)"/>
+      <circle cx="1090" cy="230" r="24" fill="url(#cdBead)"/>
+      <circle cx="1176" cy="310" r="15" fill="url(#cdBead)"/>
+      <circle cx="1052" cy="352" r="12" fill="url(#cdBead)"/>
+      <circle cx="1268" cy="238" r="10" fill="url(#cdBead)"/>
+      <circle cx="1330" cy="352" r="21" fill="url(#cdBead)"/>
+      <circle cx="1432" cy="258" r="13" fill="url(#cdBead)"/>
+      <circle cx="1392" cy="470" r="18" fill="url(#cdBead)"/>
+      <circle cx="1520" cy="374" r="11" fill="url(#cdBead)"/>
+      <circle cx="1132" cy="486" r="15" fill="url(#cdBead)"/>
+      <circle cx="1250" cy="540" r="11" fill="url(#cdBead)"/>
+      <circle cx="1478" cy="562" r="20" fill="url(#cdBead)"/>
+      <circle cx="1044" cy="596" r="13" fill="url(#cdBead)"/>
     </g>
   </g>
-  <rect x="880" y="196" width="632" height="446" rx="22" fill="none" stroke="#f2f7fa" stroke-opacity=".2" stroke-width="2"/>
-  <rect x="912" y="566" width="212" height="46" rx="23" fill="#05090e" fill-opacity=".72"/>
-  <text x="1018" y="597" text-anchor="middle" font-size="21" font-weight="600" letter-spacing="3" fill="#8fd6e6">9H CERAMIC</text>
+  <polygon points="1010,120 1600,120 1600,676 950,676" fill="none" stroke="#dc2626" stroke-width="3"/>
+  <rect x="1010" y="120" width="128" height="44" fill="#dc2626"/>
+  <text x="1074" y="151" text-anchor="middle" font-family="'Segoe UI',system-ui,Arial,sans-serif"
+        font-size="20" font-weight="800" letter-spacing="2.4" fill="#ffffff">9H</text>
 
-  <!-- stats -->
-  <line x1="90" y1="748" x2="1510" y2="748" stroke="#f2f7fa" stroke-opacity=".13"/>
-  <g font-family="Georgia,serif" font-size="52" fill="#f4f9fc">
-    <text x="90" y="836">4.9<tspan font-size="34" fill="#dda32a"> &#9733;</tspan></text>
-    <text x="560" y="836">2,400+</text>
-    <text x="1030" y="836">1 day</text>
+  <!-- spec strip -->
+  <g fill="#f8fafc" font-size="60" letter-spacing="-1">
+    <text x="82" y="862">5&#8202;YR</text>
+    <text x="470" y="862">2,400</text>
+    <text x="900" y="862">1&#8202;DAY</text>
+    <text x="1290" y="862">4.9<tspan font-size="38" fill="#dc2626">&#9733;</tspan></text>
   </g>
-  <g font-size="21" letter-spacing="3.4" fill="#7e94a4">
-    <text x="92" y="876">GOOGLE REVIEWS</text>
-    <text x="562" y="876">VEHICLES COATED</text>
-    <text x="1032" y="876">TYPICAL TURNAROUND</text>
+  <g font-family="'Segoe UI',system-ui,Arial,sans-serif" font-size="19" font-weight="700"
+     letter-spacing="3.6" fill="#65727f">
+    <text x="86" y="890">WARRANTY</text>
+    <text x="474" y="890">CARS COATED</text>
+    <text x="904" y="890">TURNAROUND</text>
+    <text x="1294" y="890">214 REVIEWS</text>
   </g>
 </svg>

@@ -1,47 +1,44 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">
-  <defs>
-    <linearGradient id="bbWarm" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#dda32a" stop-opacity=".22"/><stop offset="1" stop-color="#dda32a" stop-opacity="0"/>
-    </linearGradient>
-  </defs>
-
-  <rect width="1200" height="900" fill="#f4efe4"/>
-  <circle cx="1080" cy="80" r="420" fill="url(#bbWarm)"/>
-  <rect x="20" y="20" width="1160" height="860" rx="10" fill="none" stroke="#12293f" stroke-opacity=".14"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900"
+     font-family="'Segoe UI',system-ui,-apple-system,Helvetica,Arial,sans-serif">
+  <rect width="1200" height="900" fill="#334155"/>
 
   <!-- header -->
-  <text x="62" y="88" font-size="26" font-weight="700" letter-spacing="6" fill="#12293f">BRAND IDENTITY</text>
-  <text x="1138" y="88" text-anchor="end" font-size="24" letter-spacing="4" fill="#6a7a89">ROOFING &#183; SOUTH FLORIDA</text>
-  <line x1="62" y1="122" x2="1138" y2="122" stroke="#12293f" stroke-opacity=".14"/>
+  <text x="64" y="80" font-size="24" font-weight="800" letter-spacing="5" fill="#f8fafc">IDENTITY SYSTEM</text>
+  <text x="1136" y="80" text-anchor="end" font-size="22" font-weight="600" letter-spacing="3.4" fill="#94a3b8">BAYSIDE ROOFING</text>
 
-  <!-- mark: roofline over water -->
-  <g transform="translate(212,318)">
-    <circle r="108" fill="none" stroke="#12293f" stroke-width="4"/>
-    <polyline points="-58,14 0,-44 58,14" fill="none" stroke="#12293f" stroke-width="17"
-              stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M-58 52 q19 -20 38 0 t38 0 t38 0" fill="none" stroke="#dda32a" stroke-width="12" stroke-linecap="round"/>
+  <!-- the mark: a folded roof plane, built from the letter B counter.
+       flat, geometric, no enclosing circle — deliberately unlike the Lume mark -->
+  <g transform="translate(64,168)">
+    <polygon points="0,196 132,44 264,196 264,244 132,92 0,244" fill="#f97316"/>
+    <polygon points="0,300 132,148 264,300 264,348 132,196 0,348" fill="#f8fafc"/>
   </g>
 
-  <!-- wordmark -->
-  <text x="374" y="332" font-family="Georgia,serif" font-size="112" fill="#12293f">Bayside</text>
-  <text x="380" y="386" font-size="27" letter-spacing="11" fill="#6a7a89">ROOFING CO.</text>
+  <!-- wordmark, oversized and tightly tracked -->
+  <text x="382" y="330" font-size="132" font-weight="900" letter-spacing="-7" fill="#f8fafc">BAYSIDE</text>
+  <text x="388" y="392" font-size="27" font-weight="700" letter-spacing="15" fill="#f97316">ROOFING CO.</text>
+  <rect x="388" y="424" width="150" height="6" fill="#f97316"/>
 
-  <line x1="62" y1="516" x2="1138" y2="516" stroke="#12293f" stroke-opacity=".12"/>
+  <!-- palette as a single continuous bar, not swatch cards -->
+  <text x="64" y="592" font-size="22" font-weight="800" letter-spacing="5" fill="#94a3b8">PALETTE</text>
+  <text x="1136" y="592" text-anchor="end" font-size="23" font-weight="700" letter-spacing="2" fill="#f97316">ONE WEIGHT DOES THE SHOUTING</text>
+  <g>
+    <rect x="64"  y="614" width="268" height="96" fill="#334155"/>
+    <rect x="64"  y="614" width="268" height="96" fill="none" stroke="#f8fafc" stroke-opacity=".3" stroke-width="2"/>
+    <rect x="332" y="614" width="268" height="96" fill="#64748b"/>
+    <rect x="600" y="614" width="268" height="96" fill="#f97316"/>
+    <rect x="868" y="614" width="268" height="96" fill="#f8fafc"/>
+  </g>
+  <g font-size="19" font-weight="700" letter-spacing="2.6" fill="#94a3b8">
+    <text x="64" y="742">SLATE 700</text>
+    <text x="332" y="742">SLATE 500</text>
+    <text x="600" y="742">SAFETY 500</text>
+    <text x="868" y="742">BONE</text>
+  </g>
 
-  <!-- palette -->
-  <text x="62" y="576" font-size="24" font-weight="700" letter-spacing="5" fill="#6a7a89">PALETTE</text>
-  <rect x="62"  y="604" width="132" height="150" rx="14" fill="#12293f"/>
-  <rect x="212" y="604" width="132" height="150" rx="14" fill="#1d4266"/>
-  <rect x="362" y="604" width="132" height="150" rx="14" fill="#dda32a"/>
-  <rect x="512" y="604" width="132" height="150" rx="14" fill="#8fa3b3"/>
-  <rect x="662" y="604" width="132" height="150" rx="14" fill="#f4efe4" stroke="#cfc7b6" stroke-width="2"/>
-
-  <!-- type -->
-  <line x1="856" y1="548" x2="856" y2="764" stroke="#12293f" stroke-opacity=".12"/>
-  <text x="900" y="576" font-size="24" font-weight="700" letter-spacing="5" fill="#6a7a89">TYPE</text>
-  <text x="898" y="700" font-family="Georgia,serif" font-size="124" fill="#12293f">Aa</text>
-  <text x="900" y="748" font-size="25" letter-spacing="2" fill="#6a7a89">Georgia &#183; Inter</text>
-
-  <!-- strapline -->
-  <text x="62" y="828" font-family="Georgia,serif" font-style="italic" font-size="40" fill="#1d4266">&#8220;Roofs that hold. First time.&#8221;</text>
+  <!-- type: shown as a live line, not an Aa specimen -->
+  <text x="64" y="826" font-size="22" font-weight="800" letter-spacing="5" fill="#94a3b8">TYPE</text>
+  <text x="212" y="830" font-size="42" font-weight="900" letter-spacing="-1.6" fill="#f8fafc">Black</text>
+  <text x="366" y="830" font-size="42" font-weight="600" fill="#cbd5e1">Semibold</text>
+  <text x="574" y="830" font-size="42" font-weight="400" fill="#94a3b8">Regular</text>
+  <text x="1136" y="830" text-anchor="end" font-size="21" font-weight="600" letter-spacing="2.6" fill="#64748b">LEXEND &#183; SOURCE SANS</text>
 </svg>
