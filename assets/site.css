@@ -284,10 +284,45 @@
 .svc-group-name em{font-style:italic;color:var(--accent)}
 .svc-group-head p{color:var(--mute);margin-top:.75em;max-width:54ch}
 
+/* ── gallery ─────────────────────────────────────────
+   the work, big. tiles vary in span so the grid reads
+   as a wall rather than a spreadsheet.
+   ─────────────────────────────────────────────────── */
+.gal{display:grid;grid-template-columns:repeat(6,1fr);gap:clamp(14px,1.8vw,26px);
+  grid-auto-flow:dense}
+.gal-item{position:relative;grid-column:span 2;margin:0;border-radius:18px;overflow:hidden;
+  aspect-ratio:4/3;background:var(--panel);
+  box-shadow:0 30px 64px -34px rgba(2,12,24,.7),inset 0 0 0 1px var(--rule);
+  transition:transform .5s cubic-bezier(.2,.8,.2,1),box-shadow .5s}
+.gal-item--wide{grid-column:span 4;aspect-ratio:16/9}
+.gal-item--full{grid-column:span 6;aspect-ratio:21/9}
+.gal-item img{width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform .9s cubic-bezier(.2,.8,.2,1)}
+.gal-item:hover{transform:translateY(-6px);box-shadow:0 40px 80px -34px rgba(2,12,24,.85),inset 0 0 0 1px var(--rule-2)}
+.gal-item:hover img{transform:scale(1.05)}
+.gal-cap{position:absolute;left:0;right:0;bottom:0;z-index:2;display:flex;flex-direction:column;gap:3px;
+  padding:clamp(16px,2vw,26px);
+  background:linear-gradient(180deg,transparent,rgba(5,18,31,.86) 62%)}
+.gal-cap b{font-family:var(--display);font-weight:400;font-size:clamp(1.05rem,1.7vw,1.5rem);color:#f8f5ee}
+.gal-cap span{font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:#93e6f2}
+@media(max-width:900px){
+  .gal{grid-template-columns:repeat(2,1fr)}
+  .gal-item,.gal-item--wide,.gal-item--full{grid-column:span 2;aspect-ratio:16/10}
+}
+
 /* ── industries: typical-investment cards ──────────── */
-.ind-block + .ind-block{margin-top:clamp(48px,7vw,92px);padding-top:clamp(48px,7vw,92px);border-top:1px solid var(--rule)}
-.ind-name{color:var(--accent);font-size:clamp(1.9rem,4vw,3.2rem)}
+.ind-kind{display:inline-flex;align-items:center;gap:.75em;font-size:.6rem;letter-spacing:.24em;
+  text-transform:uppercase;font-weight:600;color:var(--accent)}
+.ind-kind::before{content:"";width:28px;height:1px;background:currentColor;opacity:.7}
+.ind-name{color:var(--accent);font-size:clamp(1.9rem,4vw,3.2rem);margin-top:.3em}
+.ind-name em{font-style:italic}
 .ind-head p{color:var(--mute);margin-top:.6em;max-width:52ch}
+/* each industry carries its own colour so the page stops reading as one flat sheet */
+.ind-block--beauty .ind-name,.ind-block--beauty .ind-kind{color:var(--accent-2)}
+.ind-block--auto .ind-name,.ind-block--auto .ind-kind{color:var(--accent)}
+.ind-block--home .ind-name,.ind-block--home .ind-kind{color:var(--accent-3)}
+.ind-block--beauty .ind-incl li::before{color:var(--accent-2)}
+.ind-block--home .ind-incl li::before{color:var(--accent-3)}
 .ind-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(clamp(250px,30%,300px),1fr));gap:18px;margin-top:clamp(26px,3vw,42px)}
 .ind-card{border:1px solid var(--rule);border-radius:16px;padding:clamp(24px,2.4vw,32px);display:flex;flex-direction:column;
   background:linear-gradient(160deg,color-mix(in srgb,var(--bg-2) 55%,transparent),transparent);
@@ -299,6 +334,10 @@
 .ind-project .l,.ind-monthly .l{display:block;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mute);margin-bottom:.3em}
 .ind-project .amt{font-family:var(--display);font-size:clamp(1.9rem,2.8vw,2.5rem);color:var(--fg);line-height:1.05}
 .ind-monthly{margin-top:16px;font-size:1.02rem;color:#1f7a5a;font-weight:600}
+/* the green has to survive both grounds — .light last so it wins inside a
+   light section on a dark page */
+.dark .ind-monthly{color:#4cbf92}
+.light .ind-monthly{color:#1f7a5a}
 .ind-incl{list-style:none;margin:20px 0 0;padding:18px 0 0;border-top:1px solid var(--rule);display:grid;gap:9px}
 .ind-incl li{font-size:.86rem;color:var(--mute-2);display:flex;gap:.6em;align-items:flex-start}
 .ind-incl li::before{content:"✓";color:var(--accent);font-weight:600;font-size:.85em;margin-top:.05em}

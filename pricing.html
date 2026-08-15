@@ -31,7 +31,7 @@
     <div class="menu">
       <a href="index.html">Home</a>
       <a href="services.html">Services</a>
-      <a href="build.html">Build</a>
+      <a href="build.html">Gallery</a>
       <a href="pricing.html" aria-current="page">Industries</a>
       <a href="about.html">Studio</a>
       <a href="mailto:hello@walshdigitalco.com" class="nav-cta">Start a project</a>
@@ -41,7 +41,7 @@
 
 <main id="main">
 
-  <header class="phead light">
+  <header class="phead aurora">
     <div class="wrap phead-in load">
       <div>
         <span class="tag">Industries</span>
@@ -58,8 +58,9 @@
   <section class="sec light">
     <div class="wrap">
 
-      <div class="ind-block rise">
+      <div class="ind-block ind-block--beauty rise">
         <div class="ind-head">
+          <span class="ind-kind">Industry 01</span>
           <h2 class="ind-name">Beauty &amp; Wellness</h2>
           <p>For businesses that grow through appointments and referrals — where how you look <em>is</em> the product.</p>
         </div>
@@ -88,8 +89,15 @@
         </div>
       </div>
 
-      <div class="ind-block rise">
+    </div>
+  </section>
+
+  <section class="sec sec--rule aurora">
+    <div class="wrap">
+
+      <div class="ind-block ind-block--auto rise">
         <div class="ind-head">
+          <span class="ind-kind">Industry 02</span>
           <h2 class="ind-name">Automotive</h2>
           <p>For shops whose work sells on visuals — before-and-afters, finishes, and a phone that keeps ringing.</p>
         </div>
@@ -118,8 +126,15 @@
         </div>
       </div>
 
-      <div class="ind-block rise">
+    </div>
+  </section>
+
+  <section class="sec sec--rule light">
+    <div class="wrap">
+
+      <div class="ind-block ind-block--home rise">
         <div class="ind-head">
+          <span class="ind-kind">Industry 03</span>
           <h2 class="ind-name">Home Services</h2>
           <p>For trades and contractors — where the whole game is more booked jobs from your service area.</p>
         </div>
@@ -151,13 +166,57 @@
     </div>
   </section>
 
+  <section class="sec sec--rule" id="estimate">
+    <div class="wrap">
+      <div class="ind-head rise" style="margin-bottom:clamp(28px,3.4vw,46px)">
+        <span class="ind-kind">Build it yourself</span>
+        <h2 class="ind-name">Or price it <em class="ital">line by line</em>.</h2>
+        <p>Pick the pieces and the estimate builds itself — no form, no gate, no "contact us for a quote".</p>
+      </div>
+      <div class="build">
+        <div class="rise">
+          <div>
+            <span class="glbl">Establish · one-time projects</span>
+            <div class="deck" id="deckOnce"></div>
+          </div>
+          <div style="margin-top:32px">
+            <span class="glbl">Maintain · every month</span>
+            <div class="deck" id="deckMonthly"></div>
+          </div>
+
+          <div style="margin-top:38px;padding-top:26px;border-top:1px solid var(--rule)">
+            <span class="tag">Two or more</span>
+            <p class="small" style="margin-top:.8em;max-width:46ch">
+              Take more than one one-time project together and <strong style="color:var(--fg)">10% comes off the whole build</strong> —
+              the pieces are cheaper to make when they're made at once.
+            </p>
+          </div>
+
+          <p class="small" style="margin-top:26px;max-width:46ch">
+            Nothing here is a contract. It's a starting shape — the real proposal follows a fifteen-minute conversation.
+          </p>
+        </div>
+
+        <aside class="est glass rise" data-d="1">
+          <span class="tag">Your estimate</span>
+          <div id="estLines" style="margin-top:20px"></div>
+          <div class="est-empty" id="estEmpty">Select a service to begin.</div>
+          <a href="mailto:hello@walshdigitalco.com" id="estSend" class="btn" style="margin-top:26px;width:100%;justify-content:center">
+            Send my selection <span class="ar" aria-hidden="true">↗</span>
+          </a>
+          <p class="small" style="margin-top:16px;font-size:.78rem">Opens your mail app with the selection filled in.</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
   <section class="sec sec--rule aurora" style="text-align:center">
     <div class="wrap">
       <span class="tag rise">Not sure where you land?</span>
       <h2 class="d3 rise" data-d="1" style="max-width:24ch;margin:.4em auto 0">Tell me your business — I'll tell you the number.</h2>
       <div class="rise" data-d="2" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:2.2em">
         <a href="mailto:hello@walshdigitalco.com" class="btn">Email Phillip <span class="ar" aria-hidden="true">↗</span></a>
-        <a href="build.html" class="btn btn--line">Build a rough estimate</a>
+        <a href="build.html" class="btn btn--line">See the work</a>
       </div>
     </div>
   </section>
@@ -181,7 +240,7 @@
         <h4>Pages</h4>
         <ul>
           <li><a href="services.html">Services</a></li>
-          <li><a href="build.html">Build</a></li>
+          <li><a href="build.html">Gallery</a></li>
           <li><a href="pricing.html">Industries</a></li>
           <li><a href="about.html">Studio</a></li>
         </ul>
