@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">
+  <defs>
+    <linearGradient id="sgA" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#17324a"/><stop offset="1" stop-color="#08131d"/></linearGradient>
+    <linearGradient id="sgB" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3fc1d6"/><stop offset="1" stop-color="#12657a"/></linearGradient>
+    <linearGradient id="sgC" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#cf4b86"/><stop offset="1" stop-color="#7a2450"/></linearGradient>
+    <linearGradient id="sgD" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#dda32a"/><stop offset="1" stop-color="#8a5f0e"/></linearGradient>
+    <linearGradient id="sgSheen" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0"/><stop offset=".5" stop-color="#ffffff" stop-opacity=".26"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="900" fill="#f8f5ee"/>
+
+  <!-- profile header -->
+  <circle cx="92" cy="92" r="46" fill="#12293f"/>
+  <text x="92" y="106" text-anchor="middle" font-family="Georgia,serif" font-size="40" fill="#4fd2e6">C</text>
+  <text x="164" y="80" font-size="32" font-weight="700" fill="#0a2138">@coastaldetailco</text>
+  <text x="164" y="120" font-size="25" fill="#5d6d7e">Miami Beach &#183; ceramic &amp; PPF</text>
+  <rect x="944" y="62" width="200" height="60" rx="30" fill="#0a2138"/>
+  <text x="1044" y="100" text-anchor="middle" font-size="24" font-weight="700" letter-spacing="2" fill="#f8f5ee">FOLLOW</text>
+
+  <g font-family="Georgia,serif" font-size="34" fill="#0a2138">
+    <text x="60" y="200">184</text><text x="260" y="200">12.4K</text><text x="500" y="200">96</text>
+  </g>
+  <g font-size="21" letter-spacing="3" fill="#7a8794">
+    <text x="62" y="234">POSTS</text><text x="262" y="234">FOLLOWERS</text><text x="502" y="234">REELS</text>
+  </g>
+  <line x1="56" y1="268" x2="1144" y2="268" stroke="#0a2138" stroke-opacity=".14"/>
+
+  <!-- 3 x 3 content grid -->
+  <!-- row 1 -->
+  <g>
+    <rect x="56" y="300" width="348" height="184" rx="10" fill="url(#sgA)"/>
+    <polygon points="56,440 200,300 300,300 56,484" fill="url(#sgSheen)"/>
+    <rect x="76" y="436" width="150" height="34" rx="17" fill="#000" fill-opacity=".45"/>
+    <text x="151" y="459" text-anchor="middle" font-size="19" font-weight="700" letter-spacing="2.4" fill="#8fd6e6">BEFORE / AFTER</text>
+
+    <rect x="426" y="300" width="348" height="184" rx="10" fill="url(#sgB)"/>
+    <circle cx="600" cy="392" r="34" fill="#ffffff" fill-opacity=".9"/>
+    <polygon points="590,375 622,392 590,409" fill="#0b3f4c"/>
+    <text x="446" y="466" font-size="20" font-weight="700" letter-spacing="2" fill="#eafaff">&#9654; 82.4K</text>
+
+    <rect x="796" y="300" width="348" height="184" rx="10" fill="url(#sgC)"/>
+    <rect x="816" y="436" width="112" height="34" rx="17" fill="#000" fill-opacity=".4"/>
+    <text x="872" y="459" text-anchor="middle" font-size="19" font-weight="700" letter-spacing="2.4" fill="#ffe4f0">TINT</text>
+  </g>
+  <!-- row 2 -->
+  <g>
+    <rect x="56" y="500" width="348" height="184" rx="10" fill="url(#sgD)"/>
+    <rect x="76" y="636" width="176" height="34" rx="17" fill="#000" fill-opacity=".4"/>
+    <text x="164" y="659" text-anchor="middle" font-size="19" font-weight="700" letter-spacing="2.4" fill="#fff3d6">INTERIOR DETAIL</text>
+
+    <rect x="426" y="500" width="348" height="184" rx="10" fill="url(#sgA)"/>
+    <polygon points="426,640 570,500 670,500 426,684" fill="url(#sgSheen)"/>
+    <circle cx="600" cy="592" r="34" fill="#ffffff" fill-opacity=".9"/>
+    <polygon points="590,575 622,592 590,609" fill="#0b3f4c"/>
+    <text x="446" y="666" font-size="20" font-weight="700" letter-spacing="2" fill="#cfe6ee">&#9654; 41.9K</text>
+
+    <rect x="796" y="500" width="348" height="184" rx="10" fill="url(#sgB)"/>
+    <rect x="816" y="636" width="130" height="34" rx="17" fill="#000" fill-opacity=".4"/>
+    <text x="881" y="659" text-anchor="middle" font-size="19" font-weight="700" letter-spacing="2.4" fill="#eafaff">9H COAT</text>
+  </g>
+  <!-- row 3 -->
+  <g>
+    <rect x="56" y="700" width="348" height="150" rx="10" fill="url(#sgC)"/>
+    <rect x="426" y="700" width="348" height="150" rx="10" fill="url(#sgD)"/>
+    <rect x="796" y="700" width="348" height="150" rx="10" fill="url(#sgA)"/>
+    <polygon points="796,840 940,700 1040,700 796,884" fill="url(#sgSheen)"/>
+  </g>
+</svg>
