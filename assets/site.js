@@ -99,7 +99,8 @@
         var from = window.pageYOffset;
         var to = top + span * 0.76;            // lands where the reveal is offered
         if (to <= from) return;
-        var dur = Math.min(6200, Math.max(2600, (to - from) * 1.7));
+        // slow enough to actually watch the film play, not just jump to the end
+        var dur = Math.min(19000, Math.max(9500, (to - from) * 8));
         var t0 = null;
         auto = {};
         var mine = auto;
