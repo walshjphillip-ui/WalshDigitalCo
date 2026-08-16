@@ -29,11 +29,48 @@
   "email": "hello@walshdigitalco.com",
   "telephone": "+19254945015",
   "makesOffer": [
-    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Website design and development" } },
-    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Video and photography" } },
-    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Brand identity" } },
-    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Social media management" } },
-    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Local SEO and Google Business Profile" } }
+    {
+      "@type": "Offer",
+      "name": "Foundation",
+      "description": "Custom website, brand identity and foundational SEO, hosted and maintained.",
+      "url": "https://walshdigitalco.com/services.html",
+      "priceSpecification": {
+        "@type": "UnitPriceSpecification",
+        "price": "199.00",
+        "priceCurrency": "USD",
+        "billingIncrement": 1,
+        "unitCode": "MON"
+      },
+      "itemOffered": { "@type": "Service", "name": "Digital presence subscription — Foundation" }
+    },
+    {
+      "@type": "Offer",
+      "name": "Growth",
+      "description": "Everything in Foundation, plus 15 short-form videos a month, managed social, and full local SEO.",
+      "url": "https://walshdigitalco.com/services.html",
+      "priceSpecification": {
+        "@type": "UnitPriceSpecification",
+        "price": "499.00",
+        "priceCurrency": "USD",
+        "billingIncrement": 1,
+        "unitCode": "MON"
+      },
+      "itemOffered": { "@type": "Service", "name": "Digital presence subscription — Growth" }
+    },
+    {
+      "@type": "Offer",
+      "name": "Premium",
+      "description": "Everything in Growth, plus 30 short-form videos a month, industry-specific website features, marketing automation and priority support.",
+      "url": "https://walshdigitalco.com/services.html",
+      "priceSpecification": {
+        "@type": "UnitPriceSpecification",
+        "price": "799.00",
+        "priceCurrency": "USD",
+        "billingIncrement": 1,
+        "unitCode": "MON"
+      },
+      "itemOffered": { "@type": "Service", "name": "Digital presence subscription — Premium" }
+    }
   ]
 }
 </script>
@@ -56,8 +93,8 @@
     <div class="menu">
       <a href="index.html" aria-current="page">Home</a>
       <a href="services.html">Services</a>
-      <a href="build.html">Gallery</a>
       <a href="pricing.html">Industries</a>
+      <a href="build.html">Gallery</a>
       <a href="about.html">Studio</a>
       <a href="mailto:hello@walshdigitalco.com" class="nav-cta">Start a project</a>
     </div>
@@ -221,20 +258,15 @@
   <section class="tight dark aurora">
     <div class="wrap">
       <div class="glass band-glass">
-      <h2 class="d3 rise" style="max-width:13ch;color:var(--accent)">Establish it, <em style="font-style:italic">then keep it alive.</em></h2>
+      <h2 class="d3 rise" style="max-width:13ch;color:var(--accent)">One partnership, <em style="font-style:italic">three levels.</em></h2>
       <div class="rise" data-d="1">
-        <span class="svc-kind" style="color:var(--accent)">Establish &middot; built once</span>
+        <span class="svc-kind" style="color:var(--accent)">Monthly &middot; no setup fees</span>
         <ul class="rlist" style="margin-top:14px">
-          <li style="padding-top:0"><b>01</b><span><strong>Web</strong> — sites built to convert, structured for search from day one.</span></li>
-          <li><b>02</b><span><strong>Brand</strong> — the identity that ties every channel together.</span></li>
-          <li style="border-bottom:0"><b>03</b><span><strong>Film &amp; photo</strong> — your launch library, shot for how customers meet you.</span></li>
+          <li style="padding-top:0"><b>$199</b><span><strong>Foundation</strong> — the website, the brand and the search basics, built and looked after.</span></li>
+          <li><b>$499</b><span><strong>Growth</strong> — everything above, plus 15 videos a month, social run for you and full local SEO.</span></li>
+          <li style="border-bottom:0"><b>$799</b><span><strong>Premium</strong> — 30 videos a month, features built for your trade, and the whole thing handled.</span></li>
         </ul>
-        <span class="svc-kind" style="color:var(--accent);margin-top:30px">Maintain &middot; every month</span>
-        <ul class="rlist" style="margin-top:14px">
-          <li style="padding-top:0"><b>04</b><span><strong>Social &amp; content</strong> — new work made and posted, without you thinking about it.</span></li>
-          <li style="border-bottom:0"><b>05</b><span><strong>Local search</strong> — Google profile and reviews, tracked monthly.</span></li>
-        </ul>
-        <a href="services.html" class="ulink" style="margin-top:26px">See all services <span aria-hidden="true">↗</span></a>
+        <a href="services.html" class="ulink" style="margin-top:26px">Compare the plans <span aria-hidden="true">↗</span></a>
       </div>
       </div>
     </div>
@@ -259,8 +291,8 @@
         <h4>Pages</h4>
         <ul>
           <li><a href="services.html">Services</a></li>
-          <li><a href="build.html">Gallery</a></li>
           <li><a href="pricing.html">Industries</a></li>
+          <li><a href="build.html">Gallery</a></li>
           <li><a href="about.html">Studio</a></li>
         </ul>
       </div>

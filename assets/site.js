@@ -146,47 +146,61 @@
     }
   }
 
-  /* ── package builder (pricing page only) ──────────── */
-  var deckOnce = document.getElementById('deckOnce');
-  if (!deckOnce) return;
+  /* ── plan finder (industries page only) ─────────────
+     two single-choice questions. the second picks the
+     plan outright; the first only colours the wording.
+     ─────────────────────────────────────────────────── */
+  var deckTrade = document.getElementById('deckTrade');
+  if (!deckTrade) return;
 
-  var BUNDLE_PCT = 10;
-  var ONCE = [
-    { key: 'website', name: 'Website',             price: 2400 },
-    { key: 'brand',   name: 'Brand identity',      price: 1200 },
-    { key: 'film',    name: 'Video & photography', price: 1600 }
+  var TRADES = [
+    { key: 'beauty', name: 'Beauty & wellness', extra: 'booking links and service menus' },
+    { key: 'auto',   name: 'Automotive',        extra: 'custom quote generation and job galleries' },
+    { key: 'home',   name: 'Home services',     extra: 'estimate forms and service-area pages' },
+    { key: 'other',  name: 'Something else',    extra: 'the workflow your trade actually runs on' }
   ];
-  var MONTHLY = [
-    { key: 'social', name: 'Social & content',         price: 600 },
-    { key: 'seo',    name: 'Google profile & local SEO', price: 350 }
+  var LEVELS = [
+    { key: 'found', name: 'Just the site and brand',    plan: 'Foundation', price: 199,
+      line: 'The presence, built and looked after — without ongoing content.' },
+    { key: 'grow',  name: 'Site plus social and video', plan: 'Growth',     price: 499,
+      line: 'The studio runs your website, search and social — 15 videos a month.' },
+    { key: 'prem',  name: 'Everything, hands-off',      plan: 'Premium',    price: 799,
+      line: 'The whole presence handled — 30 videos a month, and ' }
   ];
-  var picks = { website: true, brand: false, film: false, social: true, seo: false };
 
-  var deckMon = document.getElementById('deckMonthly');
-  var linesEl = document.getElementById('estLines');
-  var emptyEl = document.getElementById('estEmpty');
-  var sendEl  = document.getElementById('estSend');
+  var deckLevel = document.getElementById('deckLevel');
+  var outEl     = document.getElementById('planOut');
+  var emptyEl   = document.getElementById('planEmpty');
+  var sendEl    = document.getElementById('planSend');
+
+  var chosen = { trade: null, level: null };
 
   function money(n) { return '$' + n.toLocaleString('en-US'); }
 
-  function makeChip(s, suffix) {
-    var b = document.createElement('button');
-    b.type = 'button';
-    b.className = 'chip' + (picks[s.key] ? ' on' : '');
-    b.setAttribute('aria-pressed', picks[s.key] ? 'true' : 'false');
-    b.innerHTML = '<span class="tick" aria-hidden="true">&#10003;</span>' + s.name +
-                  ' <span class="pr">' + money(s.price) + suffix + '</span>';
-    b.addEventListener('click', function () {
-      picks[s.key] = !picks[s.key];
-      b.classList.toggle('on', picks[s.key]);
-      b.setAttribute('aria-pressed', picks[s.key] ? 'true' : 'false');
-      render();
+  /* one deck = one answer, so selecting clears its siblings */
+  function makeDeck(deck, items, slot) {
+    items.forEach(function (item) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'chip';
+      b.setAttribute('aria-pressed', 'false');
+      b.innerHTML = '<span class="tick" aria-hidden="true">&#10003;</span>' + item.name;
+      b.addEventListener('click', function () {
+        chosen[slot] = item;
+        Array.prototype.forEach.call(deck.children, function (sib) {
+          sib.classList.remove('on');
+          sib.setAttribute('aria-pressed', 'false');
+        });
+        b.classList.add('on');
+        b.setAttribute('aria-pressed', 'true');
+        render();
+      });
+      deck.appendChild(b);
     });
-    return b;
   }
 
-  ONCE.forEach(function (s) { deckOnce.appendChild(makeChip(s, '')); });
-  MONTHLY.forEach(function (s) { deckMon.appendChild(makeChip(s, '/mo')); });
+  makeDeck(deckTrade, TRADES, 'trade');
+  makeDeck(deckLevel, LEVELS, 'level');
 
   function row(label, value, cls) {
     return '<div class="row ' + (cls || '') + '"><span class="l">' + label +
@@ -194,37 +208,32 @@
   }
 
   function render() {
-    var onceSel = ONCE.filter(function (s) { return picks[s.key]; });
-    var monSel  = MONTHLY.filter(function (s) { return picks[s.key]; });
-    var onceSum = onceSel.reduce(function (a, s) { return a + s.price; }, 0);
-    var monSum  = monSel.reduce(function (a, s) { return a + s.price; }, 0);
-    var disc    = onceSel.length >= 2 ? Math.round(onceSum * BUNDLE_PCT / 100) : 0;
+    var t = chosen.trade, l = chosen.level;
 
-    if (!onceSel.length && !monSel.length) {
-      linesEl.innerHTML = '';
+    if (!t || !l) {
+      outEl.innerHTML = '';
       emptyEl.style.display = 'block';
-    } else {
-      emptyEl.style.display = 'none';
-      var h = '';
-      if (onceSel.length) {
-        h += row('One-time subtotal', money(onceSum));
-        if (disc) h += row('Bundle saving (' + BUNDLE_PCT + '%)', '−' + money(disc), 'save');
-        h += row('Project total', money(onceSum - disc), 'total');
-      }
-      if (monSum) {
-        h += row(onceSel.length ? 'Then monthly' : 'Monthly', money(monSum) + '/mo',
-                 onceSel.length ? '' : 'total');
-      }
-      linesEl.innerHTML = h;
+      sendEl.setAttribute('href', 'mailto:hello@walshdigitalco.com');
+      return;
     }
+    emptyEl.style.display = 'none';
 
-    var list = onceSel.map(function (s) { return s.name + ' (' + money(s.price) + ')'; })
-      .concat(monSel.map(function (s) { return s.name + ' (' + money(s.price) + '/mo)'; }));
-    var body = 'Hi Phillip, these are the services I am interested in:\n\n' +
-               list.map(function (p) { return '• ' + p; }).join('\n') +
-               '\n\nSent from walshdigitalco.com';
+    /* premium is the only tier that carries trade-specific build work */
+    var blurb = l.key === 'prem' ? l.line + t.extra + '.' : l.line;
+
+    outEl.innerHTML =
+      row('Business', t.name) +
+      row('Recommended', l.plan) +
+      row('Your plan', money(l.price) + '/mo', 'total') +
+      '<p class="small" style="margin-top:14px">' + blurb + '</p>';
+
+    var body = 'Hi Phillip,\n\n' +
+               'Business type: ' + t.name + '\n' +
+               'Looking for: ' + l.name + '\n' +
+               'Suggested plan: ' + l.plan + ' (' + money(l.price) + '/mo)\n\n' +
+               'Sent from walshdigitalco.com';
     sendEl.setAttribute('href', 'mailto:hello@walshdigitalco.com?subject=' +
-      encodeURIComponent('Project enquiry — Walsh Digital Co.') +
+      encodeURIComponent(l.plan + ' plan enquiry — Walsh Digital Co.') +
       '&body=' + encodeURIComponent(body));
   }
 
