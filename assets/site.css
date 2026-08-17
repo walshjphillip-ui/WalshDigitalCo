@@ -329,6 +329,83 @@
   .plans{grid-template-columns:1fr;max-width:520px;margin-inline:auto}
 }
 
+/* ── testimonials ────────────────────────────────────
+   styling is ready; the markup on the homepage stays
+   commented out until there are real quotes to put in
+   it. never ship invented ones.
+   ─────────────────────────────────────────────────── */
+.quotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(clamp(260px,30%,340px),1fr));
+  gap:clamp(18px,2.4vw,32px);margin-top:clamp(30px,3.6vw,48px)}
+.quote{display:flex;flex-direction:column;border:1px solid var(--rule);border-radius:16px;
+  padding:clamp(24px,2.4vw,34px);
+  background:linear-gradient(160deg,color-mix(in srgb,var(--bg-2) 55%,transparent),transparent);
+  transition:transform .45s cubic-bezier(.2,.8,.2,1),border-color .45s}
+.quote:hover{transform:translateY(-6px);border-color:var(--rule-2)}
+.quote-mark{font-family:var(--display);font-size:2.6rem;line-height:.7;color:var(--accent);
+  opacity:.55;margin-bottom:.35em}
+.quote blockquote{margin:0;font-family:var(--display);font-weight:400;
+  font-size:clamp(1.08rem,1.6vw,1.28rem);line-height:1.45;color:var(--fg)}
+.quote figcaption{margin-top:auto;padding-top:20px;font-size:.84rem;color:var(--mute)}
+.quote figcaption b{display:block;color:var(--fg);font-weight:600;font-size:.9rem;
+  margin-bottom:.15em}
+
+/* ── legal prose (privacy) ───────────────────────────
+   one narrow column. nothing clever — it exists to be
+   read straight down.
+   ─────────────────────────────────────────────────── */
+.legal{max-width:66ch}
+.legal-date{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mute);
+  padding-bottom:22px;margin-bottom:34px;border-bottom:1px solid var(--rule)}
+.legal h2{font-size:clamp(1.25rem,2.1vw,1.6rem);color:var(--fg);margin-top:2.4em}
+.legal h2:first-of-type{margin-top:0}
+.legal p{color:var(--mute);font-size:.98rem;line-height:1.7;margin-top:.85em}
+.legal strong{color:var(--fg);font-weight:600}
+.legal a{color:var(--accent);text-decoration:none;
+  border-bottom:1px solid color-mix(in srgb,var(--accent) 40%,transparent)}
+.legal a:hover{border-bottom-color:var(--accent)}
+
+/* ── 404 ─────────────────────────────────────────────
+   a wrong turn should still look like the studio.
+   ─────────────────────────────────────────────────── */
+.nf{min-height:calc(100vh - var(--nav-h));display:flex;align-items:center}
+.nf-in{width:100%}
+.nf-links{list-style:none;margin:clamp(44px,6vw,72px) 0 0;padding:0;display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(clamp(200px,22%,260px),1fr));
+  gap:clamp(14px,1.6vw,22px)}
+.nf-links a{display:block;padding-top:15px;border-top:1px solid var(--rule-2);
+  text-decoration:none;transition:border-color .35s}
+.nf-links a:hover{border-top-color:var(--accent)}
+.nf-links b{display:block;font-family:var(--display);font-weight:500;font-size:1.12rem;
+  color:var(--fg);transition:color .3s}
+.nf-links a:hover b{color:var(--accent)}
+.nf-links span{display:block;margin-top:.35em;font-size:.84rem;color:var(--mute);line-height:1.45}
+
+/* ── faq ─────────────────────────────────────────────
+   native details/summary — no javascript, keyboard and
+   screen-reader behaviour for free.
+   ─────────────────────────────────────────────────── */
+.faq{margin-top:clamp(28px,3.4vw,46px);border-top:1px solid var(--rule)}
+.faq-i{border-bottom:1px solid var(--rule)}
+.faq-i summary{cursor:pointer;list-style:none;padding:clamp(18px,2vw,24px) 46px clamp(18px,2vw,24px) 0;
+  position:relative;font-family:var(--display);font-weight:500;
+  font-size:clamp(1.05rem,1.7vw,1.3rem);color:var(--fg);line-height:1.35;
+  transition:color .3s}
+.faq-i summary::-webkit-details-marker{display:none}
+.faq-i summary:hover{color:var(--accent)}
+.faq-i summary::after{content:"";position:absolute;right:8px;top:50%;width:13px;height:13px;
+  margin-top:-7px;
+  background:
+    linear-gradient(currentColor,currentColor) center/100% 1.5px no-repeat,
+    linear-gradient(currentColor,currentColor) center/1.5px 100% no-repeat;
+  color:var(--accent);transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.faq-i[open] summary::after{transform:rotate(90deg)}
+.faq-i[open] summary{color:var(--accent)}
+.faq-a{padding:0 clamp(20px,6vw,80px) clamp(20px,2.2vw,28px) 0}
+.faq-a p{color:var(--mute);font-size:.95rem;line-height:1.65;max-width:64ch}
+.faq-a p + p{margin-top:.9em}
+.faq-a strong{color:var(--fg);font-weight:600}
+@media (prefers-reduced-motion:reduce){.faq-i summary::after{transition:none}}
+
 /* the exception route, signposted where the three plans are still on screen */
 .plans-alt{text-align:center;margin-top:clamp(26px,3vw,40px);font-size:.95rem;
   color:var(--mute);max-width:52ch;margin-inline:auto;line-height:1.6}
