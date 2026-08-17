@@ -38,7 +38,7 @@
     var vid = document.getElementById('filmVid');
     var revealBtn = document.getElementById('filmReveal');
     var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
-    var revealed = false, fTick = false, vidReady = false;
+    var revealed = false, fTick = false, vidReady = false, autoPlaying = false, playedOut = false;
 
     function sub(p, a, b) { return Math.min(1, Math.max(0, (p - a) / (b - a))); }
     function ease(t) { return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; }
@@ -60,7 +60,14 @@
       film.style.setProperty('--copyIn', copyIn.toFixed(3));
       film.classList.toggle('copy-gone', copyIn < 0.05);
 
-      if (vidReady && vid.duration) {                    // scrub, never play
+      // scrolling back up hands control to the scrub again
+      if (prog < 0.60) playedOut = false;
+
+      // scrub on manual scroll — but never while the film is playing itself, and
+      // never once it has played through. both cases end with the scrub and the
+      // playback fighting over currentTime, which drops the picture back to frame
+      // one at exactly the moment the reveal is being offered.
+      if (vidReady && vid.duration && !autoPlaying && !playedOut) {
         var vt = sub(prog, 0.06, 0.66) * (vid.duration - 0.05);
         if (Math.abs(vid.currentTime - vt) > 0.02) {
           try { vid.currentTime = vt; } catch (e) {}
@@ -78,40 +85,91 @@
       film.classList.toggle('is-after', p > 0.5);
     }
 
+    /* readiness has to be latched from several angles. with preload="auto" and a
+       warm cache, loadedmetadata can fire before this script is parsed — the lone
+       readyState check that used to back it up runs in the same tick and can still
+       read 0, leaving vidReady false for good and the film never scrubbing at all. */
     if (vid) {
-      vid.addEventListener('loadedmetadata', function () { vidReady = true; filmFrame(); });
-      if (vid.readyState >= 1) { vidReady = true; }
+      var markReady = function () {
+        if (vidReady) return;
+        vidReady = true;
+        filmFrame();
+      };
+      ['loadedmetadata', 'loadeddata', 'canplay', 'canplaythrough'].forEach(function (ev) {
+        vid.addEventListener(ev, markReady);
+      });
+      if (vid.readyState >= 1) markReady();
+      else vid.load();                 // nudge a source that never began loading
     }
-    /* "Watch the transformation" — drive the scroll to the reveal beat.
-       Any real input from the visitor cancels it, so they never feel trapped. */
+    /* "Watch the transformation" — let the film play and have the page follow it.
+       This used to inch the scroll along an ease-in-out cubic and let the scrub
+       seek from there, which stuttered badly: every currentTime assignment decodes
+       from the nearest keyframe, and at one seek per frame the seeks queue up until
+       the picture looks frozen. It also opened almost flat — about 4px in the first
+       second — so nothing visibly happened for nearly three seconds after the click.
+       Playing is the one thing a decoder is quick at, so now the video drives and
+       the scroll tracks it. Any real input from the visitor cancels it. */
     var playBtn = document.getElementById('filmPlay');
     if (playBtn) {
       var auto = null;
-      function stopAuto() { auto = null; }
+      function stopAuto() {
+        auto = null;
+        if (autoPlaying) { autoPlaying = false; try { vid.pause(); } catch (e) {} }
+      }
       ['wheel', 'touchstart', 'keydown', 'mousedown'].forEach(function (ev) {
         window.addEventListener(ev, function (e) {
           if (auto && !(e.target && e.target.closest && e.target.closest('.film-play'))) stopAuto();
         }, { passive: true });
       });
-      playBtn.addEventListener('click', function () {
-        var top = film.getBoundingClientRect().top + window.pageYOffset;
-        var span = film.offsetHeight - window.innerHeight;
-        var from = window.pageYOffset;
-        var to = top + span * 0.76;            // lands where the reveal is offered
-        if (to <= from) return;
-        // slow enough to actually watch the film play, not just jump to the end
-        var dur = Math.min(19000, Math.max(9500, (to - from) * 8));
-        var t0 = null;
-        auto = {};
-        var mine = auto;
+
+      function filmTop()  { return film.getBoundingClientRect().top + window.pageYOffset; }
+      function filmSpan() { return film.offsetHeight - window.innerHeight; }
+      // where the page should sit for a given moment of the film
+      function yForTime(t) {
+        var frac = vid.duration ? t / (vid.duration - 0.05) : 0;
+        return filmTop() + filmSpan() * (0.06 + Math.min(1, Math.max(0, frac)) * 0.60);
+      }
+      // short eased move, used to open and to close — starts immediately, unlike
+      // the cubic ease-in it replaces
+      function glide(to, ms, then) {
+        var from = window.pageYOffset, t0 = null, mine = auto;
         requestAnimationFrame(function step(ts) {
-          if (auto !== mine) return;           // cancelled by the visitor
+          if (auto !== mine) return;
           if (t0 === null) t0 = ts;
-          var k = Math.min(1, (ts - t0) / dur);
-          var e = k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
-          window.scrollTo(0, from + (to - from) * e);
-          if (k < 1) requestAnimationFrame(step); else stopAuto();
+          var k = Math.min(1, (ts - t0) / ms);
+          window.scrollTo(0, from + (to - from) * (1 - Math.pow(1 - k, 3)));
+          if (k < 1) requestAnimationFrame(step); else if (then) then();
         });
+      }
+      function toReveal() {
+        autoPlaying = false;
+        playedOut = true;                       // the scrub keeps its hands off from here
+        try { vid.pause(); } catch (e) {}       // 'ended' does not always fire, so pause outright
+        glide(filmTop() + filmSpan() * 0.76, 1400, stopAuto);
+      }
+      function runFilm() {
+        var mine = auto;
+        autoPlaying = true;
+        var p = vid.play();
+        if (p && p.catch) p.catch(function () { autoPlaying = false; stopAuto(); });
+        requestAnimationFrame(function step() {
+          if (auto !== mine) return;
+          window.scrollTo(0, yForTime(vid.currentTime));
+          if (vid.ended || vid.currentTime >= vid.duration - 0.08) { toReveal(); return; }
+          requestAnimationFrame(step);
+        });
+      }
+
+      playBtn.addEventListener('click', function () {
+        auto = {};
+        function start() {
+          // already watched it through? just go to the reveal
+          if (vid.duration && vid.currentTime >= vid.duration - 0.12) { toReveal(); return; }
+          // skip the deliberate hold before the film starts, then hand over to playback
+          glide(yForTime(vid.currentTime), 420, runFilm);
+        }
+        if (vid.readyState >= 2) start();
+        else vid.addEventListener('canplay', start, { once: true });
       });
     }
 

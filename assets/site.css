@@ -329,6 +329,15 @@
   .plans{grid-template-columns:1fr;max-width:520px;margin-inline:auto}
 }
 
+/* the exception route, signposted where the three plans are still on screen */
+.plans-alt{text-align:center;margin-top:clamp(26px,3vw,40px);font-size:.95rem;
+  color:var(--mute);max-width:52ch;margin-inline:auto;line-height:1.6}
+.plans-alt a{color:var(--accent);text-decoration:none;padding-bottom:2px;
+  border-bottom:1px solid color-mix(in srgb,var(--accent) 45%,transparent);
+  transition:border-color .3s}
+.plans-alt a::after{content:" ↓"}
+.plans-alt a:hover{border-bottom-color:var(--accent)}
+
 /* ── plan comparison ─────────────────────────────────
    the detail, for whoever wants it. scrolls inside its
    own frame so the page body never moves sideways.
