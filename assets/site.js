@@ -149,7 +149,10 @@
   /* ── plan finder (industries page only) ─────────────
      two single-choice questions. the second picks the
      plan outright; the first only colours the wording.
+     each page feature is its own IIFE so an early return
+     from one can never swallow the ones after it.
      ─────────────────────────────────────────────────── */
+  (function () {
   var deckTrade = document.getElementById('deckTrade');
   if (!deckTrade) return;
 
@@ -238,4 +241,159 @@
   }
 
   render();
+  })();
+
+  /* ── build your own (plans page only) ───────────────
+     the exception path for businesses that already have
+     some of the pieces. prices the selection, then shows
+     honestly which of the three plans beats it — the
+     ladder is steep enough that it usually does.
+     ─────────────────────────────────────────────────── */
+  (function () {
+  var deck = document.getElementById('deckBuild');
+  if (!deck) return;
+
+  var SERVICES = [
+    { key: 'social',   name: 'Social media management', price: 299 },
+    { key: 'content',  name: 'Content creation',        price: 249 },
+    { key: 'website',  name: 'Website',                 price: 199 },
+    { key: 'seo',      name: 'SEO',                     price: 199 },
+    { key: 'branding', name: 'Branding',                price: 149 }
+  ];
+  /* taken together these price as a pair, not as two line items */
+  var PAIRS = [
+    { keys: ['social', 'content'], name: 'Social + content', price: 399 },
+    { keys: ['website', 'seo'],    name: 'Website + SEO',    price: 299 }
+  ];
+  var ALL = ['website', 'branding', 'seo', 'social', 'content'];
+  var PLANS = [
+    /* Foundation carries Basic SEO, not the standalone SEO service — so it must not
+       be offered as covering someone who explicitly asked for SEO. */
+    { name: 'Foundation', price: 199, covers: ['website', 'branding'],
+      extra: 'hosting, maintenance and lead forms' },
+    { name: 'Growth', price: 499, covers: ALL,
+      extra: '15 videos a month, Google Business Profile and monthly reporting' },
+    { name: 'Premium', price: 799, covers: ALL,
+      extra: '30 videos a month, industry-specific features and priority support' }
+  ];
+  var LABEL = { website: 'your website', branding: 'branding', seo: 'SEO',
+                social: 'social management', content: 'monthly content' };
+
+  var picks   = {};
+  var linesEl = document.getElementById('buildLines');
+  var emptyEl = document.getElementById('buildEmpty');
+  var nudgeEl = document.getElementById('buildNudge');
+  var sendEl  = document.getElementById('buildSend');
+
+  function money(n) { return '$' + n.toLocaleString('en-US'); }
+  function priceOf(k) {
+    for (var i = 0; i < SERVICES.length; i++) if (SERVICES[i].key === k) return SERVICES[i].price;
+    return 0;
+  }
+  function row(l, v, cls) {
+    return '<div class="row ' + (cls || '') + '"><span class="l">' + l +
+           '</span><span class="v">' + v + '</span></div>';
+  }
+  function list(arr) {
+    if (arr.length === 1) return arr[0];
+    return arr.slice(0, -1).join(', ') + ' and ' + arr[arr.length - 1];
+  }
+
+  SERVICES.forEach(function (s) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'chip';
+    b.setAttribute('aria-pressed', 'false');
+    b.innerHTML = '<span class="tick" aria-hidden="true">&#10003;</span>' + s.name +
+                  ' <span class="pr">' + money(s.price) + '/mo</span>';
+    b.addEventListener('click', function () {
+      picks[s.key] = !picks[s.key];
+      b.classList.toggle('on', picks[s.key]);
+      b.setAttribute('aria-pressed', picks[s.key] ? 'true' : 'false');
+      render();
+    });
+    deck.appendChild(b);
+  });
+
+  /* the cheapest plan that covers everything they picked — never a dearer
+     one, even where a dearer one would also fit. */
+  function nudge(keys, total) {
+    var fits = PLANS.filter(function (p) {
+      return keys.every(function (k) { return p.covers.indexOf(k) >= 0; });
+    });
+    if (!fits.length) return '';
+    var best = fits.reduce(function (a, b) { return b.price < a.price ? b : a; });
+    var gains = best.covers.filter(function (k) { return keys.indexOf(k) < 0; })
+                           .map(function (k) { return LABEL[k]; });
+    var adds = gains.length ? 'It adds ' + list(gains) + ', plus ' + best.extra + '.'
+                            : 'It also carries ' + best.extra + '.';
+    var head, body;
+
+    if (best.price < total) {
+      head = best.name + ' is ' + money(total - best.price) + ' less';
+      body = 'Everything you picked is already in it. ' + adds;
+    } else if (best.price === total) {
+      head = best.name + ' is the same price';
+      body = adds;
+    } else if (best.price - total <= 200) {
+      head = 'You\'re ' + money(best.price - total) + ' from ' + best.name;
+      body = adds;
+    } else {
+      return '';
+    }
+
+    var out = '<div class="nudge"><b>' + head + '</b><span>' + body + '</span>' +
+              '<a href="mailto:hello@walshdigitalco.com?subject=' +
+              encodeURIComponent(best.name + ' plan enquiry — Walsh Digital Co.') +
+              '" class="ulink">Switch to ' + best.name + ' <span aria-hidden="true">↗</span></a></div>';
+
+    /* if they have built past Premium, say so — it is still the honest cheaper option */
+    if (best.name === 'Growth' && total > 799) {
+      out += '<p class="nudge-2">Or Premium at ' + money(799) + '/mo — also less than your ' +
+             'selection, with 30 videos a month and industry-specific features.</p>';
+    }
+    return out;
+  }
+
+  function render() {
+    var chosen = SERVICES.filter(function (s) { return picks[s.key]; });
+
+    if (!chosen.length) {
+      linesEl.innerHTML = '';
+      nudgeEl.innerHTML = '';
+      emptyEl.style.display = 'block';
+      sendEl.setAttribute('href', 'mailto:hello@walshdigitalco.com');
+      return;
+    }
+    emptyEl.style.display = 'none';
+
+    var left = chosen.slice(), lines = [], total = 0, saved = 0;
+    PAIRS.forEach(function (p) {
+      if (!p.keys.every(function (k) { return picks[k]; })) return;
+      var full = p.keys.reduce(function (a, k) { return a + priceOf(k); }, 0);
+      lines.push([p.name, money(p.price)]);
+      saved += full - p.price;
+      total += p.price;
+      left = left.filter(function (s) { return p.keys.indexOf(s.key) < 0; });
+    });
+    left.forEach(function (s) { lines.push([s.name, money(s.price)]); total += s.price; });
+
+    var h = lines.map(function (l) { return row(l[0], l[1]); }).join('');
+    if (saved) h += row('Paired pricing', '−' + money(saved), 'save');
+    h += row('Your package', money(total) + '/mo', 'total');
+    linesEl.innerHTML = h;
+
+    nudgeEl.innerHTML = nudge(chosen.map(function (s) { return s.key; }), total);
+
+    var body = 'Hi Phillip, I built this package on the site:\n\n' +
+               lines.map(function (l) { return '• ' + l[0] + ' — ' + l[1] + '/mo'; }).join('\n') +
+               (saved ? '\n• Paired pricing — −' + money(saved) : '') +
+               '\n\nTotal: ' + money(total) + '/mo\n\nSent from walshdigitalco.com';
+    sendEl.setAttribute('href', 'mailto:hello@walshdigitalco.com?subject=' +
+      encodeURIComponent('Custom package — Walsh Digital Co.') +
+      '&body=' + encodeURIComponent(body));
+  }
+
+  render();
+  })();
 })();

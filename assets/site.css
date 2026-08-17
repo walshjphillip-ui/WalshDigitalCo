@@ -401,45 +401,36 @@
 .ind-block--beauty .ind-name,.ind-block--beauty .ind-kind{color:var(--accent-2)}
 .ind-block--auto .ind-name,.ind-block--auto .ind-kind{color:var(--accent)}
 .ind-block--home .ind-name,.ind-block--home .ind-kind{color:var(--accent-3)}
-.ind-block--beauty .ind-incl li::before{color:var(--accent-2)}
-.ind-block--home .ind-incl li::before{color:var(--accent-3)}
-.ind-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(clamp(250px,30%,300px),1fr));gap:18px;margin-top:clamp(26px,3vw,42px)}
-.ind-card{border:1px solid var(--rule);border-radius:16px;padding:clamp(24px,2.4vw,32px);display:flex;flex-direction:column;
-  background:linear-gradient(160deg,color-mix(in srgb,var(--bg-2) 55%,transparent),transparent);
-  transition:transform .4s cubic-bezier(.2,.8,.2,1),box-shadow .4s,border-color .4s}
-.ind-card:hover{transform:translateY(-6px);border-color:var(--rule-2);box-shadow:0 30px 60px -40px rgba(2,12,24,.4)}
-.ind-card h3{font-size:clamp(1.4rem,2vw,1.8rem)}
-.ind-desc{color:var(--mute);font-size:.94rem;margin-top:.5em;line-height:1.5}
-/* with no heading above it the description is the card's lead — give it the weight */
-.ind-card > .ind-desc:first-child{color:var(--fg);font-size:1.06rem;line-height:1.45;
-  margin-top:0;min-height:2.9em}
-/* the plan this size of business usually lands on */
-.ind-plan{display:block;margin-top:22px;padding:16px 18px;border-radius:12px;
-  border:1px solid var(--rule);text-decoration:none;color:inherit;
-  background:color-mix(in srgb,var(--bg-2) 45%,transparent);
-  transition:border-color .35s,background .35s}
-.ind-plan:hover{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 8%,transparent)}
-.ind-plan .l{display:block;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--mute);margin-bottom:.45em}
-.ind-plan .nm{font-family:var(--display);font-size:clamp(1.5rem,2.2vw,1.9rem);color:var(--fg);
-  line-height:1.05;display:block}
-.ind-plan .amt{display:block;margin-top:.25em;font-size:1.02rem;font-weight:600;color:var(--accent)}
-.ind-plan .amt i{font-style:normal;font-weight:400;font-size:.82rem;color:var(--mute)}
-.ind-plan--feat{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,transparent)}
-/* premium capabilities — the functional pieces, as an editorial rail
-   rather than another set of boxes. the two Phillip leads with are keyed. */
-.cap-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(clamp(220px,26%,290px),1fr));
-  gap:clamp(16px,2vw,30px) clamp(18px,2.4vw,38px);margin-top:clamp(28px,3.2vw,44px)}
-.cap{padding-top:15px;border-top:1px solid var(--rule-2)}
-.cap b{display:block;font-family:var(--display);font-weight:500;font-size:1.14rem;
-  color:var(--fg);line-height:1.2}
-.cap span{display:block;margin-top:.45em;font-size:.86rem;color:var(--mute);line-height:1.5}
-.cap--key{border-top-color:var(--accent)}
-.cap--key b{color:var(--accent)}
+/* each industry answers two questions side by side: how the studio works
+   with this trade, and what Premium adds that only this trade would want. */
+.ind-split{display:grid;grid-template-columns:1.06fr .94fr;gap:clamp(22px,3.4vw,54px);
+  align-items:start;margin-top:clamp(28px,3.2vw,46px)}
+.ind-panel-l{display:block;font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;
+  font-weight:600;color:var(--mute-2);padding-bottom:14px;margin-bottom:22px;
+  border-bottom:1px solid var(--rule-2)}
+.ind-pts{list-style:none;margin:0;padding:0;display:grid;gap:clamp(16px,1.8vw,22px)}
+.ind-pts li{font-size:.91rem;color:var(--mute);line-height:1.55}
+.ind-pts b{display:block;font-family:var(--display);font-weight:500;font-size:1.14rem;
+  color:var(--fg);line-height:1.25;margin-bottom:.3em}
+/* the industry's own colour lands on the rule, not the body copy */
+.ind-block--beauty .ind-panel-l{border-bottom-color:color-mix(in srgb,var(--accent-2) 55%,transparent)}
+.ind-block--auto   .ind-panel-l{border-bottom-color:color-mix(in srgb,var(--accent) 55%,transparent)}
+.ind-block--home   .ind-panel-l{border-bottom-color:color-mix(in srgb,var(--accent-3) 55%,transparent)}
 
-.ind-incl{list-style:none;margin:20px 0 0;padding:18px 0 0;border-top:1px solid var(--rule);display:grid;gap:9px}
-.ind-incl li{font-size:.86rem;color:var(--mute-2);display:flex;gap:.6em;align-items:flex-start}
-.ind-incl li::before{content:"✓";color:var(--accent);font-weight:600;font-size:.85em;margin-top:.05em}
+/* premium side reads as the upgrade — always turquoise, whatever the industry,
+   because it is the product speaking rather than the trade. */
+.ind-panel--prem{border-radius:16px;padding:clamp(22px,2.3vw,32px);
+  background:color-mix(in srgb,var(--accent) 7%,transparent);
+  border:1px solid color-mix(in srgb,var(--accent) 26%,transparent)}
+.ind-block--beauty .ind-panel--prem .ind-panel-l,
+.ind-block--auto   .ind-panel--prem .ind-panel-l,
+.ind-block--home   .ind-panel--prem .ind-panel-l{color:var(--accent);
+  border-bottom-color:color-mix(in srgb,var(--accent) 34%,transparent)}
+.ind-pts--prem li{position:relative;padding-left:1.6em}
+.ind-pts--prem li::before{content:"✦";position:absolute;left:0;top:.22em;
+  color:var(--accent);font-size:.82em}
+
+@media(max-width:860px){.ind-split{grid-template-columns:1fr;gap:26px}}
 
 /* selected-work strip (homepage, under the before/after) */
 .work-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(clamp(240px,28%,320px),1fr));
@@ -843,6 +834,16 @@ hr{border:0;height:1px;background:var(--rule);margin:0}
 .row.total .l{color:var(--fg);font-weight:600}
 .row.total .v{font-family:var(--display);font-size:1.7rem;color:var(--accent)}
 .est-empty{color:var(--mute);font-size:.9rem;padding-block:6px}
+/* the calculator arguing for a plan — shown only when the maths actually
+   favours one, so it stays a fact rather than a pitch */
+.nudge{margin-top:22px;padding:16px 18px;border-radius:12px;
+  background:color-mix(in srgb,var(--accent) 13%,transparent);
+  border:1px solid color-mix(in srgb,var(--accent) 36%,transparent)}
+.nudge b{display:block;font-family:var(--display);font-weight:500;font-size:1.08rem;
+  color:var(--accent);line-height:1.25;margin-bottom:.35em}
+.nudge span{display:block;font-size:.85rem;color:var(--mute-2);line-height:1.5}
+.nudge .ulink{margin-top:12px;font-size:.72rem}
+.nudge-2{margin-top:12px;font-size:.78rem;color:var(--mute);line-height:1.5}
 @media(max-width:880px){.build{grid-template-columns:1fr}.est{position:static}}
 
 /* ─── footer ─────────────────────────────────── */
