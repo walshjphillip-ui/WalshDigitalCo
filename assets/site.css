@@ -329,6 +329,55 @@
   .plans{grid-template-columns:1fr;max-width:520px;margin-inline:auto}
 }
 
+/* ── contact ─────────────────────────────────────────
+   a real form, because a mailto: link quietly does
+   nothing on a phone without mail set up — and those
+   people never tell you they bounced.
+   ─────────────────────────────────────────────────── */
+.ct{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(30px,5vw,76px);align-items:start}
+.ct-alt{list-style:none;margin:clamp(30px,3.4vw,44px) 0 0;padding:0;display:grid;gap:16px}
+.ct-alt li{display:grid;gap:.2em}
+.ct-alt span{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mute)}
+.ct-alt a{color:var(--fg);text-decoration:none;font-size:1.02rem;
+  border-bottom:1px solid var(--rule-2);justify-self:start;transition:border-color .3s}
+.ct-alt a:hover{border-bottom-color:var(--accent);color:var(--accent)}
+
+.ct-form{display:grid;gap:clamp(14px,1.6vw,18px)}
+.ct-row{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,1.6vw,18px)}
+.ct-f{display:grid;gap:.5em}
+.ct-f > span{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600;
+  color:var(--mute-2)}
+.ct-f > span i{font-style:normal;letter-spacing:.1em;color:var(--mute);font-weight:400}
+.ct-f input,.ct-f select,.ct-f textarea{
+  font-family:var(--body);font-size:.95rem;color:var(--fg);
+  background:color-mix(in srgb,var(--bg-2) 55%,transparent);
+  border:1px solid var(--rule);border-radius:10px;padding:.85em 1em;width:100%;
+  transition:border-color .3s,background .3s}
+.ct-f textarea{resize:vertical;min-height:110px;line-height:1.55}
+.ct-f select{appearance:none;cursor:pointer;
+  background-image:linear-gradient(45deg,transparent 50%,currentColor 50%),
+                   linear-gradient(135deg,currentColor 50%,transparent 50%);
+  background-position:calc(100% - 20px) center,calc(100% - 14px) center;
+  background-size:6px 6px,6px 6px;background-repeat:no-repeat;padding-right:2.6em}
+.ct-f input:focus,.ct-f select:focus,.ct-f textarea:focus{
+  outline:none;border-color:var(--accent);
+  background:color-mix(in srgb,var(--accent) 7%,transparent)}
+.ct-f input:user-invalid,.ct-f textarea:user-invalid{border-color:var(--accent-2)}
+.ct-form .btn{justify-self:start;margin-top:6px}
+.ct-note{font-size:.86rem;line-height:1.55;color:var(--mute);min-height:1.2em}
+.ct-note.ok{color:var(--accent)}
+.ct-note.bad{color:var(--accent-2)}
+/* honeypot: off-screen rather than display:none, which some bots skip */
+.ct-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+
+@media(max-width:860px){
+  .ct{grid-template-columns:1fr;gap:34px}
+  .ct-row{grid-template-columns:1fr}
+  /* iOS Safari zooms the whole page in when a focused field is under 16px,
+     which lands right at the point someone is trying to convert */
+  .ct-f input,.ct-f select,.ct-f textarea{font-size:16px}
+}
+
 /* ── testimonials ────────────────────────────────────
    styling is ready; the markup on the homepage stays
    commented out until there are real quotes to put in

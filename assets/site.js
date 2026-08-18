@@ -301,6 +301,100 @@
   render();
   })();
 
+  /* ── contact form (plans page only) ─────────────────
+     Posts to a form service when one is configured, and
+     otherwise falls back to the prefilled mailto the site
+     used before — so an unset endpoint is never worse
+     than what was here, and never fails silently.
+     ─────────────────────────────────────────────────── */
+  (function () {
+  var form = document.getElementById('contactForm');
+  if (!form) return;
+
+  /* ─────────────────────────────────────────────────────────────
+     PASTE THE FORM ENDPOINT HERE. Create a form at formspree.io,
+     copy the URL it gives you, and drop it between the quotes:
+
+       var ENDPOINT = 'https://formspree.io/f/abcdwxyz';
+
+     Until then the button opens a prefilled email instead.
+     ───────────────────────────────────────────────────────────── */
+  var ENDPOINT = '';
+
+  var btn  = document.getElementById('contactSend');
+  var note = document.getElementById('contactNote');
+
+  function say(msg, cls) {
+    note.textContent = msg;
+    note.className = 'ct-note' + (cls ? ' ' + cls : '');
+  }
+  function val(n) {
+    var el = form.elements[n];
+    return el && el.value ? el.value.trim() : '';
+  }
+  function summary() {
+    return 'Name: ' + val('name') +
+           '\nBusiness: ' + (val('business') || '—') +
+           '\nEmail: ' + val('email') +
+           '\nPhone: ' + (val('phone') || '—') +
+           '\nInterested in: ' + val('plan') +
+           '\n\n' + (val('message') || '(no message)') +
+           '\n\nSent from walshdigitalco.com';
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    if (!form.checkValidity()) {
+      var bad = form.querySelector(':invalid');
+      if (bad) bad.focus();
+      say('Add your name and a valid email and it\'ll go through.', 'bad');
+      return;
+    }
+    // a filled honeypot means a bot — accept it silently rather than tip it off
+    if (val('_gotcha')) { say('Thanks — I\'ll be in touch shortly.', 'ok'); form.reset(); return; }
+
+    if (!ENDPOINT) {
+      window.location.href = 'mailto:hello@walshdigitalco.com?subject=' +
+        encodeURIComponent('Enquiry from ' + (val('business') || val('name'))) +
+        '&body=' + encodeURIComponent(summary());
+      say('Opening your email app with the details filled in.', 'ok');
+      return;
+    }
+
+    btn.disabled = true;
+    say('Sending…');
+    fetch(ENDPOINT, {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: new FormData(form)
+    }).then(function (r) {
+      if (!r.ok) throw new Error(r.status);
+      form.reset();
+      say('Got it — I\'ll come back to you within a day.', 'ok');
+    }).catch(function () {
+      say('That didn\'t send. Email hello@walshdigitalco.com and I\'ll pick it up there.', 'bad');
+    }).then(function () { btn.disabled = false; });
+  });
+  })();
+
+  /* ── analytics (optional, cookieless) ───────────────
+     Nothing loads unless a domain is set below. Keep it
+     that way until the privacy page is updated to match
+     — the page currently states there is no analytics.
+     ─────────────────────────────────────────────────── */
+  (function () {
+    /* Set to 'walshdigitalco.com' after creating the site in Plausible,
+       then uncomment the analytics paragraph in privacy.html. */
+    var ANALYTICS_DOMAIN = '';
+    if (!ANALYTICS_DOMAIN) return;
+    var s = document.createElement('script');
+    s.defer = true;
+    s.setAttribute('data-domain', ANALYTICS_DOMAIN);
+    s.src = 'https://plausible.io/js/script.js';
+    document.head.appendChild(s);
+  })();
+
   /* ── build your own (plans page only) ───────────────
      the exception path for businesses that already have
      some of the pieces. prices the selection, then shows
