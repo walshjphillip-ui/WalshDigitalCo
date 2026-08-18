@@ -378,22 +378,10 @@
   });
   })();
 
-  /* ── analytics (optional, cookieless) ───────────────
-     Nothing loads unless a domain is set below. Keep it
-     that way until the privacy page is updated to match
-     — the page currently states there is no analytics.
-     ─────────────────────────────────────────────────── */
-  (function () {
-    /* Set to 'walshdigitalco.com' after creating the site in Plausible,
-       then uncomment the analytics paragraph in privacy.html. */
-    var ANALYTICS_DOMAIN = '';
-    if (!ANALYTICS_DOMAIN) return;
-    var s = document.createElement('script');
-    s.defer = true;
-    s.setAttribute('data-domain', ANALYTICS_DOMAIN);
-    s.src = 'https://plausible.io/js/script.js';
-    document.head.appendChild(s);
-  })();
+  /* Analytics is Google Analytics 4, loaded from the gtag snippet in each
+     page's <head> rather than from here. It sets cookies, so the privacy
+     page has an Analytics and cookies section that must stay accurate if
+     the property or the tag ever changes. */
 
   /* ── build your own (plans page only) ───────────────
      the exception path for businesses that already have

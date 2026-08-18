@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://walshdigitalco.com/privacy.html">
 <title>Privacy — Walsh Digital Co.</title>
-<meta name="description" content="What this site collects: only what you type into the contact form. No cookies, no analytics, no tracking. A plain account of what happens when you visit.">
+<meta name="description" content="What this site collects: what you type into the contact form, plus anonymous visit counts through Google Analytics. No advertising, nothing sold on. A plain account of what happens when you visit.">
 <meta name="theme-color" content="#0a2a47">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,7 +14,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Walsh Digital Co.">
 <meta property="og:title" content="Privacy — Walsh Digital Co.">
-<meta property="og:description" content="What this site collects: only what you type into the contact form. No cookies, no analytics, no tracking. A plain account of what happens when you visit.">
+<meta property="og:description" content="What this site collects: what you type into the contact form, plus anonymous visit counts through Google Analytics. No advertising, nothing sold on. A plain account of what happens when you visit.">
 <meta property="og:url" content="https://walshdigitalco.com/privacy.html">
 <meta property="og:image" content="https://walshdigitalco.com/assets/og-home.jpg">
 <meta property="og:image:width" content="1200">
@@ -22,8 +22,17 @@
 <meta property="og:image:alt" content="Privacy — Walsh Digital Co.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Privacy — Walsh Digital Co.">
-<meta name="twitter:description" content="What this site collects: only what you type into the contact form. No cookies, no analytics, no tracking. A plain account of what happens when you visit.">
+<meta name="twitter:description" content="What this site collects: what you type into the contact form, plus anonymous visit counts through Google Analytics. No advertising, nothing sold on. A plain account of what happens when you visit.">
 <meta name="twitter:image" content="https://walshdigitalco.com/assets/og-home.jpg">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FWLTS56M16"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-FWLTS56M16');
+</script>
 <link rel="stylesheet" href="assets/site.css">
 </head>
 <body class="dark">
@@ -60,8 +69,9 @@
         <span class="tag">Privacy</span>
         <h1 class="d2" style="margin-top:.3em;max-width:16ch">What this site knows <em class="ital">about you</em>.</h1>
         <p class="lead" style="margin-top:1.5em">
-          Very little, and only what you hand over. There are no accounts here, no tracking
-          pixels and no advertising. This page says plainly what does happen.
+          Very little, and none of it sold on. There are no accounts here and no advertising —
+          visits are counted, and the contact form reaches an inbox. This page says plainly
+          what happens and how to opt out.
         </p>
       </div>
       <div class="folio" aria-hidden="true">06</div>
@@ -72,7 +82,7 @@
     <div class="wrap">
       <div class="legal rise">
 
-        <p class="legal-date">Last updated 17 August 2026</p>
+        <p class="legal-date">Last updated 18 August 2026</p>
 
         <h2>Who runs this site</h2>
         <p>Walsh Digital Co., an independent studio operated by Phillip Walsh. For anything on this
@@ -80,14 +90,14 @@
 
         <h2>What the site collects directly</h2>
         <p><strong>Only what you type into the contact form.</strong> There are no sign-ups, no
-           logins and no shopping cart. The site sets no cookies of its own, and there is no
-           advertising or session-recording software on any page. The plan finder and the package
-           builder run entirely in your browser — the choices you make are never sent anywhere,
-           and they are gone the moment you close the tab.</p>
+           logins and no shopping cart, and there is no advertising or session-recording software
+           on any page. The plan finder and the package builder run entirely in your browser — the
+           choices you make there are never sent anywhere, and they are gone the moment you close
+           the tab.</p>
 
         <h2>What happens anyway</h2>
-        <p>Two things are worth naming, because they are true of this site even though the studio
-           does not collect anything itself.</p>
+        <p>Two more things are worth naming, because they happen on every visit whether or not you
+           ever type anything in.</p>
         <p><strong>Typefaces are loaded from Google.</strong> The fonts come from Google Fonts, so
            your browser requests them from Google's servers. Google can see your IP address and
            basic browser information as part of that request. This is a consequence of how the
@@ -104,15 +114,26 @@
            replied to, and it is used for nothing else — no list, no advertising, no sharing. If
            you would rather not use it, every phone and email link on the site reaches the same
            place.</p>
-        <!-- WHEN ANALYTICS IS TURNED ON, uncomment the paragraph below and delete this comment.
-             Do not enable analytics in site.js without doing this — the section above states
-             plainly that there is none, and that has to stay true.
-        <h2>Analytics</h2>
-        <p>Visitor numbers are counted with Plausible, which is privacy-focused: it sets no
-           cookies, does not follow you between websites and collects nothing that identifies you
-           personally. It records only aggregate figures — how many people arrived, which pages
-           they read, and roughly where in the world they were.</p>
-        -->
+
+        <h2>Analytics, and the cookies it uses</h2>
+        <p>Visits are counted with <strong>Google Analytics</strong>. It records which pages were
+           opened, roughly where in the world the visitor was, the kind of device and browser used,
+           and which search or site they arrived from. It does not know who you are, and the studio
+           never sees anything that identifies you personally — only totals.</p>
+        <p>To avoid counting the same person twice it stores <strong>cookies</strong> in your
+           browser, named <code>_ga</code> and similar. That is the one place this site puts
+           something on your device. Your IP address is used to work out approximate location and
+           is not stored by Google Analytics.</p>
+        <p>That information goes to Google, and their handling of it is set out in the
+           <a href="https://policies.google.com/privacy" rel="noopener">Google Privacy Policy</a>
+           and in
+           <a href="https://policies.google.com/technologies/partner-sites" rel="noopener">how Google
+           uses information from sites that use its services</a>.</p>
+        <p><strong>If you would rather not be counted:</strong> any browser can block cookies for
+           this site, and Google publishes a
+           <a href="https://tools.google.com/dlpage/gaoptout" rel="noopener">browser opt-out add-on</a>
+           that switches Analytics off everywhere at once. Nothing on this site stops working if
+           you do either.</p>
 
         <h2>If you email the studio</h2>
         <p>Every contact link on this site opens your own mail app. If you write in, your message
@@ -126,16 +147,19 @@
            the written agreement for the work, not by this page.</p>
 
         <h2>Your choices</h2>
-        <p>Because the site holds nothing about you, there is nothing here to export or delete. If
-           you have emailed the studio and want that correspondence removed, ask and it will be
-           deleted. Any question about this page can go to the same address.</p>
+        <p>The studio holds no account or profile for you, so there is nothing here to log into or
+           export. Analytics can be switched off with the opt-out above, or by blocking cookies for
+           this site. If you have emailed the studio, or sent the contact form, and you want that
+           correspondence deleted, ask and it will be. Any question about this page can go to the
+           same address.</p>
 
         <h2>Children</h2>
         <p>This site sells services to businesses and is not directed at children.</p>
 
         <h2>Changes</h2>
-        <p>If any of the above stops being true — if a contact form or analytics is ever added —
-           this page gets updated before it ships, and the date at the top changes with it.</p>
+        <p>If any of the above stops being true — a different analytics tool, advertising, anything
+           that collects more than this does — the page gets updated before that ships, and the date
+           at the top changes with it.</p>
 
       </div>
     </div>
