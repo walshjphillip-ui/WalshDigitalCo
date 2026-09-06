@@ -1011,3 +1011,47 @@ hr{border:0;height:1px;background:var(--rule);margin:0}
 .vh{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
   clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
 a:focus-visible,.btn:focus-visible,.chip:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+/* ── the fix: teardown list ─────────────────────────
+   build.html — diagnosis in place of a portfolio
+   ─────────────────────────────────────────────────── */
+.fix-list{margin-top:clamp(30px,4vw,54px);border-top:1px solid var(--rule-2)}
+.fix-item{display:grid;grid-template-columns:auto 1.05fr .95fr;
+  gap:clamp(18px,3.2vw,54px);align-items:start;
+  padding-block:clamp(28px,3.4vw,46px);border-bottom:1px solid var(--rule)}
+.fix-no{font-family:var(--display);font-size:clamp(1rem,1.5vw,1.3rem);
+  color:var(--num);opacity:.7;letter-spacing:.08em;line-height:1.6;min-width:2.3ch}
+.fix-sym{font-size:clamp(1.28rem,2.05vw,1.8rem);line-height:1.16;max-width:20ch}
+.fix-tell{color:var(--mute);font-size:.94rem;line-height:1.62;margin-top:.8em;max-width:48ch}
+.fix-cost{margin-top:1.15em;padding-left:1.15em;border-left:2px solid var(--accent-2);
+  color:var(--mute-2);font-size:.92rem;line-height:1.62;max-width:48ch}
+.fix-do{border-radius:16px;padding:clamp(20px,2.2vw,30px);
+  background:color-mix(in srgb,var(--accent) 7%,transparent);
+  border:1px solid color-mix(in srgb,var(--accent) 26%,transparent)}
+.fix-do-l{display:block;font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;
+  font-weight:600;color:var(--accent);padding-bottom:12px;margin-bottom:14px;
+  border-bottom:1px solid color-mix(in srgb,var(--accent) 32%,transparent)}
+.fix-do p{color:var(--mute-2);font-size:.93rem;line-height:1.62}
+.fix-tier{display:inline-block;margin-top:17px;padding:.62em 1.05em;border-radius:99px;
+  font-size:.57rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;
+  color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 40%,transparent)}
+@media(max-width:900px){
+  .fix-item{grid-template-columns:auto 1fr;gap:14px 18px}
+  .fix-do{grid-column:2/-1;margin-top:8px}
+}
+
+/* self-audit — score your own presence */
+.audit-score{font-family:var(--display);font-size:clamp(2.8rem,5.4vw,4rem);line-height:1;
+  color:var(--accent);font-variant-numeric:tabular-nums}
+.audit-score em{font-family:var(--body);font-style:normal;font-size:.85rem;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--mute);margin-left:.5em}
+.audit-verdict{margin-top:1.1em;color:var(--mute-2);font-size:.95rem;line-height:1.62}
+.audit-first{margin-top:1.4em;padding-top:1.2em;border-top:1px solid var(--rule)}
+.audit-first > span{display:block;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--accent);font-weight:600;margin-bottom:.6em}
+.audit-first b{font-family:var(--display);font-weight:500;font-size:1.1rem;
+  color:var(--fg);line-height:1.32;display:block}
+
+/* two real tiles, side by side */
+.gal-item--half{grid-column:span 3;aspect-ratio:16/10}
+@media(max-width:700px){.gal-item--half{grid-column:span 6}}

@@ -536,4 +536,59 @@
 
   render();
   })();
+
+  /* ── self-audit (the fix page only) ─────────────────
+     Seven chips, a tally, and a verdict. Nothing leaves
+     the browser — no storage, no network.
+     ─────────────────────────────────────────────────── */
+  (function () {
+  var deck = document.getElementById('auditDeck');
+  if (!deck) return;
+
+  var nEl     = document.getElementById('auditN');
+  var verdict = document.getElementById('auditVerdict');
+  var first   = document.getElementById('auditFirst');
+  var firstTx = document.getElementById('auditFirstTxt');
+  var chips   = Array.prototype.slice.call(deck.querySelectorAll('.chip'));
+
+  var LINES = [
+    'Nothing ticked. Either you’ve had this handled or it’s worth a second, more sceptical look — open your own site on your phone, on cell service, and time it.',
+    'One gap. You’re ahead of most of your competition already; this is worth closing but it isn’t urgent.',
+    'Two gaps. Still in decent shape — both of these are a weekend of work, not a rebuild.',
+    'Three. This is roughly where the average local business sits, which is exactly why the ones who fix it pull ahead.',
+    'Four. Enough that people are quietly bouncing before they ever call you, and you’d have no way of knowing.',
+    'Five. Most people searching for your trade right now are finding someone else, and it isn’t because they’re better at the job.',
+    'Six. Your presence is actively working against you — the good news is that none of it is hard to fix.',
+    'All seven. Nothing here is fatal and nothing here is expensive; it just needs doing in order, starting at the top.'
+  ];
+
+  function render() {
+    var on = chips.filter(function (c) { return c.classList.contains('on'); });
+    var n  = on.length;
+
+    nEl.textContent = n;
+    verdict.textContent = LINES[n];
+
+    if (n) {
+      /* chips sit in cost order, so the lowest number ticked is the place to start */
+      var top = on.reduce(function (a, b) {
+        return (+a.getAttribute('data-n') < +b.getAttribute('data-n')) ? a : b;
+      });
+      firstTx.textContent = top.getAttribute('data-fix');
+      first.hidden = false;
+    } else {
+      first.hidden = true;
+    }
+  }
+
+  deck.addEventListener('click', function (e) {
+    var chip = e.target.closest('.chip');
+    if (!chip) return;
+    var on = chip.classList.toggle('on');
+    chip.setAttribute('aria-pressed', on ? 'true' : 'false');
+    render();
+  });
+
+  render();
+  })();
 })();
