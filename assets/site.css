@@ -1172,12 +1172,15 @@ a:focus-visible,.btn:focus-visible,.chip:focus-visible,button:focus-visible{outl
 }
 
 /* ── phones: no film at all, cream plaza + Miami glow ───────
-   The clip and its poster are both dropped below 920px; the hero
-   becomes a light surface carrying the same aurora as the rest of
-   the site. Tokens are re-declared here because the section is
-   marked .dark in the markup for the desktop treatment. */
+   The clip and its poster are both dropped below 920px. Only the top
+   block goes cream — the before/after underneath stays on the section's
+   navy, so the light surface reads as a header rather than a new page.
+   Tokens are re-declared on .film-copy because .film is marked .dark in
+   the markup for the desktop treatment. */
 @media(max-width:920px){
-  .film{
+  .film-vid-wrap,.film-scrim{display:none}
+
+  .film-copy{
     --bg:#f8f5ee; --bg-2:#eee8da; --fg:#0a2138;
     --mute:rgba(10,33,56,.58); --mute-2:rgba(10,33,56,.80);
     --rule:rgba(10,33,56,.14); --rule-2:rgba(10,33,56,.28);
@@ -1185,36 +1188,29 @@ a:focus-visible,.btn:focus-visible,.chip:focus-visible,button:focus-visible{outl
     --accent-2:#cf4b86; --accent-3:#dda32a; --num:#0a2a47;
     background:var(--bg); color:var(--fg);
     position:relative; overflow:hidden; isolation:isolate;
+    grid-column:1; grid-row:1; align-self:start;
+    /* the desktop rule centres this with top:50%; unset both here */
+    top:auto; transform:none;
+    padding:calc(var(--nav-h) + clamp(26px,5vh,48px)) 0 clamp(30px,6vh,54px);
   }
-  .film-stick{background:var(--bg)}
-
-  /* the glow, same geometry as .aurora but scoped to the hero */
-  .film::before,.film::after{
+  /* glow, clipped to the cream block by its overflow:hidden */
+  .film-copy::before,.film-copy::after{
     content:"";position:absolute;z-index:0;pointer-events:none;
     border-radius:50%;filter:blur(90px);
   }
-  .film::before{
+  .film-copy::before{
     width:88vw;height:88vw;max-width:620px;max-height:620px;
-    right:-26vw;top:-30vw;
+    right:-26vw;top:-34vw;
     background:radial-gradient(circle,rgba(63,193,214,.55),transparent 62%);
   }
-  .film::after{
+  .film-copy::after{
     width:82vw;height:82vw;max-width:560px;max-height:560px;
-    left:-30vw;top:32vh;
+    left:-30vw;bottom:-34vw;
     background:radial-gradient(circle,
       rgba(207,75,134,.42) 0%, rgba(221,163,42,.30) 46%, transparent 72%);
   }
-  .film-stick > *{position:relative;z-index:1}
-
-  /* the video, its poster and the scrim all go */
-  .film-vid-wrap,.film-scrim{display:none}
-
-  /* copy now sits on cream, so it stops being reverse-type */
-  /* .film-stick > * re-positions these, which would otherwise let the
-     desktop rule's top:50% shove the copy down half a screen */
-  .film-copy{
-    grid-column:1;grid-row:1;align-self:start;
-    top:auto;transform:none;
-    padding:calc(var(--nav-h) + clamp(26px,5vh,48px)) 0 clamp(30px,6vh,54px)}
+  .film-copy > *{position:relative;z-index:1}
   .film-copy .lead{color:var(--mute-2)}
+
+  .film-ba{grid-column:1;grid-row:2}
 }
