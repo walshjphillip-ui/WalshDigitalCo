@@ -1146,6 +1146,17 @@ a:focus-visible,.btn:focus-visible,.chip:focus-visible,button:focus-visible{outl
   .ct .ct-alt span{font-size:.75rem}
 }
 
+/* THE MOBILE MENU BUG.
+   .nav.is-fixed carries backdrop-filter, and a backdrop-filter makes the
+   element a containing block for its position:fixed descendants. So the
+   closed .menu, which relies on inset:0, sized itself to the 78px nav
+   rather than the viewport — and its 2.4rem links overflowed that box and
+   painted over the top of every page. Give it a real viewport height so
+   translateY(-100%) actually clears the screen. */
+@media(max-width:880px){
+  .menu{bottom:auto;height:100vh;height:100svh;overflow-y:auto}
+}
+
 /* the footer kept two 139px columns down to the smallest phone */
 @media(max-width:560px){
   .foot-grid{grid-template-columns:1fr;gap:32px}
