@@ -1114,3 +1114,48 @@ a:focus-visible,.btn:focus-visible,.chip:focus-visible,button:focus-visible{outl
   .ct-alt a{display:inline-block;padding-block:10px}
   .foot-btm a{display:inline-block;padding-block:12px}
 }
+
+/* ── mobile pass 2: the other six pages ─────────────
+   Same ordering rule as above — this stays at the end of the file. */
+
+@media(max-width:760px){
+  /* eyebrows, badges and price suffixes were all landing at 9–11px */
+  .tag{font-size:.78rem}
+  .foot h4{font-size:.76rem}
+  .plan-flag{font-size:.75rem}
+  .fix-tier{font-size:.75rem}
+  .plan-price .per{font-size:.82rem}
+  .chip .pr{font-size:.8rem}
+  .cmp-hint{font-size:.74rem}
+
+  /* every chip measured 39px — just under the 44px thumb floor */
+  .chip{padding:1.05em 1.25em}
+  .chip .tick{width:16px;height:16px;font-size:.62rem}
+
+  /* the "build your own" jump link was a 19px-tall target */
+  .plans-alt a{display:inline-block;padding-block:11px}
+
+  /* contact-form labels were 9.3px — on the one screen people have to
+     actually fill in */
+  .ct-f > span{font-size:.75rem}
+  /* gallery captions and the price suffix inside the comparison table */
+  .gal-cap span{font-size:.75rem}
+  /* both need the extra weight: .plan-price .per and .ct-alt span are
+     each two-class selectors declared earlier in the file */
+  .cmp .big .per{font-size:.8rem}
+  .ct .ct-alt span{font-size:.75rem}
+}
+
+/* the footer kept two 139px columns down to the smallest phone */
+@media(max-width:560px){
+  .foot-grid{grid-template-columns:1fr;gap:32px}
+}
+
+/* Studio page: the portrait and the bio sat in two ~130px columns on a
+   phone. The pairing was an inline style on the element, which no media
+   query can reach — so it moves to a class here. */
+.about-split{display:grid;grid-template-columns:.85fr 1.15fr;
+  gap:clamp(34px,6vw,90px);align-items:start}
+@media(max-width:860px){
+  .about-split{grid-template-columns:1fr;gap:34px}
+}
