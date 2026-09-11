@@ -1055,3 +1055,62 @@ a:focus-visible,.btn:focus-visible,.chip:focus-visible,button:focus-visible{outl
 /* two real tiles, side by side */
 .gal-item--half{grid-column:span 3;aspect-ratio:16/10}
 @media(max-width:700px){.gal-item--half{grid-column:span 6}}
+
+/* ─────────────────────────────────────────────────────────────
+   MOBILE PASS
+   Must stay last in the file: the base .d1/.d2/.d3 sizes are
+   declared further up, so an earlier media query loses to them at
+   equal specificity. That is exactly why the old "small-screen
+   headline relief" rule near the top never took effect.
+   ───────────────────────────────────────────────────────────── */
+
+/* the hero — headline sits ON the poster instead of a screen below it,
+   so the first thing a phone shows is words, not a wordless street */
+@media(max-width:920px){
+  .film-stick{display:grid;grid-template-columns:minmax(0,1fr)}
+  .film-vid-wrap{grid-column:1;grid-row:1;
+    height:auto;
+    min-height:clamp(540px,90vh,780px);
+    min-height:clamp(540px,90svh,780px)}
+  .film-copy{grid-column:1;grid-row:1;z-index:3;align-self:end;
+    padding:clamp(40px,10vh,90px) 0 clamp(28px,5vh,48px)}
+  .film-ba{grid-column:1;grid-row:2}
+  /* desktop's scrim runs left-to-right; over a bottom-aligned headline
+     it has to run top-to-bottom instead */
+  .film-scrim{background:linear-gradient(180deg,
+    rgba(4,15,26,.62) 0%,rgba(4,15,26,.30) 32%,
+    rgba(4,15,26,.72) 72%,rgba(4,15,26,.93) 100%)}
+  /* the Before/After badge was landing on the mockup's own brand name */
+  .ba-layer::before{left:auto;right:12px}
+}
+
+/* display type that actually fits a 375px screen */
+@media(max-width:560px){
+  .d1{font-size:clamp(1.95rem,9.2vw,2.6rem)}
+  .d2{font-size:clamp(1.8rem,8vw,2.6rem)}
+  .d3{font-size:clamp(1.45rem,6vw,1.9rem)}
+}
+
+/* legible small text — site chrome only.
+   The .mk mockups keep their small type deliberately: they are pictures
+   of a webpage rather than interface, and scaling them up would break
+   both the illusion and their layout. */
+@media(max-width:760px){
+  .tag{font-size:.74rem}
+  .svc-kind,.ind-kind,.glbl,.fix-do-l,.ind-panel-l,.plan-sub{font-size:.76rem}
+  .reel-cap{font-size:.76rem;letter-spacing:.13em}
+  .btn{font-size:.82rem}
+  .foot-btm{font-size:.79rem}
+  .brk span{font-size:.76rem}
+}
+
+/* thumb-sized tap targets — 44px is the floor Apple and Google both use */
+@media(max-width:760px){
+  .foot ul{gap:0}
+  .foot ul a{display:inline-block;padding-block:12px}
+  .ulink{padding-block:11px}
+  /* .menu a sets padding-block:6px at (0,1,1); match that weight to win */
+  .menu .nav-cta{padding-block:1.3em;padding-inline:1.5em}
+  .ct-alt a{display:inline-block;padding-block:10px}
+  .foot-btm a{display:inline-block;padding-block:12px}
+}

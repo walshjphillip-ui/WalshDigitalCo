@@ -40,6 +40,25 @@
     var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
     var revealed = false, fTick = false, vidReady = false, autoPlaying = false, playedOut = false;
 
+    /* plays itself on phones: nothing is scrubbed at this width, so a
+       paused poster is just dead weight. Muted + inline so iOS allows it,
+       and only while it is actually on screen so we aren't burning cell
+       data below the fold. Reduced-motion keeps the still. */
+    (function () {
+      if (!vid || reduce || window.innerWidth > 920) return;
+      vid.loop = true;
+      function go() { var r = vid.play(); if (r && r.catch) r.catch(function () {}); }
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (entries) {
+          entries.forEach(function (en) {
+            if (en.isIntersecting) { go(); } else { vid.pause(); }
+          });
+        }, { threshold: 0.2 }).observe(vid);
+      } else {
+        go();
+      }
+    })();
+
     function sub(p, a, b) { return Math.min(1, Math.max(0, (p - a) / (b - a))); }
     function ease(t) { return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; }
 
