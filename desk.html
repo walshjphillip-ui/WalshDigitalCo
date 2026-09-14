@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Audit Desk — Walsh Digital Co.</title>
+<meta name="theme-color" content="#0a2a47">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/desk.css">
+</head>
+<!-- Internal tool. Not linked from the site, not in the sitemap, noindex.
+     Scanning needs DESK_KEY (and optionally GOOGLE_PLACES_API_KEY) set in Vercel. -->
+<body class="dark desk">
+
+<header class="dk-bar">
+  <a href="index.html" class="mark" aria-label="Walsh Digital Co. site">
+    <img class="mark-img" src="assets/logo.png" alt="" width="28" height="28">
+  </a>
+  <div class="dk-title"><b>Audit Desk</b><span class="dk-badge">Internal</span></div>
+  <div class="dk-acts">
+    <button type="button" class="dk-btn dk-btn--ghost" id="btnNew">New</button>
+    <button type="button" class="dk-btn dk-btn--ghost" id="btnSaved">Saved <span class="dk-n" id="dkSavedN">0</span></button>
+    <button type="button" class="dk-btn" id="btnSave">Save</button>
+    <button type="button" class="dk-btn dk-btn--ghost" id="btnSettings" aria-label="Settings">Settings</button>
+  </div>
+</header>
+
+<div class="dk-grid">
+
+  <aside class="dk-in" id="dkIn" aria-label="Prospect inputs">
+
+    <button type="button" class="dk-warn" id="dkKeyWarn" hidden>No desk key set — scanning and Google lookup are off. Add it in Settings.</button>
+
+    <section class="dk-card">
+      <h2>Prospect</h2>
+      <div class="dk-seg" role="radiogroup" aria-label="Lead source">
+        <label><input type="radio" name="source" value="outbound"><span>Outbound prospect</span></label>
+        <label><input type="radio" name="source" value="inbound"><span>Requested an audit</span></label>
+      </div>
+      <label class="dk-f"><span>Business name</span><input data-bind="p.business" autocomplete="off"></label>
+      <div class="dk-2">
+        <label class="dk-f"><span>Industry</span>
+          <select data-bind="p.industry">
+            <option value="beauty">Beauty &amp; wellness</option><option value="auto">Automotive</option>
+            <option value="home">Home services &amp; trades</option><option value="food">Restaurant, café, bar</option>
+            <option value="fitness">Fitness &amp; health</option><option value="pro">Professional services</option>
+            <option value="retail">Retail</option><option value="other">Something else</option>
+          </select></label>
+        <label class="dk-f"><span>Trade <i>as a searcher says it</i></span><input data-bind="p.trade" placeholder="e.g. mobile detailing"></label>
+      </div>
+      <label class="dk-f"><span>Location</span><input data-bind="p.location" placeholder="City, State"></label>
+      <label class="dk-f"><span>Website</span><input data-bind="p.website" placeholder="business.com" spellcheck="false"></label>
+      <div class="dk-2">
+        <label class="dk-f"><span>Instagram</span><input data-bind="p.instagram" placeholder="@handle" spellcheck="false"></label>
+        <label class="dk-f"><span>TikTok</span><input data-bind="p.tiktok" placeholder="@handle" spellcheck="false"></label>
+      </div>
+      <label class="dk-f"><span>Google Business Profile URL</span><input data-bind="p.gbp" placeholder="maps.app.goo.gl/…" spellcheck="false"></label>
+      <div class="dk-2">
+        <label class="dk-f"><span>Contact name</span><input data-bind="p.contact"></label>
+        <label class="dk-f"><span>Email</span><input data-bind="p.email" type="email"></label>
+      </div>
+      <label class="dk-f"><span>Phone</span><input data-bind="p.phone" type="tel"></label>
+      <label class="dk-f"><span>Notes</span><textarea data-bind="p.notes" rows="3" placeholder="Anything you know: how you found them, what they said, what they sell most."></textarea></label>
+    </section>
+
+    <section class="dk-card">
+      <h2>Automatic checks</h2>
+      <p class="dk-hint">Measured, not guessed. Anything marked <b>auto</b> can be overridden below.</p>
+      <div class="dk-run">
+        <button type="button" class="dk-btn" id="btnAll">Run all</button>
+        <button type="button" class="dk-btn dk-btn--ghost" id="btnScan">Scan website</button>
+        <button type="button" class="dk-btn dk-btn--ghost" id="btnPlaces">Google lookup</button>
+        <button type="button" class="dk-btn dk-btn--ghost" id="btnSpeed">Mobile speed</button>
+      </div>
+      <p class="dk-out" id="scanOut" aria-live="polite"></p>
+      <p class="dk-out" id="placesOut" aria-live="polite"></p>
+      <p class="dk-out" id="speedOut" aria-live="polite"></p>
+    </section>
+
+    <section class="dk-card">
+      <h2>Website <span class="dk-count" id="count-website"></span></h2>
+      <div id="checks-website"></div>
+    </section>
+
+    <section class="dk-card">
+      <h2>Google &amp; local <span class="dk-count" id="count-google"></span></h2>
+      <div class="dk-3">
+        <label class="dk-f"><span>Rating</span><input data-bind="g.rating" type="number" step="0.1" min="1" max="5" inputmode="decimal"></label>
+        <label class="dk-f"><span>Reviews</span><input data-bind="g.reviews" type="number" min="0" inputmode="numeric"></label>
+        <label class="dk-f"><span>Photos</span><input data-bind="g.photos" type="number" min="0" inputmode="numeric"></label>
+      </div>
+      <label class="dk-f"><span>Latest review</span>
+        <select data-bind="g.lastReview"><option value="">Not checked</option><option value="30">Within a month</option>
+          <option value="90">1–3 months ago</option><option value="180">3–6 months ago</option>
+          <option value="365">6–12 months ago</option><option value="999">Over a year ago</option></select></label>
+      <div id="checks-google"></div>
+    </section>
+
+    <section class="dk-card">
+      <h2>Social <span class="dk-count" id="count-social"></span></h2>
+      <div class="dk-3">
+        <label class="dk-f"><span>IG followers</span><input data-bind="ig.followers" type="number" min="0" inputmode="numeric"></label>
+        <label class="dk-f"><span>Posts / month</span><input data-bind="ig.perMonth" type="number" min="0" inputmode="numeric"></label>
+        <label class="dk-f"><span>IG last post</span>
+          <select data-bind="ig.lastPost"><option value="">—</option><option value="7">This week</option><option value="30">This month</option>
+            <option value="90">1–3 months</option><option value="180">3–6 months</option><option value="365">6+ months</option><option value="none">Never</option></select></label>
+      </div>
+      <div class="dk-2">
+        <label class="dk-f"><span>TikTok followers</span><input data-bind="tt.followers" type="number" min="0" inputmode="numeric"></label>
+        <label class="dk-f"><span>TikTok last post</span>
+          <select data-bind="tt.lastPost"><option value="">—</option><option value="7">This week</option><option value="30">This month</option>
+            <option value="90">1–3 months</option><option value="180">3–6 months</option><option value="365">6+ months</option><option value="none">Never</option></select></label>
+      </div>
+      <div id="checks-social"></div>
+    </section>
+
+    <section class="dk-card">
+      <h2>Brand <span class="dk-count" id="count-brand"></span></h2>
+      <div id="checks-brand"></div>
+    </section>
+
+    <section class="dk-card">
+      <h2>Make it personal</h2>
+      <p class="dk-hint">Optional. Your own words beat the generated ones — outreach uses these when filled.</p>
+      <label class="dk-f"><span>Something genuinely good</span><input data-bind="p.hookGood" placeholder="e.g. the ceramic coating reels"></label>
+      <label class="dk-f"><span>One specific thing you noticed</span><input data-bind="p.hookSeen" placeholder="e.g. the booking link in your bio is broken"></label>
+    </section>
+
+  </aside>
+
+  <main class="dk-out-col" aria-label="Audit">
+    <div class="dk-tools">
+      <span class="dk-score">Score <b id="dkScore">—</b></span>
+      <button type="button" class="dk-btn dk-btn--ghost" id="btnView" aria-pressed="false">Show client view</button>
+      <button type="button" class="dk-btn dk-btn--ghost" id="btnCopySum">Copy summary</button>
+      <button type="button" class="dk-btn dk-btn--ghost" id="btnCopyAll">Copy audit as text</button>
+      <button type="button" class="dk-btn" id="btnPrint">Print / save PDF</button>
+    </div>
+    <article class="dk-doc light" id="doc" data-view="internal"></article>
+  </main>
+
+</div>
+
+<dialog class="dk-dlg" id="dlgSaved">
+  <div class="dk-dlg-h"><h2>Saved audits</h2><button type="button" class="dk-btn dk-btn--ghost dk-btn--sm" data-close>Close</button></div>
+  <ul class="dk-saved" id="savedList"></ul>
+  <div class="dk-dlg-f">
+    <button type="button" class="dk-btn dk-btn--ghost dk-btn--sm" id="btnExport">Export all (JSON)</button>
+    <label class="dk-btn dk-btn--ghost dk-btn--sm">Import<input type="file" id="fileImport" accept="application/json" hidden></label>
+    <span class="dk-hint">Saved in this browser only — export to back up or move machines.</span>
+  </div>
+</dialog>
+
+<dialog class="dk-dlg" id="dlgSettings">
+  <form method="dialog" id="formSettings">
+    <div class="dk-dlg-h"><h2>Settings</h2><button type="button" class="dk-btn dk-btn--ghost dk-btn--sm" data-close>Close</button></div>
+    <label class="dk-f"><span>Desk key</span><input id="setKey" type="password" autocomplete="off">
+      <em>The same value as <code>DESK_KEY</code> in Vercel. Kept in this browser.</em></label>
+    <label class="dk-f"><span>PageSpeed API key <i>optional</i></span><input id="setPsi" type="password" autocomplete="off">
+      <em>Only needed if Google’s free speed-test quota runs out.</em></label>
+    <div class="dk-dlg-f"><button class="dk-btn" value="save">Save settings</button></div>
+  </form>
+</dialog>
+
+<div class="dk-toast" id="dkToast" role="status" hidden></div>
+
+<script src="assets/desk-checks.js"></script>
+<script src="assets/desk.js"></script>
+</body>
+</html>
