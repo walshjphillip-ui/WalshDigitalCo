@@ -149,7 +149,7 @@
 }
 </script>
 </head>
-<body class="has-rail">
+<body>
 <a class="skip" href="#main">Skip to content</a>
 
 <nav class="nav is-fixed dark" data-fixed="always">
@@ -306,15 +306,17 @@
 
   <!-- where you are on the page (wide screens) -->
   <nav class="rail" id="rail" aria-label="On this page">
+    <i class="rail-fill" aria-hidden="true"></i>
     <ol>
-      <li><a href="#problems">Sound familiar</a></li>
-      <li><a href="#how">How a presence gets built</a></li>
-      <li><a href="#audit">Free audit</a></li>
-      <li><a href="#compare">Your other options</a></li>
-      <li><a href="#plans">Plans</a></li>
-      <li><a href="#together">Working together</a></li>
-      <li><a href="#work">Examples of the work</a></li>
+      <li><a href="#problems" data-label="Sound familiar">Sound familiar</a></li>
+      <li><a href="#how" data-label="How a presence gets built">How a presence gets built</a></li>
+      <li><a href="#audit" data-label="Free audit">Free audit</a></li>
+      <li><a href="#compare" data-label="Your other options">Your other options</a></li>
+      <li><a href="#plans" data-label="Plans">Plans</a></li>
+      <li><a href="#together" data-label="Working together">Working together</a></li>
+      <li><a href="#work" data-label="Examples of the work">Examples of the work</a></li>
     </ol>
+    <span class="rail-now" id="railNow" aria-hidden="true"></span>
   </nav>
 
   <!-- 1 · sound familiar — the owner's own words -->

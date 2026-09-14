@@ -793,6 +793,7 @@
   var links = [].slice.call(rail.querySelectorAll('a'));
   var secs = links.map(function (a) { return document.querySelector(a.getAttribute('href')); });
   var foot = document.querySelector('.foot');
+  var now = document.getElementById('railNow');
   var tick = false;
 
   function update() {
@@ -805,6 +806,16 @@
     links.forEach(function (a, i) {
       if (i === cur) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
     });
+    if (now) now.textContent = cur >= 0 ? links[cur].getAttribute('data-label') : '';
+    // the fill sits on the current section's dot and creeps toward the next one
+    var p = 0;
+    if (cur >= 0) {
+      var a = secs[cur].getBoundingClientRect().top;
+      var b = cur < secs.length - 1 ? secs[cur + 1].getBoundingClientRect().top : footTop;
+      var frac = b > a ? Math.min(1, Math.max(0, (mid - a) / (b - a))) : 0;
+      p = Math.min(1, (cur + (cur < secs.length - 1 ? frac : 0)) / (secs.length - 1));
+    }
+    rail.style.setProperty('--rpn', p.toFixed(3));
   }
   window.addEventListener('scroll', function () {
     if (!tick) { tick = true; window.requestAnimationFrame(update); }
