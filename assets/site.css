@@ -989,12 +989,15 @@ hr{border:0;height:1px;background:var(--rule);margin:0}
 @media(max-width:820px){.foot-grid{grid-template-columns:1fr 1fr}}
 
 /* ─── motion ─────────────────────────────────── */
-.rise{opacity:0;transform:translateY(26px)}
-.rise.in{opacity:1;transform:none;transition:opacity .95s cubic-bezier(.2,.8,.2,1),transform .95s cubic-bezier(.2,.8,.2,1)}
-.rise[data-d="1"].in{transition-delay:.09s}
-.rise[data-d="2"].in{transition-delay:.18s}
-.rise[data-d="3"].in{transition-delay:.27s}
-.rise[data-d="4"].in{transition-delay:.36s}
+/* Content is readable before JavaScript, without scrolling, and if a script
+   fails. IntersectionObserver adds motion only; it never unlocks content. */
+.rise{opacity:1;transform:none}
+.rise.in{animation:content-rise .65s cubic-bezier(.2,.8,.2,1) both}
+.rise[data-d="1"].in{animation-delay:.09s}
+.rise[data-d="2"].in{animation-delay:.18s}
+.rise[data-d="3"].in{animation-delay:.27s}
+.rise[data-d="4"].in{animation-delay:.36s}
+@keyframes content-rise{from{transform:translateY(18px)}to{transform:none}}
 .load>*{opacity:0;transform:translateY(22px);animation:rise .95s cubic-bezier(.2,.8,.2,1) forwards}
 .load>*:nth-child(1){animation-delay:.05s}
 .load>*:nth-child(2){animation-delay:.14s}

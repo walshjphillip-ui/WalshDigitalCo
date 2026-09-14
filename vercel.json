@@ -1,6 +1,17 @@
 {
   "redirects": [
     {
+      "source": "/index.html",
+      "destination": "https://www.walshdigitalco.com/",
+      "permanent": true
+    },
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "walsh-digital-co.vercel.app" }],
+      "destination": "https://www.walshdigitalco.com/",
+      "permanent": true
+    },
+    {
       "source": "/:path*",
       "has": [{ "type": "host", "value": "walsh-digital-co.vercel.app" }],
       "destination": "https://www.walshdigitalco.com/:path*",
