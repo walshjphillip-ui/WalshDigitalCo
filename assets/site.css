@@ -1153,6 +1153,9 @@ a:focus-visible,.btn:focus-visible,.chip:focus-visible,button:focus-visible{outl
 .work-flag--client{background:#4fd2e6;color:#06303a}
 /* on browser-framed shots the chip sits in the empty right of the bar, clear of the url */
 .reel-shot--web .work-flag{top:6px;left:auto;right:12px;padding:.45em .85em}
+.proof--three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.proof--three .reel-shot{aspect-ratio:4/3}
+@media(max-width:900px){.proof--three{grid-template-columns:1fr 1fr}}
 @media(max-width:700px){.proof{grid-template-columns:1fr}}
 
 .promise{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(24px,3vw,44px);
