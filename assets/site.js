@@ -2,6 +2,12 @@
 (function () {
   'use strict';
 
+  /* Every form on the site posts to Web3Forms, which emails the submission to
+     hello@walshdigitalco.com. The access key is public by design — lock it to
+     walshdigitalco.com + www in the Web3Forms dashboard so nobody else can use it. */
+  var WEB3FORMS_URL = 'https://api.web3forms.com/submit';
+  var WEB3FORMS_KEY = '941a7e49-3f26-4823-942e-e44be4cab380';
+
   /* ── nav: fix on scroll + mobile menu ─────────────── */
   var nav = document.querySelector('.nav');
   var burger = document.querySelector('.burger');
@@ -281,7 +287,7 @@
     if (!t || !l) {
       outEl.innerHTML = '';
       emptyEl.style.display = 'block';
-      sendEl.setAttribute('href', 'mailto:hello@walshdigitalco.com');
+      sendEl.setAttribute('href', 'services.html#contact');
       return;
     }
     emptyEl.style.display = 'none';
@@ -295,14 +301,10 @@
       row('Your plan', money(l.price) + '/mo', 'total') +
       '<p class="small" style="margin-top:14px">' + blurb + '</p>';
 
-    var body = 'Hi Phillip,\n\n' +
-               'Business type: ' + t.name + '\n' +
-               'Looking for: ' + l.name + '\n' +
-               'Suggested plan: ' + l.plan + ' (' + money(l.price) + '/mo)\n\n' +
-               'Sent from walshdigitalco.com';
-    sendEl.setAttribute('href', 'mailto:hello@walshdigitalco.com?subject=' +
-      encodeURIComponent(l.plan + ' plan enquiry — Walsh Digital Co.') +
-      '&body=' + encodeURIComponent(body));
+    /* the contact form reads ?plan= and ?trade= — a form beats a mailto: that does
+       nothing on a phone without mail set up */
+    sendEl.setAttribute('href', 'services.html?plan=' + encodeURIComponent(l.plan) +
+      '&trade=' + encodeURIComponent(t.name) + '#contact');
   }
 
   render();
@@ -318,18 +320,23 @@
   var form = document.getElementById('contactForm');
   if (!form) return;
 
-  /* ─────────────────────────────────────────────────────────────
-     PASTE THE FORM ENDPOINT HERE. Create a form at formspree.io,
-     copy the URL it gives you, and drop it between the quotes:
+  var ENDPOINT = WEB3FORMS_URL;
 
-       var ENDPOINT = 'https://formspree.io/f/abcdwxyz';
-
-     Until then the button opens a prefilled email instead.
-     ───────────────────────────────────────────────────────────── */
-  var ENDPOINT = '';
+  /* a plan button further up the page ("Start with Growth") preselects it here */
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('[data-plan]');
+    if (!a || !form.elements.plan) return;
+    form.elements.plan.value = a.getAttribute('data-plan');
+  });
 
   var btn  = document.getElementById('contactSend');
   var note = document.getElementById('contactNote');
+
+  /* arriving from the plan finder on the industries page */
+  var q = new URLSearchParams(location.search);
+  if (q.get('plan') && form.elements.plan) form.elements.plan.value = q.get('plan');
+  if (q.get('trade') && form.elements.message && !form.elements.message.value)
+    form.elements.message.value = 'Business type: ' + q.get('trade') + '. ';
 
   function say(msg, cls) {
     note.textContent = msg;
@@ -371,13 +378,19 @@
 
     btn.disabled = true;
     say('Sending…');
+    var fd = new FormData(form);
+    fd.delete('_gotcha');
+    fd.append('access_key', WEB3FORMS_KEY);
+    fd.append('subject', 'Enquiry — ' + (val('business') || val('name')) + ' (' + val('plan') + ')');
+    fd.append('from_name', 'Walsh Digital Co. website');
     fetch(ENDPOINT, {
       method: 'POST',
       headers: { 'Accept': 'application/json' },
-      body: new FormData(form)
+      body: fd
     }).then(function (r) {
       if (!r.ok) throw new Error(r.status);
       form.reset();
+      if (window.gtag) window.gtag('event', 'generate_lead', { form_name: 'contact' });
       say('Got it — I\'ll come back to you within a day.', 'ok');
     }).catch(function () {
       say('That didn\'t send. Email hello@walshdigitalco.com and I\'ll pick it up there.', 'bad');
@@ -557,6 +570,7 @@
   var first   = document.getElementById('auditFirst');
   var firstTx = document.getElementById('auditFirstTxt');
   var chips   = Array.prototype.slice.call(deck.querySelectorAll('.chip'));
+  var cta     = document.getElementById('auditCta');
 
   var LINES = [
     'Nothing ticked. Either you’ve had this handled or it’s worth a second, more sceptical look — open your own site on your phone, on cell service, and time it.',
@@ -575,6 +589,12 @@
 
     nEl.textContent = n;
     verdict.textContent = LINES[n];
+
+    if (cta) {
+      var nums = on.map(function (c) { return c.getAttribute('data-n'); });
+      cta.setAttribute('href', 'audit.html' + (n ? '?issues=' + nums.join(',') : ''));
+      cta.firstChild.textContent = n ? 'Get the full audit for these ' : 'Get a free audit ';
+    }
 
     if (n) {
       /* chips sit in cost order, so the lowest number ticked is the place to start */
@@ -597,5 +617,170 @@
   });
 
   render();
+  })();
+  /* ── free audit request (audit page only) ───────────
+     The site's primary conversion. Two short steps —
+     the business first, then where to send it — because
+     a long single form is where people give up.
+     Without JavaScript both steps show and the form posts
+     straight to Web3Forms, which redirects back here.
+     ─────────────────────────────────────────────────── */
+  (function () {
+  var form = document.getElementById('auditForm');
+  if (!form) return;
+
+  var done   = document.getElementById('auditDone');
+  var note   = document.getElementById('auditNote');
+  var sendEl = document.getElementById('auditSend');
+  var steps  = [].slice.call(form.querySelectorAll('.af-step'));
+  var prog   = [].slice.call(form.querySelectorAll('.af-prog li'));
+  var EMAIL  = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+  form.classList.add('js-steps');
+
+  function say(msg, cls) { note.textContent = msg; note.className = 'ct-note' + (cls ? ' ' + cls : ''); }
+  function val(n) { var el = form.elements[n]; return el && el.value ? el.value.trim() : ''; }
+
+  function go(n) {
+    steps.forEach(function (s) { s.classList.toggle('on', +s.dataset.step === n); });
+    prog.forEach(function (li) {
+      var k = +li.dataset.for;
+      li.classList.toggle('on', k === n);
+      li.classList.toggle('done', k < n);
+    });
+    say('');
+    var first = steps[n - 1].querySelector('input:not([type=hidden]):not(.ct-hp),select,textarea');
+    if (first) first.focus({ preventScroll: true });
+    var top = form.getBoundingClientRect().top;
+    if (top < 70) window.scrollBy({ top: top - 90, behavior: 'smooth' });
+  }
+
+  /* the first empty or malformed required field in a step, if any */
+  function problem(step) {
+    var req = step.querySelectorAll('[required]');
+    for (var i = 0; i < req.length; i++) {
+      var el = req[i], v = el.value.trim();
+      if (!v) return { el: el, msg: 'Add your ' + labelOf(el) + ' and it’ll go through.' };
+      if (el.type === 'email' && !EMAIL.test(v)) return { el: el, msg: 'That email doesn’t look right — check it and try again.' };
+    }
+    return null;
+  }
+  function labelOf(el) {
+    var l = el.closest('label'), s = l && l.querySelector('span');
+    return s ? s.firstChild.textContent.trim().toLowerCase() : 'details';
+  }
+
+  form.querySelector('[data-next]').addEventListener('click', function () {
+    var p = problem(steps[0]);
+    if (p) { p.el.focus(); say(p.msg, 'bad'); return; }
+    go(2);
+  });
+  form.querySelector('[data-back]').addEventListener('click', function () { go(1); });
+  // Enter in a step-one field moves forward instead of submitting half a form
+  steps[0].addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' && e.target.tagName === 'INPUT') {
+      e.preventDefault();
+      form.querySelector('[data-next]').click();
+    }
+  });
+
+  /* arriving from The Fix self-check: carry the ticked items over */
+  var q = new URLSearchParams(location.search);
+  if (q.get('issues')) {
+    var FIX = { 1: 'Number isn’t one tap on mobile', 2: 'Not in the map pack', 3: 'Reviews are old or unanswered',
+                4: 'Slow on a phone', 5: 'Photos are stock', 6: 'Nothing updated in a year', 7: 'No clear way to book or quote' };
+    var picked = q.get('issues').split(',').map(function (n) { return FIX[n]; }).filter(Boolean);
+    if (picked.length) form.elements.message.value = 'From The Fix self-check: ' + picked.join('; ') + '.';
+  }
+  if (q.get('sent')) showDone({});
+
+  function normUrl(v) {
+    if (!v) return '';
+    return /^https?:\/\//i.test(v) ? v : 'https://' + v.replace(/^\/+/, '');
+  }
+  function handle(v, site) {
+    if (!v) return '';
+    if (/^https?:\/\//i.test(v) || v.indexOf(site) >= 0) return normUrl(v);
+    return '@' + v.replace(/^@/, '');
+  }
+  /* base64url of UTF-8 JSON — the lead, packed for the internal audit desk */
+  function pack(o) {
+    var b = btoa(unescape(encodeURIComponent(JSON.stringify(o))));
+    return b.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+  }
+
+  function showDone(d) {
+    form.hidden = true;
+    done.hidden = false;
+    if (d.name) document.getElementById('auditDoneLead').textContent =
+      'Thanks, ' + d.name.split(' ')[0] + '. Here’s what happens next.';
+    if (d.business) document.getElementById('auditDone1').textContent =
+      d.business + '’s website, Google profile and social — the way a new customer would see them.';
+    if (d.email) document.getElementById('auditDone2').textContent =
+      'Sent to ' + d.email + ' within two business days. Short, prioritised, plain English.';
+    done.focus({ preventScroll: true });
+    var top = done.getBoundingClientRect().top;
+    if (top < 70 || top > window.innerHeight * 0.6) window.scrollBy({ top: top - 100, behavior: 'smooth' });
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var p = problem(steps[0]);
+    if (p) { go(1); p.el.focus(); say(p.msg, 'bad'); return; }
+    p = problem(steps[1]);
+    if (p) { p.el.focus(); say(p.msg, 'bad'); return; }
+    if (form.elements.botcheck.checked) { showDone({}); return; }   // a bot; don't tip it off
+
+    var struggles = [].slice.call(form.querySelectorAll('input[name=struggles]:checked'))
+                      .map(function (c) { return c.value; });
+    var lead = {
+      business: val('business'), industry: val('industry'), website: normUrl(val('website')),
+      instagram: handle(val('instagram'), 'instagram.com'), tiktok: handle(val('tiktok'), 'tiktok.com'),
+      city: val('city'), name: val('name'), email: val('email'), phone: val('phone'),
+      struggles: struggles, message: val('message')
+    };
+    var payload = {
+      access_key: WEB3FORMS_KEY,
+      subject: 'Free audit request — ' + lead.business + ' (' + lead.city + ')',
+      from_name: 'Walsh Digital Co. website',
+      email: lead.email,
+      'Business': lead.business,
+      'Industry': lead.industry,
+      'City / market': lead.city,
+      'Website': lead.website || '—',
+      'Instagram': lead.instagram || '—',
+      'TikTok': lead.tiktok || '—',
+      'Name': lead.name,
+      'Phone': lead.phone || '—',
+      'Struggling with': struggles.length ? struggles.join('; ') : '—',
+      'Notes': lead.message || '—',
+      'Open in Audit Desk': 'https://www.walshdigitalco.com/desk.html#lead=' + pack(lead)
+    };
+
+    sendEl.disabled = true;
+    say('Sending…');
+    fetch(WEB3FORMS_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(payload)
+    }).then(function (r) {
+      return r.json().catch(function () { return {}; }).then(function (j) {
+        if (!r.ok || j.success === false) throw new Error(j.message || r.status);
+      });
+    }).then(function () {
+      if (window.gtag) window.gtag('event', 'generate_lead', { form_name: 'free_audit' });
+      showDone(lead);
+    }).catch(function () {
+      /* never lose a lead to a network hiccup: offer the same details by email */
+      var body = Object.keys(payload).filter(function (k) { return /^[A-Z]/.test(k) && k !== 'Open in Audit Desk'; })
+        .map(function (k) { return k + ': ' + payload[k]; }).join('\n') + '\nEmail: ' + lead.email;
+      var href = 'mailto:hello@walshdigitalco.com?subject=' + encodeURIComponent(payload.subject) +
+                 '&body=' + encodeURIComponent(body);
+      note.className = 'ct-note bad';
+      note.innerHTML = 'That didn’t send. <a href="' + href + '" style="text-decoration:underline">Email it instead</a> ' +
+                       '— your details are already filled in.';
+      sendEl.disabled = false;
+    });
+  });
   })();
 })();

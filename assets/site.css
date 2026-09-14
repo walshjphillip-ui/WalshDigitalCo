@@ -1057,6 +1057,254 @@ a:focus-visible,.btn:focus-visible,.chip:focus-visible,button:focus-visible{outl
 @media(max-width:700px){.gal-item--half{grid-column:span 6}}
 
 /* ─────────────────────────────────────────────────────────────
+   CONVERSION PASS (2026-09)
+   The homepage now argues in order: what the studio does → the
+   problem → how it gets fixed → the offer → honest proof → the
+   choice → the process → the ask. Every section points at one
+   primary action, the free audit (audit.html).
+   Declared before the MOBILE PASS, which must stay last.
+   ───────────────────────────────────────────────────────────── */
+
+/* hero reassurance, under the buttons */
+.hero-trust{display:flex;flex-wrap:wrap;gap:.5em 1.5em;margin-top:1.5em;
+  font-size:.8rem;letter-spacing:.02em;color:var(--mute-2)}
+.hero-trust span{display:inline-flex;align-items:center;gap:.6em}
+.hero-trust span::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent);flex:none}
+.film-copy .hero-trust{color:#c3d2e0}
+
+/* phones: the menu (and its CTA) hide behind the burger, so the audit
+   gets its own compact button in the bar */
+.nav-audit{display:none}
+@media(max-width:880px){
+  .nav-in{gap:12px}
+  .nav-audit{display:inline-flex;align-items:center;margin-left:auto;padding:.8em 1.1em;min-height:44px;
+    font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap;
+    background:var(--fg);color:var(--bg);border:1px solid var(--fg)}
+}
+@media(max-width:380px){.mark span{font-size:.64rem;letter-spacing:.14em}.nav-audit{padding-inline:.85em}}
+
+/* concept disclosure inside the before/after */
+.ba-note{display:block;text-align:center;margin-top:.55em;font-size:.58rem;letter-spacing:.2em;
+  text-transform:uppercase;color:rgba(248,245,238,.62)}
+
+/* section head shared by the new homepage bands */
+.sh{max-width:840px;margin-bottom:clamp(30px,3.8vw,54px)}
+.sh h2{font-size:clamp(2rem,4.2vw,3.4rem);margin-top:.3em}
+.sh h2 em{font-style:italic;color:var(--accent)}
+.sh p{color:var(--mute);margin-top:.85em;max-width:58ch;font-size:1.02rem;line-height:1.62}
+.sh--center{margin-inline:auto;text-align:center}
+.sh--center p{margin-inline:auto}
+
+/* ── pains: the owner's own words ────────────────── */
+.pains{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--rule);
+  border:1px solid var(--rule);border-radius:18px;overflow:hidden}
+.pain{background:var(--bg);padding:clamp(22px,2.3vw,32px);display:flex;flex-direction:column;
+  gap:.75em;min-height:236px;transition:background .4s}
+.pain:hover{background:color-mix(in srgb,var(--bg-2) 70%,var(--bg))}
+.pain-k{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600;color:var(--accent-2)}
+.pain-q{font-family:var(--display);font-size:clamp(1.1rem,1.45vw,1.3rem);line-height:1.28;color:var(--fg)}
+.pain-a{font-size:.88rem;color:var(--mute);line-height:1.55;margin-top:auto}
+@media(max-width:1060px){.pains{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.pains{grid-template-columns:1fr}.pain{min-height:0}}
+.pains-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;
+  gap:20px 36px;margin-top:clamp(26px,3vw,40px)}
+.pains-foot p{max-width:58ch;color:var(--mute-2);font-size:1rem;line-height:1.6}
+.pains-foot p strong{color:var(--fg);font-weight:600}
+
+/* ── the flow: found → trusted → chosen → kept ───── */
+.flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(14px,1.6vw,22px)}
+.flow-step{border-radius:18px;padding:clamp(24px,2.3vw,32px);display:flex;flex-direction:column}
+.flow-top{display:flex;align-items:center;gap:12px;font-size:.6rem;letter-spacing:.22em;
+  text-transform:uppercase;font-weight:600;color:var(--accent)}
+.flow-top::after{content:"→";margin-left:auto;font-size:.95rem;letter-spacing:0;opacity:.7}
+.flow-step:last-child .flow-top::after{content:"↻"}
+.flow-step h3{font-size:clamp(1.35rem,1.9vw,1.75rem);margin-top:.6em;line-height:1.12}
+.flow-step > p{color:var(--mute-2);font-size:.92rem;line-height:1.58;margin-top:.75em}
+.flow-list{list-style:none;margin:20px 0 0;padding:16px 0 0;border-top:1px solid var(--rule);display:grid;gap:9px}
+.flow-list li{font-size:.85rem;color:var(--mute-2);display:flex;gap:.65em;line-height:1.4}
+.flow-list li::before{content:"✦";color:var(--accent);font-size:.72em;margin-top:.3em;flex:none}
+.flow-out{margin-top:auto;padding-top:22px;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;
+  font-weight:600;color:var(--accent-3)}
+@media(max-width:1060px){.flow{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:620px){.flow{grid-template-columns:1fr}}
+.flow-note{margin-top:clamp(26px,3vw,40px);display:flex;flex-wrap:wrap;gap:18px 36px;align-items:center;
+  justify-content:space-between}
+.flow-note p{max-width:60ch;color:var(--mute-2);line-height:1.6}
+.flow-note p strong{color:var(--fg);font-weight:600}
+
+/* ── plans band additions ─────────────────────────── */
+.band-acts{display:flex;flex-wrap:wrap;gap:14px 26px;align-items:center;margin-top:28px}
+
+/* ── proof, honestly labelled ─────────────────────── */
+.proof-lbl{display:flex;align-items:center;gap:1em;margin:0 0 18px;font-size:.6rem;letter-spacing:.22em;
+  text-transform:uppercase;font-weight:600;color:var(--mute-2)}
+.proof-lbl::after{content:"";flex:1;height:1px;background:var(--rule)}
+.proof{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(18px,2.4vw,32px)}
+.proof + .proof-lbl{margin-top:clamp(36px,4.4vw,60px)}
+.proof figure{margin:0;min-width:0}
+.proof .reel-shot{aspect-ratio:16/10}
+.proof--concept .reel-shot{aspect-ratio:16/9}
+.work-flag{position:absolute;top:14px;left:14px;z-index:3;padding:.55em .95em;border-radius:99px;
+  font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;
+  background:rgba(10,42,71,.84);color:#f8f5ee}
+.work-flag--client{background:#4fd2e6;color:#06303a}
+/* on browser-framed shots the chip sits in the empty right of the bar, clear of the url */
+.reel-shot--web .work-flag{top:6px;left:auto;right:12px;padding:.45em .85em}
+@media(max-width:700px){.proof{grid-template-columns:1fr}}
+
+.promise{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(24px,3vw,44px);
+  margin-top:clamp(44px,5.4vw,76px);padding-top:clamp(32px,4vw,52px);border-top:1px solid var(--rule)}
+.promise b{display:block;font-family:var(--display);font-weight:500;font-size:1.16rem;color:var(--fg);line-height:1.25}
+.promise p{color:var(--mute);font-size:.9rem;margin-top:.45em;line-height:1.55}
+@media(max-width:900px){.promise{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.promise{grid-template-columns:1fr}}
+
+/* ── the alternatives, side by side ───────────────── */
+.vs{border-top:1px solid var(--rule-2)}
+.vs-row{display:grid;grid-template-columns:.75fr 1.15fr 1.1fr;gap:clamp(16px,3vw,52px);
+  padding-block:clamp(20px,2.3vw,30px);border-bottom:1px solid var(--rule);align-items:start}
+.vs-head{padding-block:16px}
+.vs-head span{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;font-weight:600;color:var(--mute)}
+.vs-head span:last-child{color:var(--accent)}
+.vs-opt{font-family:var(--display);font-size:clamp(1.15rem,1.7vw,1.45rem);line-height:1.2;color:var(--fg)}
+.vs-catch{color:var(--mute);font-size:.93rem;line-height:1.6}
+.vs-us{color:var(--mute-2);font-size:.93rem;line-height:1.6;padding-left:1.1em;border-left:2px solid var(--accent)}
+.vs-us strong{color:var(--fg);font-weight:600}
+@media(max-width:820px){
+  .vs-head{display:none}
+  .vs-row{grid-template-columns:1fr;gap:10px}
+}
+
+/* ── what working together looks like ─────────────── */
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:clamp(20px,2.4vw,36px)}
+.steps li{padding-top:22px;border-top:2px solid var(--rule-2)}
+.steps li:first-child{border-top-color:var(--accent)}
+.steps .n{font-family:var(--display);font-style:italic;font-size:1.3rem;color:var(--accent);line-height:1}
+.steps h3{font-size:clamp(1.25rem,1.8vw,1.55rem);margin-top:.45em}
+.steps p{color:var(--mute);font-size:.9rem;line-height:1.58;margin-top:.6em}
+.steps .when{display:inline-block;margin-top:14px;font-size:.58rem;letter-spacing:.18em;
+  text-transform:uppercase;font-weight:600;color:var(--accent)}
+@media(max-width:900px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.steps{grid-template-columns:1fr}}
+
+/* ── the ask ───────────────────────────────────────── */
+.ask{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(30px,5vw,80px);align-items:center;
+  border-radius:24px;padding:clamp(30px,5vw,68px)}
+.ask h2{font-size:clamp(2rem,4.4vw,3.6rem)}
+.ask h2 em{font-style:italic}
+.ask .lead{margin-top:1.1em;max-width:50ch}
+.ask-acts{display:flex;flex-wrap:wrap;gap:14px 24px;align-items:center;margin-top:2em}
+.ask-alt{font-size:.9rem;color:var(--mute-2)}
+.ask-alt a{color:var(--fg);border-bottom:1px solid var(--rule-2);padding-bottom:2px}
+.ask-alt a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+@media(max-width:860px){.ask{grid-template-columns:1fr}}
+
+/* ticked "what you get" list — the ask band and the audit page */
+.gets{list-style:none;margin:0;padding:0;display:grid;gap:15px}
+.gets li{display:grid;grid-template-columns:26px minmax(0,1fr);gap:13px;align-items:start;
+  color:var(--mute-2);font-size:.94rem;line-height:1.5}
+.gets li::before{content:"✓";width:24px;height:24px;border-radius:50%;display:grid;place-items:center;
+  font-size:.7rem;margin-top:-1px;color:var(--accent);
+  background:color-mix(in srgb,var(--accent) 16%,transparent);
+  border:1px solid color-mix(in srgb,var(--accent) 45%,transparent)}
+.gets b{display:block;color:var(--fg);font-weight:600}
+
+/* ── the free audit page ──────────────────────────── */
+.aud{padding:calc(var(--nav-h) + clamp(40px,6vw,92px)) 0 clamp(64px,8vw,116px)}
+.aud-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.95fr);gap:clamp(34px,5vw,84px);align-items:start}
+.aud-grid .gets{margin-top:clamp(28px,3.2vw,40px)}
+.aud-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:clamp(28px,3.2vw,38px)}
+.aud-meta span{padding:.62em 1.05em;border-radius:99px;border:1px solid var(--rule-2);font-size:.6rem;
+  letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:var(--mute-2)}
+.aud-who{display:flex;gap:16px;align-items:center;margin-top:clamp(28px,3.2vw,40px);padding-top:24px;
+  border-top:1px solid var(--rule)}
+.aud-who img{width:54px;height:54px;border-radius:50%;object-fit:cover;object-position:50% 30%;flex:none;
+  border:1px solid var(--rule-2)}
+.aud-who p{font-size:.88rem;color:var(--mute);line-height:1.5}
+.aud-who b{color:var(--fg);font-weight:600}
+.aud-jump{display:none}
+@media(max-width:980px){
+  .aud-grid{grid-template-columns:1fr}
+  /* on a phone the form is a long scroll below the pitch; offer the shortcut */
+  .aud-jump{display:inline-flex;margin-top:1.6em}
+  #auditForm{scroll-margin-top:calc(var(--nav-h) + 12px)}
+}
+
+.af{border-radius:22px;padding:clamp(22px,3vw,40px);position:sticky;top:calc(var(--nav-h) + 20px)}
+@media(max-width:980px){.af{position:relative;top:auto}}
+.af-head{display:flex;justify-content:space-between;align-items:center;gap:12px 18px;flex-wrap:wrap;
+  padding-bottom:18px;margin-bottom:22px;border-bottom:1px solid var(--rule)}
+.af-head h2{font-size:clamp(1.3rem,2vw,1.6rem)}
+.af-prog{list-style:none;margin:0;padding:0;display:flex;gap:14px;counter-reset:afp}
+.af-prog li{counter-increment:afp;display:flex;align-items:center;gap:.55em;font-size:.58rem;
+  letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--mute)}
+.af-prog li::before{content:counter(afp);width:22px;height:22px;border-radius:50%;display:grid;
+  place-items:center;border:1px solid var(--rule-2);font-size:.66rem;letter-spacing:0}
+.af-prog li.on{color:var(--fg)}
+.af-prog li.on::before{background:var(--accent);border-color:var(--accent);color:#06303a}
+.af-prog li.done::before{content:"✓";border-color:var(--accent);color:var(--accent)}
+.af fieldset{border:0;margin:0;padding:0;min-width:0;display:grid;gap:clamp(14px,1.6vw,18px)}
+.af legend{padding:0}
+.af.js-steps .af-step:not(.on){display:none}
+.af:not(.js-steps) .af-step + .af-step{margin-top:24px;padding-top:24px;border-top:1px solid var(--rule)}
+.af .ct-f input::placeholder,.af .ct-f textarea::placeholder{color:var(--mute);opacity:.75}
+.af-acts{display:flex;gap:12px 16px;flex-wrap:wrap;align-items:center;margin-top:4px}
+.af-back{background:none;border:0;padding:10px 4px;cursor:pointer;font-family:var(--body);font-size:.72rem;
+  letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--mute-2)}
+.af-back:hover{color:var(--fg)}
+.af-glbl{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600;color:var(--mute-2)}
+.af-glbl i{font-style:normal;letter-spacing:.1em;color:var(--mute);font-weight:400}
+.af-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:.6em}
+.af-chip{position:relative;display:inline-flex}
+.af-chip input{position:absolute;inset:0;opacity:0;margin:0;cursor:pointer}
+.af-chip span{display:inline-flex;align-items:center;padding:.72em 1.05em;border-radius:99px;
+  border:1px solid var(--rule-2);font-size:.8rem;line-height:1.2;color:var(--mute-2);transition:background .25s,color .25s,border-color .25s}
+.af-chip:hover span{border-color:var(--accent);color:var(--fg)}
+.af-chip input:checked + span{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.af-chip input:focus-visible + span{outline:2px solid var(--accent);outline-offset:2px}
+.af-fine{font-size:.8rem;color:var(--mute);line-height:1.5}
+.af-done{text-align:left}
+.af-done h2{font-size:clamp(1.6rem,2.6vw,2.2rem);margin-top:.3em}
+.af-done h2 em{font-style:italic;color:var(--accent)}
+.af-done > p{color:var(--mute-2);margin-top:.8em;line-height:1.6}
+.af-done .steps{grid-template-columns:1fr;gap:18px;margin-top:26px}
+.af-done .steps li{padding-top:14px}
+
+/* example audit, so the free thing has a visible shape */
+.sample{border-radius:20px;border:1px solid var(--rule);background:#fffdf8;overflow:hidden;max-width:1000px;
+  margin-inline:auto;box-shadow:0 44px 90px -50px rgba(10,33,56,.5)}
+.sample-top{display:flex;justify-content:space-between;gap:20px;align-items:center;flex-wrap:wrap;
+  padding:clamp(20px,2.6vw,30px) clamp(22px,3.2vw,42px);background:var(--panel);color:#f8f5ee}
+.sample-top small{display:block;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:#93e6f2;margin-bottom:.4em}
+.sample-top b{font-family:var(--display);font-weight:400;font-size:clamp(1.2rem,2vw,1.6rem)}
+.sample-score{font-family:var(--display);font-size:clamp(2rem,3.4vw,2.6rem);line-height:1;text-align:right}
+.sample-score em{display:block;font-style:normal;font-family:var(--body);font-size:.58rem;letter-spacing:.18em;
+  text-transform:uppercase;color:rgba(248,245,238,.62);margin-top:.5em}
+.sample-body{padding:clamp(22px,3.2vw,42px)}
+.sample-h{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600;color:var(--accent)}
+.sample-sum{font-family:var(--display);font-size:clamp(1.05rem,1.6vw,1.28rem);line-height:1.48;color:var(--fg);margin-top:.6em}
+.sample-rows{margin-top:26px;border-top:1px solid var(--rule)}
+.sample-row{display:grid;grid-template-columns:118px minmax(0,1fr);gap:18px;padding:17px 0;border-bottom:1px solid var(--rule)}
+.sample-row:last-child{border-bottom:0}
+.sample-row h3{font-family:var(--display);font-weight:500;font-size:1.06rem;line-height:1.3}
+.sample-row p{font-size:.88rem;color:var(--mute);margin-top:.35em;line-height:1.55}
+.pill{display:inline-block;padding:.5em .9em;border-radius:99px;font-size:.56rem;letter-spacing:.16em;
+  text-transform:uppercase;font-weight:600;white-space:nowrap;align-self:start;justify-self:start}
+.pill--bad{background:rgba(207,75,134,.13);color:#a3336a}
+.pill--ok{background:rgba(12,127,150,.12);color:#0a6d81}
+.pill--win{background:rgba(221,163,42,.2);color:#7c5a0c}
+@media(max-width:600px){.sample-row{grid-template-columns:1fr;gap:8px}}
+
+/* small uppercase labels, readable on phones (matches the mobile pass) */
+@media(max-width:760px){
+  .pain-k,.flow-top,.flow-out,.proof-lbl,.work-flag,.steps .when,.aud-meta span,
+  .af-prog li,.af-glbl,.pill,.sample-h,.sample-top small,.ba-note{font-size:.72rem}
+  .hero-trust{font-size:.86rem}
+  .af-back{font-size:.8rem;padding-block:14px}
+}
+
+/* ─────────────────────────────────────────────────────────────
    MOBILE PASS
    Must stay last in the file: the base .d1/.d2/.d3 sizes are
    declared further up, so an earlier media query loses to them at
@@ -1214,3 +1462,6 @@ a:focus-visible,.btn:focus-visible,.chip:focus-visible,button:focus-visible{outl
 
   .film-ba{grid-column:1;grid-row:2}
 }
+
+/* hero reassurance on the cream phone hero — must follow the block above */
+@media(max-width:920px){.film-copy .hero-trust{color:var(--mute-2)}}
