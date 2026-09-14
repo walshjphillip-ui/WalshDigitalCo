@@ -783,4 +783,33 @@
     });
   });
   })();
+  /* ── section rail (homepage) ─────────────────────────
+     highlights the section under the middle of the screen,
+     and only shows once the film is scrolled past.
+     ─────────────────────────────────────────────────── */
+  (function () {
+  var rail = document.getElementById('rail');
+  if (!rail) return;
+  var links = [].slice.call(rail.querySelectorAll('a'));
+  var secs = links.map(function (a) { return document.querySelector(a.getAttribute('href')); });
+  var foot = document.querySelector('.foot');
+  var tick = false;
+
+  function update() {
+    tick = false;
+    var mid = window.innerHeight * 0.45, cur = -1;
+    secs.forEach(function (s, i) { if (s && s.getBoundingClientRect().top <= mid) cur = i; });
+    var first = secs[0] && secs[0].getBoundingClientRect().top;
+    var footTop = foot ? foot.getBoundingClientRect().top : Infinity;
+    rail.classList.toggle('on', first < window.innerHeight * 0.7 && footTop > window.innerHeight * 0.55);
+    links.forEach(function (a, i) {
+      if (i === cur) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
+    });
+  }
+  window.addEventListener('scroll', function () {
+    if (!tick) { tick = true; window.requestAnimationFrame(update); }
+  }, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+  })();
 })();
